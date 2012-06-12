@@ -1,0 +1,4 @@
+Just a file to make git retain this directory.  Note that
+if deploying from git you will have to make the "media"
+and "static" sub-directories, since they are explicitly
+set to be ignored by git.

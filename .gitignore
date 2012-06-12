@@ -1,4 +1,10 @@
 *.log
 *.pot
-*.pyc
+*.py[cod]
 local_settings.py
+*~
+\#*\#
+/htdocs/static/
+/htdocs/media/
+/ve/
+/activate
