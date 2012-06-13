@@ -1,0 +1,34 @@
+<html>
+<head>
+<title>{{ story.title }}</title>
+</head>
+<body>
+  <div>
+    <h1>{{ story.title }}</h1>
+    <div class="story-abstract">{{ story.abstract }}</div>
+    {% if page %}
+    <div class="page">
+      <h2>{{ page.title }}</h2>
+      <div class="text">{{ page.text }}</div>
+      {% if page.image %}
+        <img src="{{ MEDIA_URL }}{{ page.image }}">
+      {% endif %}
+    </div>
+    <div class="next-prev">
+    Page {{ page_num }} of {{ page_count }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    {% if page_prev %}
+      <a href="?page_num={{ page_prev }}">{{ page_prev}} &lt;</a>
+    {% endif %}
+    &nbsp;--&nbsp;
+    {% if page_next %}
+      <a href="?page_num={{ page_next }}">&gt; {{ page_next}}</a>
+    {% endif %}
+    </div>
+    {% else %}
+    <div class="no-pages">
+      This story has no pages.
+    </div>
+    {% endif %}
+  </div>
+</body>
+</html>
