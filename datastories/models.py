@@ -1,10 +1,8 @@
 from django.utils.translation import ugettext as _
-
 from django.db import models
-
-
 from django.contrib.auth.models import User
-		
+from visualizations.models import Visualization
+    		
 class Page(models.Model):
     """A Story page
 
@@ -35,10 +33,7 @@ class Page(models.Model):
                               max_length=255,
                               blank=True,
                               default='')
-    # We will eventually add a ForeignKey (or some other means
-    # of specifying a weave visualization), but we don't have
-    # the model for that, and it will be easy enough to add
-    # later.
+    visualization = models.ManyToManyField(Visualization)
 
     def __unicode__(self):
         return '%s by %s' % (self.title,

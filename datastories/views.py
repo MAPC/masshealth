@@ -1,14 +1,17 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from models import Story
+from places.models import Place
 
-def story(request, slug, owner_id=None):
-    # For now slug must be unique
+def story(request, place_slug, story_slug, owner_id=None):
+    # For now slugs must be unique within type
+    place = get_object_or_404(Place, slug=place_slug)
+
     if owner_id is None:
-        story = get_object_or_404(Story, slug=slug, owner__isnull=True)
+        story = get_object_or_404(Story, slug=story_slug, owner__isnull=True)
     else:
-        story = get_object_or_404(Story, slug=slug, owner__isnull=False,
-                                  owner__id=owner_id)
+        story = get_object_or_404(Story, slug_id=Noneslug,
+                                  owner__isnull=False, owner__id=owner_id)
 
     pages = story.pages.order_by('storypage__page_number')
 
@@ -46,5 +49,6 @@ def story(request, slug, owner_id=None):
                                    page_num=page_num,
                                    page_count=page_count,
                                    page_prev=page_prev,
-                                   page_next=page_next),
+                                   page_next=page_next,
+                                   place=place),
                               context_instance=RequestContext(request))
