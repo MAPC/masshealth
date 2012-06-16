@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html;charset=UTF-8" >
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            {% block title %}Healthy Massachusetts{% endblock %} 
+        </title>
+
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+
+        <link rel="stylesheet" href="{{ STATIC_URL }}libs/bootstrap/css/bootstrap.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/main.css">
+       <!-- <link rel="stylesheet" href="{{ STATIC_URL }}css/media.css"> -->
+
+    </head>
+
+{% block bodyclass %}
+<body>
+{% endblock %}  
+<div class="topbar">&nbsp;</div>
+
+{% block topnav %}
+<div class="navbar">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>         
+
+<div class="logo"><a href="/"><span class="healthy">Healthy</span> Massachusetts</a></div>    
+<div class="nav-collapse">
+            <ul class="nav">
+        <li class="town-list"><label>Choose a Town:</label>
+                <select id='neighborhood_neighborhood'>
+					<option SELECTED value="">Select a Town</option>
+					 {% for town in towns %}<option 
+					 {% ifequal townpassed town %} SELECTED=SELECTED{% endifequal %} 
+					 value="{{town.id}}">{{town.name}}</option>
+					 {% endfor %}
+				</select>
+        </li>
+        <li><a class="home" href="/">HOME</a></li>
+        <li><a class="cominfo" href="/park/play/">COMMUNITY<br>INFORMATION</a></li>
+        <li><a class="maptool" href="/explore/">MAP&nbsp;TOOL</a></li>
+        <li><a class="about" href="/explore/">ABOUT</a></li>
+
+        </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+{% endblock %}
+  
+<div class="container middle">
+  <div class="row-fluid">
+    <div class="span3">
+    <h1>Town Name</h1>
+    <ul class="sidenav">
+		<li>
+		    <a href="#"> Summary </a>
+		</li>
+		<li>
+		    <a href="#"> Health Profile </a>
+		</li>		<li>
+			<a href="#"> Data Stories </a>
+		</li>		<li>
+		    <a href="#"> Health Programs </a>
+		</li>
+	</ul>
+    
+    </div>
+
+{% block content %}  
+
+
+
+
+
+{% endblock %}
+
+  <div class="row-fluid show-grid">
+  <div class="span12 footer">
+<h5>60 Temple Place Boston, MA 02111 Main Tel: 617-451-2770&nbsp;|&nbsp;FAX: 627-451-2770</h5>
+<a href="">About Healthy Massachusetts</a>&nbsp;|&nbsp;<a href="">Contact MAPC</a>&nbsp;|&nbsp;<a href="">Data Disclaimer</a>&nbsp;|&nbsp;<a href="">Terms of Service</a>&nbsp;|&nbsp;<a href="">Privacy Policy</a> </div>
+  </div>
+
+</div>
+</div>
+
+{% block javascript %}
+
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?libraries=geometry&amp;sensor=false&amp;language=en"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}libs/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}libs/bootstrap/js/bootstrap.js"></script> 
+{% endblock %}
+</body>
+</html>
+
