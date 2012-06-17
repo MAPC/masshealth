@@ -137,7 +137,7 @@ INSTALLED_APPS = (
     'places',
     'visualizations',
     'programs',
-    'heros',
+    'heroes',
 )
 
 # A sample logging configuration. The only tangible logging

@@ -6,7 +6,7 @@ class Hero(models.Model):
     description =  models.TextField(_('Description'),
                                     blank=True, default='')
     image = models.ImageField(_('Image'),
-                              upload_to='heros/img/%y%U',
+                              upload_to='heroes/img/%y%U',
                               max_length=255,
                               blank=True,
                               default='')
