@@ -28,3 +28,8 @@ class Place(models.Model):
 
     def __unicode__(self):
         return '%s(%s)' % (self.name, self.get_regiontype_display())
+
+    @classmethod
+    def place_choices(cls):
+        return tuple([(o.slug, o.name)
+                      for o in cls.objects.order_by('name')])
