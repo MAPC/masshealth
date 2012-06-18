@@ -14,6 +14,23 @@
         <link rel="stylesheet" href="{{ STATIC_URL }}css/main.css">
        <!-- <link rel="stylesheet" href="{{ STATIC_URL }}css/media.css"> -->
 {% block head_javascript %}
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?libraries=geometry&amp;sensor=false&amp;language=en"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}libs/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}libs/bootstrap/js/bootstrap.js"></script> 
+<script type="text/javascript">
+    /*
+    * Global HEMA object
+    */
+    var HEMA = {
+        weave_url: "{{ WEAVE_URL }}",
+        sessionstate: {},
+        swfobject: {
+            vis: {}
+        }
+    }
+
+    // A spot for Google Analytics code.
+</script>
 {% endblock %}
     </head>
 
@@ -93,10 +110,6 @@
 </div>
 
 {% block javascript %}
-
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?libraries=geometry&amp;sensor=false&amp;language=en"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}libs/jquery-1.7.2.min.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}libs/bootstrap/js/bootstrap.js"></script> 
 {% endblock %}
 </body>
 </html>
