@@ -9,3 +9,5 @@ local_settings.py
 /ve/
 /activate
 /visualizations/templates/visualizations/XML/
+*.sublime-*
+/data/
