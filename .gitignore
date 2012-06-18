@@ -8,3 +8,5 @@ local_settings.py
 /htdocs/media/
 /ve/
 /activate
+
+*.sublime-*
