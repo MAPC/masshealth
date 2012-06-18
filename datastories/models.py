@@ -33,7 +33,8 @@ class Page(models.Model):
                               max_length=255,
                               blank=True,
                               default='')
-    visualization = models.ManyToManyField(Visualization)
+    visualization = models.ForeignKey(Visualization,
+                                      blank=True, null=True)
 
     def __unicode__(self):
         return '%s by %s' % (self.title,

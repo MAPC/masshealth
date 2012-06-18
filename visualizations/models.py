@@ -88,3 +88,6 @@ class Visualization(models.Model):
         upload_to=VISUALIZATION_TEMPLATES_SUB_PATH,
         storage=VISUALIZATION_TEMPLATES_STORAGE,
         blank=True, default='')
+
+    def __unicode__(self):
+        return self.name

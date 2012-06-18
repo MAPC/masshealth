@@ -1,4 +1,5 @@
 # Django settings for masshealth project.
+from django.conf import global_settings as DEFAULT_SETTINGS
 import os
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT, PROJECT_NAME = os.path.split(PROJECT_DIR)
@@ -99,6 +100,10 @@ TEMPLATE_LOADERS = (
 #     'django.template.loaders.eggs.Loader',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS + (
+    'visualizations.context_processors.visualizations',
+    )
+
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -107,6 +112,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 )
 
 ROOT_URLCONF = _pmod('urls')
@@ -133,12 +139,15 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'django.contrib.gis',
+    'django.contrib.flatpages',
     'datastories',
     'places',
     'visualizations',
     'programs',
     'heroes',
 )
+
+WEAVE_URL = 'http://www.metrobostondatacommon.org/weave/'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

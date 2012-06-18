@@ -8,7 +8,7 @@ def visualization_xml(request, vis_id, place_id):
     place = get_object_or_404(Place, id=place_id)
 
     return render_to_response(
-        visualization.name,
+        visualization.template.name,
         dict(regionalunit=place),
         context_instance=RequestContext(request),
         mimetype='application/xml')

@@ -2,6 +2,45 @@
 
 <title>{% block title %}{{ story.title }}{% endblock %}</title>
 
+{% block head_javascript %}
+
+{{ block.super }}
+
+{% include "visualizations/_swfobject.html" %}
+
+<script type="text/javascript">
+
+{% if page.visualization %}
+
+jQuery(document).ready(function($) {
+    swfobject.embedSWF(
+      "{{ WEAVE_URL }}weave.swf", 
+      "visualization", 
+      "380", "275", 
+      "10.0.0",
+      "expressInstall.swf", 
+      {
+		file: "http://{{ CURRENT_SITE.domain }}{% url visualizations.views.visualization_xml page.visualization.id place.id %}"
+	  }, 
+      HEMA.swfobject.params,
+      {
+        id: "visualization",
+        name: "visualization"
+      }
+    );
+
+    // Flash available
+    if (swfobject.getFlashPlayerVersion()["major"] > 0) {
+        $("#visualization p:first").remove();
+    }
+};
+
+{% endif %}
+
+</script>
+
+{% endblock %} 
+
 {% block bodyclass %}
 <body>
 {% endblock %} 
@@ -15,8 +54,21 @@
 					<div class="page">
 					  <h2>{{ page.title }}</h2>
 					  <div class="text">{{ page.text }}</div>
-					  {% if page.image %}
-						<img src="{{ MEDIA_URL }}{{ page.image }}">
+					  {% if page.visualization %}
+					    <div id="visualization">
+					      {% if page.visualization.thumbnail %}
+					        <img src="{{ MEDIA_URL }}{{ page.visualization.thumbnail }}">
+					      {% endif %}
+					         <p>Please install the
+						   <a href="http://get.adobe.com/flashplayer/">Adobe
+						     Flash Player
+						   </a> to interact with this visualization.
+						 </p>
+					    </div>
+					  {% else %}
+					  	{% if page.image %}
+							<img src="{{ MEDIA_URL }}{{ page.image }}">
+					  	{% endif %}
 					  {% endif %}
 					</div>
 				<div class="next-prev">
@@ -29,7 +81,7 @@
 					  <a href="?page_num={{ page_next }}">&gt; {{ page_next}}</a>
 					{% endif %}
 				</div>
-				{% else %}
+			{% else %}
 					<div class="no-pages">
 					  This story has no pages.
 					</div>

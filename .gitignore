@@ -8,3 +8,4 @@ local_settings.py
 /htdocs/media/
 /ve/
 /activate
+/visualizations/templates/visualizations/XML/
