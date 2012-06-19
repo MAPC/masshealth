@@ -1,11 +1,12 @@
 /*  CSS for Healthy Massachusetts */
-/*  orange: #f35a20 */
+/*  orange: #f35a20  */
+/*  blue: #6D6E71  */
 
 body { 
 text-align: center; 
 font-family: 'Open Sans', sans-serif;
-font-size: 13px;
-line-height: 15px;
+font-size: 14px;
+line-height: 16px;
 color: #6d6e71; 
 }
 
@@ -47,11 +48,14 @@ font-weight: bold;
 }
 
 h4  {
-font-size: 13px;
-line-height: 15px;
-color: #6d6e71;
-font-weight: bold;
-}
+color: #6D6E71;
+color: #000000;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 16px;
+    margin-bottom: 6px;
+    margin-top: 6px;
+    padding-top: 6px;}
 
 h5  {
 font-size: 12px;
@@ -116,6 +120,8 @@ font-weight: bold;
 .navbar .nav {
     margin: 0;
     float: right;
+    font-size: 13px;
+    line-height: 14px;
 }
 
 .navbar-inner {
@@ -215,6 +221,12 @@ text-decoration: none;
 font-weight: bold;
 }
 
+.datastories li.data_stories a
+{
+background-color: #fcded3;
+
+}
+
 li.town-list select {width: 180px;}
 
 
@@ -229,4 +241,75 @@ border-left: 1px solid #DFDFDF;
 
 .row-fluid .span3 {text-align: left;}
 
+.visualization-text
+{
+background-color: #EFEFEF;
+    float: right;
+    font-size: 13px;
+    line-height: 15px;
+    padding: 15px;
+    width: 195px;
+}
+    
+.story-abstract
+{
+padding-top: 12px;
+}
+
+.next-prev
+{
+font-weight: bold;
+text-align: right;
+padding-top: 12px;
+font-size: 14px; 
+line-height: 15px;
+color: #000000;
+}
+
+.next-prev a:link,
+.next-prev a:visited
+{
+color: #f35a20;
+}
+
+.next-prev a:hover,
+.next-prev a:active
+{
+color: #6D6E71;
+text-decoration: none;
+}
+
+.story_links
+{
+display: block;
+}
+
+.story_sum
+{
+background-color: #efefef;
+padding: 15px;
+width: 195px;
+font-size: 13px;
+height: 15px;
+float: left;
+margin-right: 15px;
+min-height: 70px;
+}
+
+.story_sum .link_title
+{
+width: 100px;
+float: left;
+font-weight: bold;
+}
+
+.story_sum .thumbnail
+{
+width: 75px;
+height: 65px;
+float: right;
+}
+
 .footer {text-align: left; font-size: 12px; line-height: 24px;padding-top:20px;}
+
+.clearer {font-size: 2px; line-height: 1px; clear: both; display: block;}

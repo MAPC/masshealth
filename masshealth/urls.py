@@ -12,6 +12,7 @@ urlpatterns = patterns(
     # url(r'^masshealth/', include('masshealth.foo.urls')),
     url(r'^story/', include('datastories.urls')),
     url(r'^visualizations/', include('visualizations.urls')),
+    url(r'^crossdomain.xml$', 'visualizations.views.crossdomain'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

@@ -13,3 +13,10 @@ def visualization_xml(request, vis_id, place_id):
         context_instance=RequestContext(request),
         mimetype='application/xml')
 
+def crossdomain(request):
+    return render_to_response(
+        'visualizations/crossdomain.xml', 
+        {}, 
+        mimetype='application/xml')
+
+    
