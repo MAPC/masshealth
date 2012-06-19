@@ -11,3 +11,4 @@ local_settings.py
 /visualizations/templates/visualizations/XML/
 *.sublime-*
 /data/
+*/migrations/
