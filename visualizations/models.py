@@ -113,7 +113,7 @@ class Slot(object):
     # width, height
     # Use a string if you need a suffix.  Integers will be turned into
     # strings later.
-    size_by_type = {'profile-table': (707, 'auto'),
+    size_by_type = {'profile-table': (707, 100),
                     'profile-chart': (344, 288),
                     'profile-map':   (344, 288)}
 

@@ -19,7 +19,7 @@ jQuery(document).ready(function($) {
     swfobject.embedSWF(
       "{{ WEAVE_URL }}weave.swf", 
       "{{ slot.name }}", 
-      {{ slot.get_width }}, {{ slot.get_height }}, 
+      {{ slot.get_width|safe }}, {{ slot.get_height|safe }}, 
       "10.0.0",
       "expressInstall.swf", 
       {
