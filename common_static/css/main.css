@@ -278,6 +278,32 @@ li.town-list select { width: 180px; }
 	text-decoration: none;
 }
 
+.program
+{
+margin-top: 50px;
+}
+
+.place_program_desc
+{
+margin-top: 30px;
+}
+
+.program-image
+{
+margin-left: 10px;
+}
+
+.datastories-summary, .health-programs-summary
+{
+margin-top: 30px;
+}
+
+
+.place_program_desc,
+.programs-staff-info
+{
+padding-left: 10px;
+}
 .story_links { display: block; }
 
 .story_sum
@@ -294,7 +320,6 @@ li.town-list select { width: 180px; }
 
 .story_sum .link_title
 {
-	width: 100px;
 	float: left;
 	font-weight: bold;
 }

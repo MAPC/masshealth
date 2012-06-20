@@ -24,11 +24,14 @@
 <li><a href="#">Some other private document...</a></li>
 </ul>
 </div>
-<img src="{{ STATIC_URL }}img/programs-side.png">
+
+
 {% for program in place.program_set.all %}
+<div class="program">
 <a name="{{ program.title|slugify }}"><h2>{{ program.title }}</h2></a>
+{% if program.image %}<img class="program-image" align="right" src="{{ program.image.url }}">{% endif %}
 <div class="program-description">{{ program.description|markdown }}</div>
-{% if program.image %}<img src="{{ program.image.url }}">{% endif %}
+</div>
 {% endfor %}
 </div>
 {% endblock %} 
