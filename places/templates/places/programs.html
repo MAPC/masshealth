@@ -8,7 +8,7 @@
 {% endblock %} 
 
 {% block bodyclass %}
-<body class="summary">
+<body class="programs">
 {% endblock %} 
 
 {% block content %}  
@@ -16,8 +16,19 @@
 <div class="span9">
 <h2>Health Promotion Programs:  {{place.name}}</h2>
 <div class="place_program_desc">{{place.program_desc|markdown}}</div>
-
-
-
+<div class="programs-staff-info"><h3>Staff Information</h3>
+{# Need stuff dependent on login? is this whole section conditional or just "you are logged in as..." #}
+<ul>
+{# and maybe some for loop #}
+<li><a href="#">Some private document...</a></li>
+<li><a href="#">Some other private document...</a></li>
+</ul>
+</div>
+<img src="{{ STATIC_URL }}img/programs-side.png">
+{% for program in place.program_set.all %}
+<a name="{{ program.title|slugify }}"><h2>{{ program.title }}</h2></a>
+<div class="program-description">{{ program.description|markdown }}</div>
+{% if program.image %}<img src="{{ program.image.url }}">{% endif %}
+{% endfor %}
 </div>
 {% endblock %} 

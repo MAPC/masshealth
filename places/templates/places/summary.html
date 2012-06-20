@@ -16,13 +16,19 @@
 <div class="span9">
   <div class="health-profile-summary">
     <h2>Health Profile</h2>
-    Someday there will be a visualization here.
+    <em>These indicators are selected according to an algorithm highlighting the most relevant indicators.</em>
+    <div class="vis_placeholder">
+    
+    </div>
   </div>
+  
+  
   <div class="datastories-summary">{# Maybe the if goes outside this div? #}
     {% if place.datastories.count %}
     <h2>Data Stories</h2>
     <i>These data stories provide insight into health topics
        particularly of interest in your community.</i>
+    <img src="{{STATIC_URL}}river-jogger200x115.jpg">
     <div class="list-and-image">
       <ul>
         {% for story in place.datastories.all %}{# could use slice to limit to 3 #}
@@ -36,6 +42,11 @@
     </div>
     {% endif %}
   </div>
+  
+  
+  
+  
+  
   <div class="health-programs-summary">
     {% if place.program_set.count %}
     <h2>Health Program Information</h2>

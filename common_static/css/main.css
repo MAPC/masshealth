@@ -224,6 +224,10 @@ ul.sidenav > li a:active
 }
 
 .datastories li.data_stories a { background-color: #fcded3; }
+.summary li.summary a { background-color: #fcded3; }
+.profile li.profile a { background-color: #fcded3; }
+.programs li.health_programs a { background-color: #fcded3; }
+
 li.town-list select { width: 180px; }
 .row { margin: 0; }
 
@@ -249,6 +253,8 @@ li.town-list select { width: 180px; }
 	padding: 15px;
 	width: 195px;
 }
+
+.vis_placeholder { width: 707px; height: 78px; border: 1px solid #dfdfdf; margin: 10px 0;}
 
 .story-abstract { padding-top: 12px; }
 
@@ -467,6 +473,8 @@ li.town-list select { width: 180px; }
 }
 
 .footer-inner img { padding-left: 20px; }
+
+.footer_socials img {padding: 0 10px 0 0;}
 
 .footer-text
 {
