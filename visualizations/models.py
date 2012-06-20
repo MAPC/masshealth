@@ -91,3 +91,71 @@ class Visualization(models.Model):
 
     def __unicode__(self):
         return self.name
+
+class Slot(object):
+    """To aid in building views with fixed layouts of fisualizations.
+
+    These objects describe what visualization to use, plus extra options.
+
+    They are held in row iterables, which are in turn held in one iterable
+    for the page.  The whole thing is passed to the template, and carries
+    such data as is needed to render the visualization.
+
+    At the momemnt there is little else to store besides how to find the
+    visualization, but if the template needs any information not carried
+    by the Visualization objects, we can add them here.
+    """
+    _visualization_object = None  # Default value
+    title = None # Default value, don't make template handle attr error.
+
+    _all_instances = []
+
+    filters = dict(kind__in=['profile-table',
+                              'profile-chart',
+                              'profile-map'])
+    excludes = {}
+
+    def __init__(self, name,
+                 extra_filters=None, extra_excludes=None,
+                 **extra_attributes):
+        # Visualizations are found by their name, plus type restrictions:
+        # There can be only one of each name within the type set.
+        self.name = name
+        if extra_filters:
+            self.filters = self.filters.copy().update(extra_filters)
+        if extra_excludes:
+            self.excludes = self.excludes.copy().update(extra_excludes)
+        if extra_attributes:
+            self.__dict__.update(extra_attributes)
+        self._all_instances.append(self)
+
+    @property
+    def visualization(self):
+        if not self._visualization_object:
+            qs = Visualization.objects
+            try:
+                if self.filters:
+                    qs = qs.filter(**self.filters)
+                if self.excludes:
+                    qs = qs.exclude(**self.excludes)
+                self._visualization_object = qs.get(name=self.name)
+            except:
+                # we tried
+                pass
+        return self._visualization_object
+
+    def ok(self):
+        return self.visualization is not None
+
+    def __repr__(self):
+        return "Visualization view slot %r" % self.name
+
+    @classmethod
+    def _purge_visualizations(cls, sender=None, **kwargs):
+        """For connection to the Visualization save signal.
+        """
+        for inst in cls._all_instances:
+            inst._visualization_object = None
+
+models.signals.post_save.connect(Slot._purge_visualizations,
+                                 Visualization)
