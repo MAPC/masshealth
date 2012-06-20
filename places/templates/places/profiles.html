@@ -15,7 +15,7 @@ jQuery(document).ready(function($) {
 {% for row in visualization_rows %}
   {% for slot in row %}
     {% with vis=slot.visualization %}
-      {% if vis.ok %}
+      {% if slot.ok %}
     swfobject.embedSWF(
       "{{ WEAVE_URL }}weave.swf", 
       "{{ slot.name }}", 
@@ -23,7 +23,7 @@ jQuery(document).ready(function($) {
       "10.0.0",
       "expressInstall.swf", 
       {
-		file: "http://{{ CURRENT_SITE.domain }}{% url visualizations.views.visualization_xml {{ slot.name }}.id place.id %}"
+		file: "http://{{ CURRENT_SITE.domain }}{% url visualizations.views.visualization_xml vis.id place.id %}"
 	  }, 
       HEMA.swfobject.params,
       {
@@ -57,6 +57,7 @@ jQuery(document).ready(function($) {
 <div class="place_profile">{{place.profile|markdown}}</div>
 <div class="place_map"></div>
 
+</div>
 {% for row in visualization_rows %}
 <div class="row-of-visualizations">
 {% if row.0.title %}<h2>{{ row.0.title }}</h2>
@@ -80,5 +81,4 @@ Viaualization "{{ slot.name }}" does not exist or has a bad type.
 </div>
 {% endfor %}
 
-</div>
 {% endblock %} 

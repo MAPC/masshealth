@@ -33,8 +33,8 @@ LAYOUT = (
     [ Slot("health-outcomes-chart"), Slot("health-outcomes-map") ],
     [ Slot("risk-factors-table", title="Risk Factors") ],
     [ Slot("risk-factors-chart"), Slot("risk-factors-map") ],
-    [ Slot("environmant-table", title="Environment") ],
-    [ Slot("environmant-chart"), Slot("environmant-map") ],
+    [ Slot("environment-table", title="Environment") ],
+    [ Slot("environment-chart"), Slot("environment-map") ],
     [ Slot("social-indicators-table", title="Social Indicators") ],
     [ Slot("social-indicators-chart"), Slot("social-indicators-map") ],
 
