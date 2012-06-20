@@ -110,9 +110,14 @@ class Slot(object):
 
     _all_instances = []
 
-    filters = dict(kind__in=['profile-table',
-                              'profile-chart',
-                              'profile-map'])
+    # width, height
+    # Use a string if you need a suffix.  Integers will be turned into
+    # strings later.
+    size_by_type = {'profile-table': (707, 'auto'),
+                    'profile-chart': (344, 288),
+                    'profile-map':   (344, 288)}
+
+    filters = dict(kind__in=size_by_type.keys())
     excludes = {}
 
     def __init__(self, name,
@@ -146,6 +151,18 @@ class Slot(object):
 
     def ok(self):
         return self.visualization is not None
+
+    def get_width(self):
+        v = self.size_by_type[self.visualization.kind][0]
+        v = getattr(self, 'width', v)
+        v = str(v) # fix those integers
+        return '"%s"' % v
+
+    def get_height(self):
+        v = self.size_by_type[self.visualization.kind][1]
+        v = getattr(self, 'height', v)
+        v = str(v) # fix those integers
+        return '"%s"' % v
 
     def __repr__(self):
         return "Visualization view slot %r" % self.name
