@@ -94,6 +94,18 @@
 		<li class="health_programs">
 		    <a href="{% url places.views.programs place.slug %}"> Health Programs </a>
 		</li>
+		
+		        <li class="town-list"><label>Choose a Town:</label>
+                <select id='town_selector'>
+					<option
+					{% if not place %} SELECTED=SELECTED{% endif %} value="">Select a Town</option>
+					{% places as towns %}
+					{% for town in towns %}<option 
+					 {% if place %}{% ifequal place.slug town.0 %} SELECTED=SELECTED{% endifequal %}{% endif %}
+					 value="{% url places.views.summary town.0 %}">{{town.1}}</option>
+					{% endfor %}
+				</select>
+        </li>
 	</ul>
     
     </div>

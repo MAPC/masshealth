@@ -171,14 +171,25 @@ a:focus { outline: none; }
 	background-color: transparent;
 	color: #f35a20;
 	text-decoration: none;
-	border-bottom: 1px solid #f35a20;
+	border-bottom: 2px solid #f35a20;
 	border-top: 6px solid #f35a20;
 	padding: 31px 10px 39px;
-	/* background-image: url('/static/img/sm-arrow-down.png');
-background-position: 50% 100px;
-background-repeat: no-repeat;
-*/
 }
+
+.navbar .nav > li > a.home
+{
+background-color: transparent;
+	color: #f35a20;
+	text-decoration: none;
+	border-bottom: 2px solid #f35a20;
+	border-top: 6px solid #f35a20;
+	padding: 31px 10px 39px;
+	
+	}
+
+
+
+
 
 .navbar .nav > li > a.cominfo { padding: 29px 10px 32px; }
 .navbar .nav > li > a.cominfo:hover { padding: 23px 10px 31px; }
@@ -221,6 +232,12 @@ ul.sidenav > li a:active
 	background-color: #fcded3;
 	text-decoration: none;
 	font-weight: bold;
+}
+
+
+ul.sidenav li.town-list
+{
+margin-top: 30px;
 }
 
 .datastories li.data_stories a { background-color: #fcded3; }
@@ -413,7 +430,7 @@ padding-left: 10px;
 
 .home_slide_nav a.activeSlide
 {
-	border-left: 4px solid red;
+	border-left: 4px solid #f35a20;
 	padding-left: 16px;
 	background-color: #dfdfdf !important;
 	color: #000000 !important;
