@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+{% load places_extras %}<html>
     <head>
         <meta http-equiv="Content-type" content="text/html;charset=UTF-8" >
         <meta charset="utf-8">
@@ -53,18 +53,20 @@
 <div class="nav-collapse">
             <ul class="nav">
         <li class="town-list"><label>Choose a Town:</label>
-                <select id='neighborhood_neighborhood'>
-					<option SELECTED value="">Select a Town</option>
-					 {% for town in towns %}<option 
-					 {% ifequal townpassed town %} SELECTED=SELECTED{% endifequal %} 
-					 value="{{town.id}}">{{town.name}}</option>
-					 {% endfor %}
+                <select id='town_selector'>
+					<option
+					{% if not place %} SELECTED=SELECTED{% endif %} value="">Select a Town</option>
+					{% places as towns %}
+					{% for town in towns %}<option 
+					 {% if place %}{% ifequal place.slug town.0 %} SELECTED=SELECTED{% endifequal %}{% endif %}
+					 value="{% url places.views.summary town.0 %}">{{town.1}}</option>
+					{% endfor %}
 				</select>
         </li>
         <li><a class="home" href="/">HOME</a></li>
-        <li><a class="cominfo" href="/park/play/">COMMUNITY<br>INFORMATION</a></li>
-        <li><a class="maptool" href="/explore/">MAP&nbsp;TOOL</a></li>
-        <li><a class="about" href="/explore/">ABOUT</a></li>
+        <li><a class="cominfo" href="#">COMMUNITY<br>INFORMATION</a></li>
+        <li><a class="maptool" href="#">MAP&nbsp;TOOL</a></li>
+        <li><a class="about" href="#">ABOUT</a></li>
 
         </ul>
           </div><!--/.nav-collapse -->
@@ -72,47 +74,71 @@
       </div>
     </div>
 {% endblock %}
-  
+ 
 <div class="container middle">
   <div class="row-fluid">
+  
+  {% block sidenav %} 
     <div class="span3">
     <h1>{{place.name}}</h1>
     <ul class="sidenav">
 		<li class="summary">
-		    <a href="#"> Summary </a>
+		    <a href="{% url places.views.summary place.slug %}"> Summary </a>
 		</li>
 		<li class="health_profile">
-		    <a href="#"> Health Profile </a>
+		    <a href="{% url places.views.profiles place.slug %}"> Health Profile </a>
 		</li>
 		<li class="data_stories">
-			<a href="#"> Data Stories </a>
+			<a href="{% url datastories.views.story place.slug %}"> Data Stories </a>
 		</li>
 		<li class="health_programs">
-		    <a href="#"> Health Programs </a>
+		    <a href="{% url places.views.programs place.slug %}"> Health Programs </a>
 		</li>
 	</ul>
     
     </div>
-
-{% block content %}  
-
-
-
-
-
 {% endblock %}
 
-  <div class="row show-grid">
-  <div class="span12 footer">
+
+{% block content %}  
+{% endblock %}
+</div>
+</div>
+  <div class="footer">
+  <div class="footer-inner">
+<div class="container-fluid">
+<div class="footer-text">
 <h5>60 Temple Place Boston, MA 02111 Main Tel: 617-451-2770&nbsp;|&nbsp;FAX: 627-451-2770</h5>
-<a href="">About Healthy Massachusetts</a>&nbsp;|&nbsp;<a href="">Contact MAPC</a>&nbsp;|&nbsp;<a href="">Data Disclaimer</a>&nbsp;|&nbsp;<a href="">Terms of Service</a>&nbsp;|&nbsp;<a href="">Privacy Policy</a> </div>
-  </div>
+<a href="">About Healthy Massachusetts</a>&nbsp;|&nbsp;<a href="">Contact MAPC</a>&nbsp;|&nbsp;<a href="">Data Disclaimer</a>&nbsp;|&nbsp;<a href="">Terms of Service</a>&nbsp;|&nbsp;<a href="">Privacy Policy</a> 
+</div>
+<div class="footer-images">
+<img src="{{ STATIC_URL }}img/mapc108x62.png" alt="MAPC" />
+<img src="{{ STATIC_URL }}img/mim38x62.png" alt="Mass In Motion" />
+</div>
 
 </div>
 </div>
+</div>
+
 
 {% block javascript %}
 {% endblock %}
+<script>
+var $ = jQuery;
+    $(function(){
+      // bind change event to select
+      $('#town_selector').bind('change', function () {
+          var url = $(this).val(); // get selected value
+          if (url) { // require a URL
+              window.location = url; // redirect
+          }
+          return false;
+      });
+    });
+</script>
+
+
+
 </body>
 </html>
 

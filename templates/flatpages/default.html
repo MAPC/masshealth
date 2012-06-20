@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+<title>{% block title %}{{flatpage.title}}{% endblock %}</title>
+
+{% block head_javascript %}
+{{ block.super }}
+</script>
+{% endblock %} 
+
+{% block bodyclass %}
+<body class="pages">
+{% endblock %} 
+
+{% block content %}  
+
+    <div class="span9">
+
+{{flatpage.content}}
+
+</div>
+{% endblock %}

@@ -1,10 +1,23 @@
-<html>
-<head>
-<title>programs</title>
-</head>
-<body>
-<h1>programs</h1>
+{% extends 'base.html' %}
+{% load markup %}
 
-<p>Dummy programs template.</p>
-</body>
-</html>
+<title>{% block title %}{{ place.name }} Health Propmotion Programs{% endblock %}</title>
+
+{% block head_javascript %}
+{{ block.super }}
+{% endblock %} 
+
+{% block bodyclass %}
+<body class="summary">
+{% endblock %} 
+
+{% block content %}  
+
+<div class="span9">
+<h2>Health Promotion Programs:  {{place.name}}</h2>
+<div class="place_program_desc">{{place.program_desc|markdown}}</div>
+
+
+
+</div>
+{% endblock %} 

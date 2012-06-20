@@ -140,6 +140,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'django.contrib.gis',
     'django.contrib.flatpages',
+    'django.contrib.markup',
     'datastories',
     'places',
     'visualizations',

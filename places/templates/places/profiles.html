@@ -1,10 +1,23 @@
-<html>
-<head>
-<title>profiles</title>
-</head>
-<body>
-<h1>profiles</h1>
+{% extends 'base.html' %}
+{% load markup %}
 
-<p>Dummy profiles template.</p>
-</body>
-</html>
+<title>{% block title %}{{ place.name }} Health Profile{% endblock %}</title>
+
+{% block head_javascript %}
+{{ block.super }}
+{% endblock %} 
+
+{% block bodyclass %}
+<body class="summary">
+{% endblock %} 
+
+{% block content %}  
+
+<div class="span9">
+<h2>Health Profile: {{place.name}}</h2>
+<div class="place_profile">{{place.profile|markdown}}</div>
+<div class="place_map"></div>
+
+
+</div>
+{% endblock %} 

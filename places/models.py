@@ -33,3 +33,7 @@ class Place(models.Model):
     def place_choices(cls):
         return tuple([(o.slug, o.name)
                       for o in cls.objects.order_by('name')])
+
+    class Meta:
+        ordering = ['name']
+

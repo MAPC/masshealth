@@ -1,10 +1,59 @@
-<html>
-<head>
-<title>summary</title>
-</head>
-<body>
-<h1>summary</h1>
+{% extends 'base.html' %}
+{% load markup %}
 
-<p>Dummy summary template.</p>
-</body>
-</html>
+<title>{% block title %}{{ place.name }} Summary{% endblock %}</title>
+
+{% block head_javascript %}
+{{ block.super }}
+{% endblock %} 
+
+{% block bodyclass %}
+<body class="summary">
+{% endblock %} 
+
+{% block content %}  
+
+<div class="span9">
+  <div class="health-profile-summary">
+    <h2>Health Profile</h2>
+    Someday there will be a visualization here.
+  </div>
+  <div class="datastories-summary">{# Maybe the if goes outside this div? #}
+    {% if place.datastories.count %}
+    <h2>Data Stories</h2>
+    <i>These data stories provide insight into health topics
+       particularly of interest in your community.</i>
+    <div class="list-and-image">
+      <ul>
+        {% for story in place.datastories.all %}{# could use slice to limit to 3 #}
+          <li><a href="{% url datastories.views.story place.slug story.slug %}"
+                >{{ story.title }}</a></li>
+        {% endfor %}
+      </ul>
+      <img src="{{ STATIC_URL }}img/datastories-summary.png">
+      <a href="{% url datastories.views.story place.slug %}"
+       >View all data stories &gt;</a>
+    </div>
+    {% endif %}
+  </div>
+  <div class="health-programs-summary">
+    {% if place.program_set.count %}
+    <h2>Health Program Information</h2>
+    <i>Learn more about health promotion programs in your community.</i>
+    <div class="list-and-image">
+      <ul>{% url places.views.programs place.slug as programs_url %}
+        {% for program in place.program_set.all %}{# could use slice to limit to 3 #}
+          <li><a href="{{ programs_url }}#{{ program.title|slugify }}"
+                >{{ program.title }}</a></li>
+        {% endfor %}
+      </ul>
+      <img src="{{ STATIC_URL }}img/programs-summary.png">
+      <a href="{{ programs_url }}"
+       >View all health program information &gt;</a>
+    </div>
+    {% endif %}
+  </div>
+
+
+</div>
+{% endblock %} 
