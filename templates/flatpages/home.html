@@ -23,9 +23,10 @@
 
 
 <!-- home_slider -->
+{% heroes "homepage" as my_heroes %}
+{% if my_heroes.count %}
 <div class="home_slider">
 	<div class="home_slide">
-{% heroes "homepage" as my_heroes %}
 {% for hero in my_heroes %}
 
 		<div class="home_slide_box">
@@ -60,6 +61,7 @@
 	
 {% endfor %}
 </div>	</div>
+{% endif %}
 <!-- /home_slider -->
 
 
