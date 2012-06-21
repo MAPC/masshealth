@@ -55,7 +55,7 @@ jQuery(document).ready(function($) {
 <div class="span9">
 <h2>Health Profile: {{place.name}}</h2>
 <div class="place_profile">{{place.profile|markdown}}</div>
-<div class="place_map"></div>
+<div id="place_map"></div>
 
 </div>
 {% for row in visualization_rows %}
@@ -82,3 +82,43 @@ Viaualization "{{ slot.name }}" does not exist or has a bad type.
 {% endfor %}
 
 {% endblock %} 
+
+
+{% block javascript %}
+  {{ block.super }}
+  {% include "_map_inc.html" %}
+  <script type="text/javascript">
+
+    // background layers
+    var basemap = new L.MAPCTileLayer("basemap");
+
+    // overlays
+    var place = new L.GeoJSON();
+    place.on("featureparse", function (e) {    
+      e.layer.setStyle({
+        "weight": 1,
+        "opacity": 0.9,
+        "color": "#F35A20",
+        "fillOpacity": 0.4
+      });
+    });
+    
+    // map
+    var boston = new L.LatLng(42.357778, -71.061667);
+    var map = new L.Map("place_map",{
+        minZoom: 9,
+        maxZoom: 17,
+        zoomControl: false,
+        dragging: false,
+        attributionControl: false
+    })
+    .setView(boston, 9)
+    .addLayer(basemap);
+
+    // add place geometry
+    place.addGeoJSON({{ place.geometry.geojson|safe }});
+    map.addLayer(place);
+    map.fitBounds(place.getBounds());
+
+  </script>
+{% endblock %}
