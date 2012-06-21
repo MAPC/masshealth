@@ -148,6 +148,10 @@ INSTALLED_APPS = (
     'heroes',
 )
 
+FIXTURE_DIRS = ( # Extra fixure dirs, not stored under an ap
+    _rrel('fixtures', 'flatpages'),  # flatpages is off under django.contrib
+    )
+
 WEAVE_URL = 'http://www.metrobostondatacommon.org/weave/'
 
 # A sample logging configuration. The only tangible logging
