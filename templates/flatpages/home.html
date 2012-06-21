@@ -10,8 +10,7 @@
 </style>
 
 <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-plugins.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}js/hema-min.js"></script> 
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?libraries=geometry&amp;sensor=false&amp;language=en"></script>
+
 
 {% endblock %} 
 
@@ -79,4 +78,34 @@
 </div>
 
 
+{% endblock %}
+
+{% block javascript %}
+    {{ block.super }}
+    {% include "_map_inc.html" %}
+    <script type="text/javascript">
+
+        // background layers
+        var basemap = new L.MAPCTileLayer("basemap");
+
+        // overlays
+        var projects = new L.GeoJSON();
+        projects.on("featureparse", function (e) {  
+            if (e.properties && e.properties.popupContent) {
+                e.layer.bindPopup(e.properties.popupContent);
+            }
+        });
+        
+        // map
+        var boston = new L.LatLng(42.357778, -71.061667);
+        var map = new L.Map("mamc_map",{
+            minZoom: 9,
+            maxZoom: 17
+        })
+        .setView(boston, 9)
+        .addLayer(basemap);
+
+        // TODO: load GeoJSON with projects
+
+    </script>
 {% endblock %}
