@@ -12,22 +12,23 @@ def story(request, place_slug, story_slug=None, owner_id=None):
 
     # Maybe return an alternate rendering if place_stories.count == 0?
 
-    if story_slug is None:
-        try:
+    try:
+        if story_slug is None:
             story = place_stories[0]
-        except (Story.DoesNotExist, IndexError):
-            raise Http404
-    elif owner_id is None:
-        story = get_object_or_404(place_stories,
-                                  slug=story_slug,
-                                  owner__isnull=True)
-    else:
-        story = get_object_or_404(place_stories,
-                                  slug_id=Noneslug,
-                                  owner__isnull=False,
-                                  owner__id=owner_id)
+        elif owner_id is None:
+            story = place_stories.get(slug=story_slug,
+                                      owner__isnull=True)
+        else:
+            story = place_stories.get(slug_id=Noneslug,
+                                      owner__isnull=False,
+                                      owner__id=owner_id)
+    except (Story.DoesNotExist, IndexError):
+        story = None
 
-    pages = story.pages.order_by('storypage__page_number')
+    if story:
+        pages = story.pages.order_by('storypage__page_number')
+    else:
+        pages = []
 
     paginator = Paginator(pages, 1)
 
@@ -53,34 +54,6 @@ def story(request, place_slug, story_slug=None, owner_id=None):
         page_num = pgpg.number
         page_next = pgpg.next_page_number() if pgpg.has_next() else 0
         page_prev = pgpg.previous_page_number() if pgpg.has_previous() else 0
-
-#     page_count = pages.count()
-
-#     if page_count == 0:
-#         # No pages
-#         page = None
-#         page_num = 0
-#         page_next = 0
-#         page_prev = 0
-#     else:
-#         page_num = request.GET.get('page_num', '1')
-
-#         try:
-#             page_num = int(page_num)
-#         except ValueError:
-#             page_num = 1
-
-#         if page_num < 1:
-#             page_num = 1
-#         elif page_num > page_count:
-#             page_num = page_count
-
-#         page_prev = page_num - 1  # Will be 0 if no previous page
-#         page_next = page_num + 1
-#         if page_next > page_count:
-#             page_next = 0  # There is no next page
-
-#         page = pages[page_prev] # page 1 is at index 0, etc.
 
     return render_to_response('datastories/story.html',
                               dict(story=story,

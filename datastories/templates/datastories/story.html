@@ -52,7 +52,7 @@ jQuery(document).ready(function($) {
     	<h2>Data Stories: {{ place.name }}</h2>
     	<p><em>These data stories provide insight into health topics particularly of interest in your community</em></p>
     
-    
+		{% if story %}
 		<h4>{{ story.title }}</h4>
 		
 			{% if page %}
@@ -95,6 +95,11 @@ jQuery(document).ready(function($) {
 					  This story has no pages.
 					</div>
 			{% endif %}
+		{% else %}
+			<div class="no-story">
+				{{ place.name }} has no Data Stories.
+			</div>
+		{% endif %}
 
 <div class="story_links">			
 	{% for story in datastories %}
