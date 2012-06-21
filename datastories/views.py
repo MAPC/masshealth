@@ -15,7 +15,7 @@ def story(request, place_slug, story_slug=None, owner_id=None):
     if story_slug is None:
         try:
             story = place_stories[0]
-        except Story.DoesNotExist, IndexError:
+        except (Story.DoesNotExist, IndexError):
             raise Http404
     elif owner_id is None:
         story = get_object_or_404(place_stories,
