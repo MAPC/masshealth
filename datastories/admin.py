@@ -4,6 +4,7 @@ from django.contrib import admin
 class StoryAdmin(admin.ModelAdmin):
     list_display = ('title', 'slug')
     prepopulated_fields = dict(slug=['title'])
+    filter_horizontal = ('places',)
     exclude = ('owner',)
 
 # Uncomment the stuff below to automate keeping  creator as owner

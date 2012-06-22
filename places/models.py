@@ -20,8 +20,6 @@ class Place(models.Model):
                                     blank=True, default='', help_text=_(
         'Shown at the top of the Health Programs page'))
 
-    datastories = models.ManyToManyField('datastories.Story')
-
     geometry = models.MultiPolygonField(srid=26986, blank=True, null=True)
 
     objects = models.GeoManager()

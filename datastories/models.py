@@ -67,6 +67,10 @@ class Story(models.Model):
 
     pages = models.ManyToManyField(Page, through='StoryPage')
 
+    places = models.ManyToManyField('places.Place',
+                                    related_name='datastories',
+                                    blank=True)
+
     def __unicode__(self):
         return '%s by %s' % (self.title,
                              (self.owner.username if self.owner
