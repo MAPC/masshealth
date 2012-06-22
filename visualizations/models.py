@@ -207,14 +207,14 @@ class Slot(models.Model):
         [(n.lower(), n) for n in slot_params_by_type.keys()]
         )
     slot_type = models.CharField(_('Type'), max_length=100,
-                                 blank=True, default='table',
+                                 blank=False, default='table',
                                  choices=SLOT_TYPE_CHOICES)
     SHOWN_ON_CHOICES = (
-        ('', '--not-shown--'),
+        ('-not-shown-', '--not-shown--'),
         ('profile', 'Health Profile pages'),
         )
     shown_on = models.CharField(_('Shown on'), max_length=100,
-                                blank=True, default='',
+                                blank=False, default='-not-shown-',
                                 choices=SHOWN_ON_CHOICES)
 
     def width(self):
@@ -224,3 +224,6 @@ class Slot(models.Model):
     def heigth(self):
         v = str(slot_params_by_type[self.slot_type][1])
         return mark_safe('"%s"' % v)
+
+    def __unicode__(self):
+        return self.name
