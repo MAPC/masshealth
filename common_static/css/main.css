@@ -493,6 +493,16 @@ padding-left: 10px;
 .place_profile {width: 380px; float: left;}
 #place_map {width: 297px; height: 170px; border: 1px solid #efefef; float: right;}
 
+.row-of-visualizations
+{
+margin-top: 30px;
+}
+
+.row-of-visualizations object
+{
+border: 1px solid #dfdfdf;
+}
+
 .footer
 {
 	text-align: left;

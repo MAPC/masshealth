@@ -68,6 +68,7 @@ jQuery(document).ready(function($) {
         $(".swfobject-container-div p:first").remove();
     }
 });
+
 </script>
 
 {% endblock %} 
@@ -80,10 +81,12 @@ jQuery(document).ready(function($) {
 
 <div class="span9">
 <h2>Health Profile: {{place.name}}</h2>
-<div class="place_profile">{{place.profile|markdown}}</div>
-<div id="place_map"></div>
-
+<div class="profile_summary clearfix">
+	<div class="place_profile">{{place.profile|markdown}}</div>
+	<div id="place_map"></div>
 </div>
+
+<div class="profile-visualizations">
 {% if slots.count %}
 
 <div class="row-of-visualizations">{# new_row or not #}
@@ -132,7 +135,9 @@ Viaualization "{{ slot.name }}" does not exist or has a bad type.
 {% endfor %}
 
 {% endif %}
+</div>
 
+</div>
 {% endblock %} 
 
 
@@ -174,5 +179,8 @@ Viaualization "{{ slot.name }}" does not exist or has a bad type.
     map.fitBounds(place.getBounds());
     {% endif %}
 
+
   </script>
+
+
 {% endblock %}
