@@ -12,6 +12,30 @@
 <script type="text/javascript">
 jQuery(document).ready(function($) {
 
+{% if slots.count %}
+
+{% for slot in slots %}
+    {% with vis=slot.visualization %}
+    swfobject.embedSWF(
+      "{{ WEAVE_URL }}weave.swf", 
+      "profile-swf-div-{{ forloop.counter0 }}", 
+      {{ slot.width }}, {{ slot.height }}, 
+      "10.0.0",
+      "expressInstall.swf", 
+      {
+		file: "http://{{ CURRENT_SITE.domain }}{% url visualizations.views.visualization_xml vis.id place.id %}"
+	  }, 
+      HEMA.swfobject.params,
+      {
+        id: "profile-swf-div-{{ forloop.counter0 }}",
+        name: "profile-swf-div-{{ forloop.counter0 }}"
+      }
+    );
+    {% endwith %}
+{% endfor %}
+
+{% else %}
+
 {% for row in visualization_rows %}
   {% for slot in row %}
     {% with vis=slot.visualization %}
@@ -37,6 +61,8 @@ jQuery(document).ready(function($) {
   {% endfor %}
 {% endfor %}
 
+{% endif %}
+
     // Flash available
     if (swfobject.getFlashPlayerVersion()["major"] > 0) {
         $(".swfobject-container-div p:first").remove();
@@ -58,6 +84,29 @@ jQuery(document).ready(function($) {
 <div id="place_map"></div>
 
 </div>
+{% if slots.count %}
+
+{% for slot in slots %}
+{% if forloop.first %}<div class="row-of-visualizations">{# new_row or not #}
+{% else %}{% if slot.new_row %}</div>
+<div class="row-of-visualizations">
+{% endif %}{% endif %}
+{% if slot.new_row and slot.title %}<h2>{{ slot.title }}</h2>{% endif %}
+<div id="profile-swf-div-{{ forloop.counter0 }}"
+   class="swfobject-container-div profile-slot-{{ slot.name|slugify }}">
+{% with vis=slot.visualization %}
+{% if vis.visualization.thumbnail %}
+<img src="{{ MEDIA_URL }}{{ vis.visualization.thumbnail }}" alt="">
+{% endif %}
+<p>Please install the
+<a href="http://get.adobe.com/flashplayer/">Adobe Flash Player</a>
+to interact with this visualization.</p>
+{% endwith %}
+</div>
+{% endfor %}
+
+{% else %}
+
 {% for row in visualization_rows %}
 <div class="row-of-visualizations">
 {% if row.0.title %}<h2>{{ row.0.title }}</h2>
@@ -80,6 +129,8 @@ Viaualization "{{ slot.name }}" does not exist or has a bad type.
 {% endfor %}
 </div>
 {% endfor %}
+
+{% endif %}
 
 {% endblock %} 
 
@@ -115,10 +166,12 @@ Viaualization "{{ slot.name }}" does not exist or has a bad type.
     .setView(boston, 9)
     .addLayer(basemap);
 
+    {% if GDAL_AVAILABLE %}
     // add place geometry
     place.addGeoJSON({{ place.geometry.geojson|safe }});
     map.addLayer(place);
     map.fitBounds(place.getBounds());
+    {% endif %}
 
   </script>
 {% endblock %}

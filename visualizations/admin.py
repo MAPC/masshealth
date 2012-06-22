@@ -10,7 +10,8 @@ def shown_on(obj):
 shown_on.short_description = 'Where'
 
 class SlotAdmin(admin.ModelAdmin):
-    list_display = ['name', slot_type, shown_on]
+    list_display = ['name', 'rank', 'new_row', slot_type, shown_on]
+    list_editable = ['rank', 'new_row']
 
 admin.site.register(Visualization)
 

@@ -206,6 +206,8 @@ class Slot(models.Model):
     SLOT_TYPE_CHOICES = tuple(
         [(n.lower(), n) for n in slot_params_by_type.keys()]
         )
+    slot_params_by_type = dict(
+        [ (n.lower(), v) for n, v in slot_params_by_type.items() ])
     slot_type = models.CharField(_('Type'), max_length=100,
                                  blank=False, default='table',
                                  choices=SLOT_TYPE_CHOICES)
@@ -218,11 +220,11 @@ class Slot(models.Model):
                                 choices=SHOWN_ON_CHOICES)
 
     def width(self):
-        v = str(slot_params_by_type[self.slot_type][0])
+        v = str(self.__class__.slot_params_by_type[self.slot_type][0])
         return mark_safe('"%s"' % v)
 
-    def heigth(self):
-        v = str(slot_params_by_type[self.slot_type][1])
+    def height(self):
+        v = str(self.__class__.slot_params_by_type[self.slot_type][1])
         return mark_safe('"%s"' % v)
 
     def __unicode__(self):
