@@ -86,11 +86,11 @@ jQuery(document).ready(function($) {
 </div>
 {% if slots.count %}
 
+<div class="row-of-visualizations">{# new_row or not #}
 {% for slot in slots %}
-{% if forloop.first %}<div class="row-of-visualizations">{# new_row or not #}
-{% else %}{% if slot.new_row %}</div>
+{% if not forloop.first and slot.new_row %}</div>
 <div class="row-of-visualizations">
-{% endif %}{% endif %}
+{% endif %}
 {% if slot.new_row and slot.title %}<h2>{{ slot.title }}</h2>{% endif %}
 <div id="profile-swf-div-{{ forloop.counter0 }}"
    class="swfobject-container-div profile-slot-{{ slot.name|slugify }}">
@@ -104,6 +104,7 @@ to interact with this visualization.</p>
 {% endwith %}
 </div>
 {% endfor %}
+</div>
 
 {% else %}
 
