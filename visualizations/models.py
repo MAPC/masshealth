@@ -1,6 +1,7 @@
 from django.utils.translation import ugettext as _
 from django.db import models
 
+from django.utils.safestring import mark_safe
 from django.core.files.storage import FileSystemStorage
 from django.conf import settings
 
@@ -92,7 +93,7 @@ class Visualization(models.Model):
     def __unicode__(self):
         return self.name
 
-class Slot(object):
+class OldSlot(object):
     """To aid in building views with fixed layouts of fisualizations.
 
     These objects describe what visualization to use, plus extra options.
@@ -174,5 +175,52 @@ class Slot(object):
         for inst in cls._all_instances:
             inst._visualization_object = None
 
-models.signals.post_save.connect(Slot._purge_visualizations,
+models.signals.post_save.connect(OldSlot._purge_visualizations,
                                  Visualization)
+
+class Slot(models.Model):
+    name = models.CharField(_('Name'), max_length=100)
+    visualization = models.ForeignKey(Visualization)
+    rank = models.IntegerField(_('Relative order'), default=500)
+    new_row = models.BooleanField(_('Starts new row'), default=True,
+                                  help_text=_(
+        'If turned off this slot is in the same row as the slot '
+        'before it in the relative order.  If on, this slot begins '
+        'a new row of slots.'))
+    title = models.CharField(_('Row title'), max_length=100,
+                             blank=True, default='',
+                             help_text=_(
+        'Ignored if "Starts new row" is off, or if it is blank.  '
+        'Otherwise it is displayed as a heading for the row or '
+        'section (group of rows begun by this one).'))
+    # The first two values below are width and height.
+    # Use a string if you need a suffix.  Integers will be turned into
+    # strings later.
+    # We can append more paramters to the value tuples as we think of
+    # them.
+    slot_params_by_type = {
+        'Table': (707, 100),
+        'Chart': (344, 288),
+        'Map':   (344, 288)
+        }
+    SLOT_TYPE_CHOICES = tuple(
+        [(n.lower(), n) for n in slot_params_by_type.keys()]
+        )
+    slot_type = models.CharField(_('Type'), max_length=100,
+                                 blank=True, default='table',
+                                 choices=SLOT_TYPE_CHOICES)
+    SHOWN_ON_CHOICES = (
+        ('', '--not-shown--'),
+        ('profile', 'Health Profile pages'),
+        )
+    shown_on = models.CharField(_('Shown on'), max_length=100,
+                                blank=True, default='',
+                                choices=SHOWN_ON_CHOICES)
+
+    def width(self):
+        v = str(slot_params_by_type[self.slot_type][0])
+        return mark_safe('"%s"' % v)
+
+    def heigth(self):
+        v = str(slot_params_by_type[self.slot_type][1])
+        return mark_safe('"%s"' % v)

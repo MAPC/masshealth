@@ -23,7 +23,7 @@ a heading, use Slot("xxx", title="Your Desired Title").  This
 Will probably only work well on the first member of a row.
 """
 
-from visualizations.models import Slot
+from visualizations.models import OldSlot as Slot
 
 LAYOUT = (
 
