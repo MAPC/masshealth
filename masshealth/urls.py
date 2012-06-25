@@ -14,6 +14,7 @@ urlpatterns = patterns(
     url(r'^visualizations/', include('visualizations.urls')),
     url(r'^place/', include('places.urls')),
     url(r'^crossdomain.xml$', 'visualizations.views.crossdomain'),
+    url(r'^program/', include('programs.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
