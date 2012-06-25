@@ -20,3 +20,10 @@ class Program(models.Model):
     def __unicode__(self):
         return 'Program %s @ %s' % (self.title, self.place.name)
 
+    def save(self, *args, **kwargs):
+        # defaults location to place-centroid
+        if not self.geometry:
+            self.geometry = self.place.geometry.centroid
+
+        super(Program, self).save(*args, **kwargs)
+
