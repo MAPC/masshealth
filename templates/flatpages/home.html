@@ -117,6 +117,7 @@
                 function(data) {
                         projects.addGeoJSON(data);
                         map.addLayer(projects);
+                        map.fitBounds(projects.getBounds());
             });
     });
 
