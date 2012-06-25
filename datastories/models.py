@@ -14,8 +14,6 @@ class Page(models.Model):
     implemented in the admin form definition
     """
     title = models.CharField(_('Title'), max_length=100)
-    owner = models.ForeignKey(User, verbose_name=_('owner'),
-                              blank=True, null=True)
     last_modified = models.DateTimeField(auto_now_add=True)
     # We might name this "body", if prefered.  But we never
     # have both an abstract and a caption, so it seems
@@ -37,9 +35,7 @@ class Page(models.Model):
                                       blank=True, null=True)
 
     def __unicode__(self):
-        return '%s by %s' % (self.title,
-                             (self.owner.username if self.owner
-                              else "<Anonymous>"))
+        return self.title
 
 class Story(models.Model):
     """A Data Story.
@@ -61,8 +57,6 @@ class Story(models.Model):
     slug  = models.SlugField(max_length=100)
     abstract = models.TextField(_('Abstract'), blank=True, default='')
 
-    owner = models.ForeignKey(User, verbose_name=_('owner'),
-                              blank=True, null=True)
     last_modified = models.DateTimeField(auto_now_add=True)
 
     pages = models.ManyToManyField(Page, through='StoryPage')
@@ -72,12 +66,9 @@ class Story(models.Model):
                                     blank=True)
 
     def __unicode__(self):
-        return '%s by %s' % (self.title,
-                             (self.owner.username if self.owner
-                              else "<Anonymous>"))
+        return self.title
 
     class Meta:
-        unique_together = (('title', 'owner'),)
         verbose_name = 'Datastory'
         verbose_name_plural = "Datastories"
 

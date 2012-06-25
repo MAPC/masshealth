@@ -5,7 +5,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from models import Story
 from places.models import Place
 
-def story(request, place_slug, story_slug=None, owner_id=None):
+def story(request, place_slug, story_slug=None):
     place = get_object_or_404(Place, slug=place_slug)
 
     place_stories = place.datastories.all()
@@ -15,13 +15,8 @@ def story(request, place_slug, story_slug=None, owner_id=None):
     try:
         if story_slug is None:
             story = place_stories[0]
-        elif owner_id is None:
-            story = place_stories.get(slug=story_slug,
-                                      owner__isnull=True)
         else:
-            story = place_stories.get(slug_id=Noneslug,
-                                      owner__isnull=False,
-                                      owner__id=owner_id)
+            story = place_stories.get(slug=story_slug)
     except (Story.DoesNotExist, IndexError):
         story = None
 
