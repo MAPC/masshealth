@@ -13,9 +13,10 @@ class Program(models.Model):
                               default='')
     place = models.ForeignKey('places.Place')
 
-    geometry = models.PointField(_('Where'), null=True, blank=True)
+    geometry = models.PointField(_('Location'), srid=26986, null=True, blank=True)
 
     objects = models.GeoManager()
 
     def __unicode__(self):
         return 'Program %s @ %s' % (self.title, self.place.name)
+
