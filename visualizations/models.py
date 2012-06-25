@@ -232,4 +232,4 @@ class Slot(models.Model):
 
     class Meta:
         ordering = ('rank',)
-
+        verbose_name = 'Profiel Visualization Slot'
