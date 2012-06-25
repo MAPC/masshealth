@@ -76,9 +76,6 @@ class Visualization(models.Model):
     """Hold imformation needed to render Weave visualizations.
     """
     name = models.CharField(_('Name'), max_length=100)
-    kind = models.CharField(_('Type'), max_length=100,
-                            blank=True, default='', help_text=_(
-        'For grouping to make choosing easier in other admin pages.'))
     thumbnail = models.ImageField(
         _('Dummy Image'), upload_to='visualizations/thumbnails/',
         max_length=255, blank=True, default='', help_text=_(
@@ -92,91 +89,6 @@ class Visualization(models.Model):
 
     def __unicode__(self):
         return self.name
-
-class OldSlot(object):
-    """To aid in building views with fixed layouts of fisualizations.
-
-    These objects describe what visualization to use, plus extra options.
-
-    They are held in row iterables, which are in turn held in one iterable
-    for the page.  The whole thing is passed to the template, and carries
-    such data as is needed to render the visualization.
-
-    At the momemnt there is little else to store besides how to find the
-    visualization, but if the template needs any information not carried
-    by the Visualization objects, we can add them here.
-    """
-    _visualization_object = None  # Default value
-    title = None # Default value, don't make template handle attr error.
-
-    _all_instances = []
-
-    # width, height
-    # Use a string if you need a suffix.  Integers will be turned into
-    # strings later.
-    size_by_type = {'profile-table': (707, 100),
-                    'profile-chart': (344, 288),
-                    'profile-map':   (344, 288)}
-
-    filters = dict(kind__in=size_by_type.keys())
-    excludes = {}
-
-    def __init__(self, name,
-                 extra_filters=None, extra_excludes=None,
-                 **extra_attributes):
-        # Visualizations are found by their name, plus type restrictions:
-        # There can be only one of each name within the type set.
-        self.name = name
-        if extra_filters:
-            self.filters = self.filters.copy().update(extra_filters)
-        if extra_excludes:
-            self.excludes = self.excludes.copy().update(extra_excludes)
-        if extra_attributes:
-            self.__dict__.update(extra_attributes)
-        self._all_instances.append(self)
-
-    @property
-    def visualization(self):
-        if not self._visualization_object:
-            qs = Visualization.objects
-            try:
-                if self.filters:
-                    qs = qs.filter(**self.filters)
-                if self.excludes:
-                    qs = qs.exclude(**self.excludes)
-                self._visualization_object = qs.get(name=self.name)
-            except:
-                # we tried
-                pass
-        return self._visualization_object
-
-    def ok(self):
-        return self.visualization is not None
-
-    def get_width(self):
-        v = self.size_by_type[self.visualization.kind][0]
-        v = getattr(self, 'width', v)
-        v = str(v) # fix those integers
-        return '"%s"' % v
-
-    def get_height(self):
-        v = self.size_by_type[self.visualization.kind][1]
-        v = getattr(self, 'height', v)
-        v = str(v) # fix those integers
-        return '"%s"' % v
-
-    def __repr__(self):
-        return "Visualization view slot %r" % self.name
-
-    @classmethod
-    def _purge_visualizations(cls, sender=None, **kwargs):
-        """For connection to the Visualization save signal.
-        """
-        for inst in cls._all_instances:
-            inst._visualization_object = None
-
-models.signals.post_save.connect(OldSlot._purge_visualizations,
-                                 Visualization)
 
 class Slot(models.Model):
     name = models.CharField(_('Name'), max_length=100)

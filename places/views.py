@@ -5,7 +5,6 @@ from django.conf import settings
 
 from models import Place
 from visualizations.models import Slot
-from profile_layout import LAYOUT as PROFILE_LAYOUT
 
 GDAL_AVAILABLE = getattr(settings, 'GDAL_AVAILABLE', True)
 
@@ -24,7 +23,6 @@ def profiles(request, place_slug):
     return render_to_response(
         'places/profiles.html',
         dict(place=place,
-             visualization_rows=PROFILE_LAYOUT,
              slots = Slot.objects.filter(shown_on='profile'
                                          ).order_by('rank'),
              GDAL_AVAILABLE=GDAL_AVAILABLE),
