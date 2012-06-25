@@ -92,9 +92,12 @@
 
         // overlays
         var projects = new L.GeoJSON();
-        projects.on("featureparse", function (e) {  
-            if (e.properties && e.properties.popupContent) {
-                e.layer.bindPopup(e.properties.popupContent);
+        projects.on("featureparse", function(e) {  
+            if (e.properties) {
+                popupContent = "<strong>" + e.properties["title"] + "</strong>";
+                if (e.properties["description"] !== "") popupContent += "<p>" + e.properties["description"] + "</p>";
+                if (e.properties["image_url"]) popupContent += "<img src=" + e.properties["image_url"] + " alt=\"" + e.properties["title"] + "\">";
+                e.layer.bindPopup(popupContent);
             }
         });
         
@@ -107,7 +110,16 @@
         .setView(boston, 9)
         .addLayer(basemap);
 
-        // TODO: load GeoJSON with projects
+        jQuery(function() {
+            // load program locations on map
+            $.getJSON(
+                "/program/geojson/",  
+                function(data) {
+                        projects.addGeoJSON(data);
+                        map.addLayer(projects);
+                        map.fitBounds(projects.getBounds());
+            });
+    });
 
     </script>
 {% endblock %}
