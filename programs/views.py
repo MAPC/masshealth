@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.utils import simplejson
+from django.template.defaultfilters import truncatewords
 
 from models import Program
 
@@ -16,7 +17,8 @@ def all_geojson(request):
     features = []
 
     for program in programs:
-        properties = dict(title=program.title, description=program.description)
+        # truncatewords
+        properties = dict(title=program.title, description=truncatewords(program.description,20))
         if program.image:
             properties['image_url'] = program.image.url;
         geometry = simplejson.loads(program.geometry.geojson)
