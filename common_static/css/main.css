@@ -366,6 +366,14 @@ padding-left: 10px;
 	border: 1px solid #dfdfdf;
 }
 
+.map-thumb {
+	width: 120px;
+	height: 80px;
+	float: left;
+	margin-right: 8px;
+	border: 1px solid #DFDFDF
+}
+
 /*home_slider*/
 .home_slider
 {

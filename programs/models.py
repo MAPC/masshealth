@@ -10,7 +10,8 @@ class Program(models.Model):
                               upload_to='programs/img/%y%U',
                               max_length=255,
                               blank=True,
-                              default='')
+                              default='',
+                              help_text="Image will be shown at 120x80 in map info windwo.")
     place = models.ForeignKey('places.Place')
 
     geometry = models.PointField(_('Location'), srid=26986, null=True, blank=True)
