@@ -36,6 +36,63 @@ jQuery(document).ready(function($) {
     {% endwith %}
 {% endfor %}
 
+{% if can_update_thumbnails %}
+    {% url visualizations.views.ajax_thumbnails_post as ajax_url %}
+    $('form#submit-new-thumbnails').submit(function(e) {
+
+{% comment %} I have some problem with this code, debug later
+        var holders = {);
+	{% for slot in slots %}
+          holders["x{{ forloop.counter0 }}"] = {
+	    vid: {{ slot.visualization.id }},
+            has_thumbnail: {% if slot.visualization.thumbnail %}true{% else %}false{% endif %}
+	  };{% endfor %}
+
+	var do_all = ! ! $(
+	  'form#submit-new-thumbnails input[name=update-which-thumbnails]'
+	  ).attr('checked');
+
+	var sendables = [];
+
+	for (var id in holders) {
+	  var h = holders[id];
+	  if (h.has_thumbnail && ! do_all) continue;
+	  var swob = $('object#' + id);
+	  if ( ! swob ) continue;
+	  if ( swob.getTaskCount() ) continue; // If Andy Dufilie is right
+	  try {
+	    var new_image = swob.evaluateExpression(
+	      null,
+	      'getBase64Image(Application.application.visDesktop)',
+	      null,
+	      ['weave.utils.BitmapUtils', 'mx.core.Application']);
+	  } catch(error) {
+	    continue;
+	  }
+	  sendables.push({vid: h.vid, img: new_image});
+	};
+
+	$(document).ajaxSend(function(event, xhr, settings) {
+          /* We presume that we're the only ajax here, and don't
+	     check same origin or method.  If it comes down to
+	     it we could compare against the template ajax_url
+	     variable, as well as method.
+	  */
+	  xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token_value }}");
+	  $.post("{{ ajax_url }}",
+	         { visualization_thumbnails: JSON.stringify(sendables) },
+		 function(data) {
+		   if (data) alert(data);
+		 },
+		 "json");
+        });
+{% endcomment %}
+
+        return false;  // Don't actually let the form submit
+    });
+{% endif %}
+
+
 {% endif %}
 
     // Flash available
@@ -87,6 +144,20 @@ to interact with this visualization.</p>
 </div>
 {% endfor %}
 </div>
+{% if can_update_thumbnails %}
+<hr />
+<div class="submit-new-thumbnails">
+  <form method="POST" action="#" id="submit-new-thumbnails">
+    <div>
+      <input type="checkbox" name="update-which-thumbnails" value="all" />
+	Update thumbnails for all rendered visualizations<br />
+	(versus just those that don't already have a thumbnail).<br />
+	Wait for visualization rendering to be complete before submitting.
+      <input type="submit" />
+    </div>
+  </form>
+</div>
+{% endif %}
 
 {% else %}
 
