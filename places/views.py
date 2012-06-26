@@ -2,6 +2,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.http import Http404
 from django.conf import settings
+from django.middleware.csrf import get_token
 
 from models import Place
 from visualizations.models import Slot
@@ -20,11 +21,20 @@ def profiles(request, place_slug):
     except Place.DoesNotExist:
       raise Http404
 
+    u = request .user
+    can_update_thumbnails = u.is_active and (u.is_superuser or u.is_staff)
+    if can_update_thumbnails:
+        csrf_token_value = get_token(request) # Forces cookie generation.
+    else:
+        csrf_token_value = ''
+
     return render_to_response(
         'places/profiles.html',
         dict(place=place,
              slots = Slot.objects.filter(shown_on='profile'
                                          ).order_by('rank'),
+             can_update_thumbnails=can_update_thumbnails,
+             csrf_token_value=csrf_token_value,
              GDAL_AVAILABLE=GDAL_AVAILABLE),
         context_instance=RequestContext(request))
 

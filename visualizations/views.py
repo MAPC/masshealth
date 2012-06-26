@@ -1,5 +1,6 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
+from django.http import HttpResponse
 from models import Visualization
 from places.models import Place
 
@@ -19,4 +20,6 @@ def crossdomain(request):
         {}, 
         mimetype='application/xml')
 
-    
+def ajax_thumbnails_post(request):
+    # Much more to come.
+    return HttpResponse('unimplemented', 'text/plain')
