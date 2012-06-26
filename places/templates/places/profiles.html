@@ -16,21 +16,23 @@ jQuery(document).ready(function($) {
 
 {% for slot in slots %}
     {% with vis=slot.visualization %}
-    swfobject.embedSWF(
-      "{{ WEAVE_URL }}weave.swf", 
-      "profile-swf-div-{{ forloop.counter0 }}", 
-      {{ slot.width }}, {{ slot.height }}, 
-      "10.0.0",
-      "expressInstall.swf", 
-      {
-		file: "http://{{ CURRENT_SITE.domain }}{% url visualizations.views.visualization_xml vis.id place.id %}"
-	  }, 
-      HEMA.swfobject.params,
-      {
-        id: "profile-swf-div-{{ forloop.counter0 }}",
-        name: "profile-swf-div-{{ forloop.counter0 }}"
-      }
-    );
+    $("#profile-swf-div-{{ forloop.counter0 }}").click(function() {
+	swfobject.embedSWF(
+	  "{{ WEAVE_URL }}weave.swf", 
+	  "profile-swf-div-{{ forloop.counter0 }}", 
+	  {{ slot.width }}, {{ slot.height }}, 
+	  "10.0.0",
+	  "expressInstall.swf", 
+	  {
+		    file: "http://{{ CURRENT_SITE.domain }}{% url visualizations.views.visualization_xml vis.id place.id %}"
+	      }, 
+	  HEMA.swfobject.params,
+	  {
+	    id: "profile-swf-div-{{ forloop.counter0 }}",
+	    name: "profile-swf-div-{{ forloop.counter0 }}"
+	  }
+	);
+    });
     {% endwith %}
 {% endfor %}
 
@@ -38,7 +40,7 @@ jQuery(document).ready(function($) {
 
     // Flash available
     if (swfobject.getFlashPlayerVersion()["major"] > 0) {
-        $(".swfobject-container-div p:first").remove();
+        $("body").addClass("flash-is-present");
     }
 });
 
@@ -69,12 +71,16 @@ jQuery(document).ready(function($) {
 {% endif %}
 {% if slot.new_row and slot.title %}<h2>{{ slot.title }}</h2>{% endif %}
 <div id="profile-swf-div-{{ forloop.counter0 }}"
-   class="swfobject-container-div profile-slot-{{ slot.name|slugify }}">
+   class="swfobject-container-div profile-slot-{{ slot.name|slugify }} slot-type-{{ slot.slot_type|slugify }}">
 {% with vis=slot.visualization %}
-{% if vis.visualization.thumbnail %}
-<img src="{{ MEDIA_URL }}{{ vis.visualization.thumbnail }}" alt="">
+{% if vis.thumbnail %}
+<img src="{{ MEDIA_URL }}{{ vis.thumbnail }}" alt="">
+<p class="if-flash">Click image for interactive Weave Visualization</p>
+{% else %}
+<p class="if-flash">Click here for interactive
+  {{ slot.get_slot_type_display }} Weave Visualization</p>
 {% endif %}
-<p>Please install the
+<p class="if-no-flash">Please install the
 <a href="http://get.adobe.com/flashplayer/">Adobe Flash Player</a>
 to interact with this visualization.</p>
 {% endwith %}
