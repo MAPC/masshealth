@@ -145,6 +145,7 @@ a:focus { outline: none; }
 	padding-right: 0px;
 	width: 940px;
 	border-bottom: 1px solid #dfdfdf;
+	filter: none;
 }
 
 .navbar .nav > li
