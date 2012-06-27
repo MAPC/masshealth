@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load flatpages %}
+{% get_flatpages '/about/' as pages %}
 
 <title>{% block title %}{{flatpage.title}}{% endblock %}</title>
 
@@ -10,6 +12,29 @@
 {% block bodyclass %}
 <body class="pages">
 {% endblock %} 
+
+{% block sidenav %} 
+    <div class="span3">
+    <ul class="sidenav">
+         {% for page in pages %}
+		<li class="summary">
+		    <a href="{{page.url}}"> {{page.title}} </a>
+		</li>
+         {% endfor%}
+		
+		<li class="town-list"><label>Choose a Town:</label>
+		<select id='town_selector_side'>
+			<option SELECTED=SELECTED value="">Select a Town</option>
+			{% for place in places%}<option 
+			     value="{% url places.views.summary place.0 %}">{{place.1}}</option>
+			{% endfor %}
+		</select>
+</li>
+	</ul>
+    
+    </div>
+{% endblock %}
+
 
 {% block content %}  
 
