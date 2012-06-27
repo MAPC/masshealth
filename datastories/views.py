@@ -6,6 +6,7 @@ from models import Story
 from places.models import Place
 
 def story(request, place_slug, story_slug=None):
+    page_type = "story"
     place = get_object_or_404(Place, slug=place_slug)
 
     place_stories = place.datastories.all()
@@ -52,6 +53,7 @@ def story(request, place_slug, story_slug=None):
 
     return render_to_response('datastories/story.html',
                               dict(story=story,
+                                   page_type=page_type,
                                    page=page,
                                    page_num=page_num,
                                    page_count=page_count,
