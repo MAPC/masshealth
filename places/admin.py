@@ -6,4 +6,16 @@ try:
 except AttributeError:
     _model_admin = admin.ModelAdmin
 
-admin.site.register(Place, _model_admin)
+
+class Commonmedia:
+    js = (
+        '/static/libs/tinymce/jscripts/tiny_mce/tiny_mce.js',
+        '/static/js/textareas.js',
+    )
+
+
+
+
+admin.site.register(Place, _model_admin,
+    Media = Commonmedia,
+    )
