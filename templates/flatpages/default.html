@@ -1,6 +1,4 @@
 {% extends 'base.html' %}
-{% load flatpages %}
-{% get_flatpages '/about/' as pages %}
 
 <title>{% block title %}{{flatpage.title}}{% endblock %}</title>
 
@@ -16,7 +14,9 @@
 {% block sidenav %} 
     <div class="span3">
     <ul class="sidenav">
-         {% for page in pages %}
+{% load flatpages %}
+{% get_flatpages '/about/' as flatpages %}
+         {% for page in flatpages %}
 		<li class="summary">
 		    <a href="{{page.url}}"> {{page.title}} </a>
 		</li>

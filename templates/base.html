@@ -105,7 +105,10 @@
 		    	{% places as towns %}
 		    	{% for town in towns %}<option 
 		    	    {% if place %}{% ifequal place.slug town.0 %} SELECTED=SELECTED{% endifequal %}{% endif %}
-		    	    value="{% url places.views.summary town.0 %}">{{town.1}}</option>
+                            {% comment %} Tie into the page and change the url depending on the page_type variable {% endcomment %}
+                            value=" {% ifequal page_type "summary" %}{% url places.views.summary town.0 %}{% endifequal %}
+                            {% ifequal page_type "profiles" %}{% url places.views.profiles town.0 %}{% endifequal %}
+                            {% ifequal page_type "programs" %}{% url places.views.programs town.0 %}{% endifequal %} ">{{town.1}}</option> 
 		    	{% endfor %}
 		    </select>
                 </li>
