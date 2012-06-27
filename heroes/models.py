@@ -9,8 +9,7 @@ class Hero(models.Model):
     image = models.ImageField(_('Image'),
                               upload_to='heroes/img/%y%U',
                               max_length=255,
-                              blank=True,
-                              default='')
+                              blank=False)
     rank = models.IntegerField(_('Order'), default=500)
     active = models.BooleanField(_('Active'), default=True)
     show_in = models.CharField(_('Selector'), max_length=200,
