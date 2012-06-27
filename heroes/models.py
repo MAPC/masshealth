@@ -3,7 +3,7 @@ from django.db import models
 
 class Hero(models.Model):
     title = models.CharField(max_length=100)
-    type = models.CharField(max_length=100)
+    type = models.CharField(max_length=100,verbose_name='subtitle')
     description =  models.TextField(_('Description'),
                                     blank=True, default='')
     image = models.ImageField(_('Image'),
