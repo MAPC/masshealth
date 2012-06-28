@@ -3,14 +3,13 @@ from django.db import models
 
 class Hero(models.Model):
     title = models.CharField(max_length=100)
-    type = models.CharField(max_length=100)
+    type = models.CharField(max_length=100,verbose_name='subtitle')
     description =  models.TextField(_('Description'),
                                     blank=True, default='')
     image = models.ImageField(_('Image'),
                               upload_to='heroes/img/%y%U',
                               max_length=255,
-                              blank=True,
-                              default='')
+                              blank=False)
     rank = models.IntegerField(_('Order'), default=500)
     active = models.BooleanField(_('Active'), default=True)
     show_in = models.CharField(_('Selector'), max_length=200,

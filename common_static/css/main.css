@@ -15,6 +15,7 @@ p
 	font-size: 13px;
 	line-height: 15px;
 	color: #6d6e71;
+    text-align: left;
 }
 
 Little p
@@ -71,6 +72,14 @@ h5
 	color: #000000;
 	font-weight: normal;
 }
+
+ul li
+{
+font-size: 13px;
+line-height: 15px;
+}
+
+
 
 SlideshowNav
 {
@@ -145,6 +154,7 @@ a:focus { outline: none; }
 	padding-right: 0px;
 	width: 940px;
 	border-bottom: 1px solid #dfdfdf;
+	filter: none;
 }
 
 .navbar .nav > li
@@ -187,8 +197,10 @@ background-color: transparent;
 	
 	}
 
-
-
+.navbar .nav > li > a.maptool
+{
+color: #CCCCCC;
+}
 
 
 .navbar .nav > li > a.cominfo { padding: 29px 10px 32px; }
@@ -316,10 +328,16 @@ margin-top: 30px;
 }
 
 
-.place_program_desc,
-.programs-staff-info
+.place_program_desc
 {
 padding-left: 10px;
+}
+
+.programs-staff-info
+{
+background-color: #EFEFEF;
+padding: 10px;
+margin-top: 10px;
 }
 .story_links { display: block; }
 

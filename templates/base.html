@@ -69,7 +69,7 @@
         <li><a class="home" href="/">HOME</a></li>
         <li><a class="cominfo" href="#">COMMUNITY<br>INFORMATION</a></li>
         <li><a class="maptool" href="#">MAP&nbsp;TOOL</a></li>
-        <li><a class="about" href="#">ABOUT</a></li>
+        <li><a class="about" href="/about/about-the-website/">ABOUT</a></li>
 
         </ul>
           </div><!--/.nav-collapse -->
@@ -81,14 +81,14 @@
 <div class="container middle">
   <div class="row-fluid">
   
-  {% block sidenav %} 
+{% block sidenav %} 
     <div class="span3">
     <h1>{{place.name}}</h1>
     <ul class="sidenav">
 		<li class="summary">
 		    <a href="{% url places.views.summary place.slug %}"> Summary </a>
 		</li>
-		<li class="health_profile">
+		<li class="health_profile profile">
 		    <a href="{% url places.views.profiles place.slug %}"> Health Profile </a>
 		</li>
 		<li class="data_stories">
@@ -98,19 +98,22 @@
 		    <a href="{% url places.views.programs place.slug %}"> Health Programs </a>
 		</li>
 		
-		        <li class="town-list"><label>Choose a Town:</label>
-                <select id='town_selector'>
-					<option
-					{% if not place %} SELECTED=SELECTED{% endif %} value="">Select a Town</option>
-					{% places as towns %}
-					{% for town in towns %}<option 
-					 {% if place %}{% ifequal place.slug town.0 %} SELECTED=SELECTED{% endifequal %}{% endif %}
-					 value="{% url places.views.summary town.0 %}">{{town.1}}</option>
-					{% endfor %}
-				</select>
-        </li>
+		<li class="town-list"><label>Choose a Town:</label>
+		    <select id='town_selector_side'>
+		    	<option
+		    	{% if not place %} SELECTED=SELECTED{% endif %} value="">Select a Town</option>
+		    	{% places as towns %}
+		    	{% for town in towns %}<option 
+		    	    {% if place %}{% ifequal place.slug town.0 %} SELECTED=SELECTED{% endifequal %}{% endif %}
+                            {% comment %} Tie into the page and change the url depending on the page_type variable {% endcomment %}
+                            value=" {% ifequal page_type "summary" %}{% url places.views.summary town.0 %}{% endifequal %}
+                            {% ifequal page_type "profiles" %}{% url places.views.profiles town.0 %}{% endifequal %}
+                            {% ifequal page_type "story" %}{% url datastories.views.story town.0 %}{% endifequal %}
+                            {% ifequal page_type "programs" %}{% url places.views.programs town.0 %}{% endifequal %} ">{{town.1}}</option> 
+		    	{% endfor %}
+		    </select>
+                </li>
 	</ul>
-    
     </div>
 {% endblock %}
 
@@ -151,6 +154,13 @@ var $ = jQuery;
     $(function(){
       // bind change event to select
       $('#town_selector').bind('change', function () {
+          var url = $(this).val(); // get selected value
+          if (url) { // require a URL
+              window.location = url; // redirect
+          }
+          return false;
+      });
+      $('#town_selector_side').bind('change', function () {
           var url = $(this).val(); // get selected value
           if (url) { // require a URL
               window.location = url; // redirect
