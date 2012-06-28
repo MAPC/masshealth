@@ -90,6 +90,12 @@ class Visualization(models.Model):
     def __unicode__(self):
         return self.name
 
+    def has_thumbnail(self):
+        if not self.thumbnail:
+            return False
+        path = self.thumbnail.path
+        return path and os.path.isfile(path)
+
 class Slot(models.Model):
     name = models.CharField(_('Name'), max_length=100)
     visualization = models.ForeignKey(Visualization)

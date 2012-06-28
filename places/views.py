@@ -25,7 +25,7 @@ def profiles(request, place_slug):
     except Place.DoesNotExist:
       raise Http404
 
-    u = request .user
+    u = request.user
     can_update_thumbnails = u.is_active and (u.is_superuser or u.is_staff)
     if can_update_thumbnails:
         csrf_token_value = get_token(request) # Forces cookie generation.
