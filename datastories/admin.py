@@ -33,6 +33,14 @@ class StoryAdmin(admin.ModelAdmin):
     prepopulated_fields = dict(slug=['title'])
     form = StoryAdminForm
 
-admin.site.register(Story, StoryAdmin)
+class Commonmedia:
+    js = (
+        '/static/libs/tinymce/jscripts/tiny_mce/tiny_mce.js',
+        '/static/js/textareas.js',
+    )
+
+admin.site.register(Story, StoryAdmin,
+    Media = Commonmedia,
+    )
 admin.site.register(Page)
 admin.site.register(StoryPage)

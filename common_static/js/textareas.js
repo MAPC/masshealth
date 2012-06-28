@@ -1,19 +1,17 @@
 tinyMCE.init({
-	mode : "textareas",
-	theme : "advanced",
+//	mode : "textareas",
+//        mode : "specific_textareas",
+        mode: "exact",
+        elements: "id_profile, id_program_desc, id_abstract, id_text, id_content, id_description",
+//        editor_selector : "mceEditor",
+        theme : "advanced",
 	content_css : "/static/css/main.css",
 //    plugins : "table,inlinepopups",
 
 	// Style formats
 	style_formats : [
 			{title : 'Bold text', inline : 'b'},
-			{title : 'Red text', inline : 'span', styles : {color : '#ff0000'}},
-			{title : 'Red header', block : 'h1', styles : {color : '#ff0000'}},
-			{title : 'Boxed white', block : 'div', classes : 'boxedwhite'},
-			{title : 'Boxed black', block : 'div', classes : 'boxedblack'},
-			{title : 'Example 2', inline : 'span', classes : 'example2'},
-			{title : 'Table styles'},
-			{title : 'Table row 1', selector : 'tr', classes : 'tablerow1'}
+			{title : 'Orange text', inline : 'span', styles : {color : '#ff0000'}},
 	],
 
     // Theme options
