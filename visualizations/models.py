@@ -137,6 +137,7 @@ class Slot(models.Model):
     SHOWN_ON_CHOICES = (
         ('-not-shown-', '--not-shown--'),
         ('profile', 'Health Profile pages'),
+        ('summary', 'Summary pages'),
         )
     shown_on = models.CharField(_('Shown on'), max_length=100,
                                 blank=False, default='-not-shown-',
@@ -155,4 +156,4 @@ class Slot(models.Model):
 
     class Meta:
         ordering = ('rank',)
-        verbose_name = 'Profile Visualization Slot'
+        verbose_name = 'Profile/Summary Visualization Slot'
