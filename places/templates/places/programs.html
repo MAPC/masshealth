@@ -15,7 +15,7 @@
 
 <div class="span9">
 <h2>Health Promotion Programs</h2>
-<div class="place_program_desc">{{place.program_desc|markdown}}</div>
+<div class="place_program_desc">{{place.program_desc|safe}}</div>
 <div class="programs-staff-info"><h3>Staff Information</h3>
 {# Need stuff dependent on login? is this whole section conditional or just "you are logged in as..." #}
 <ul>
