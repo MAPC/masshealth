@@ -104,7 +104,7 @@ jQuery(document).ready(function($) {
 <div class="story_links">			
 	{% for story in datastories %}
 	<div class="story_sum">
-                      <a class="link_title" href="{{slug}}">
+                      <a class="link_title" href="{% url datastories.views.story place.slug story.slug %}">
                       <div>{{ story.title }}</div>
                       </a>
 					  {% if story.page.0.visualization.thumbnail %}

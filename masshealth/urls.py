@@ -6,6 +6,9 @@ from django.conf import settings
 from django.contrib import admin
 admin.autodiscover()
 
+from monkey_patches import admin as mpa
+mpa.flatpages()
+
 urlpatterns = patterns(
     '', # Putting it here makes emacs indentation helpful.
     # Examples:
