@@ -135,6 +135,7 @@ jQuery(document).ready(function($) {
   <div id="profile-swf-div-{{ forloop.counter0 }}"
      class="swfobject-container-div profile-slot-{{ slot.name|slugify }} slot-type-{{ slot.slot_type|slugify }}">
   {% with vis=slot.visualization %}
+  {% if slot.vistitle %}<h3>{{ slot.vistitle }}</h3>{% endif %}
   {% if vis.thumbnail %}
   <img src="{{ MEDIA_URL }}{{ vis.thumbnail }}" alt="">
   <p class="if-flash">Click image for interactive Weave Visualization</p>
