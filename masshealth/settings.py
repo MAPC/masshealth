@@ -66,6 +66,8 @@ MEDIA_URL = '/media/'
 
 FILEBROWSER_DIRECTORY = MEDIA_ROOT
 
+ADMIN_MEDIA_PREFIX = '/static/admin/'
+
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
@@ -139,7 +141,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
-    #'grappelli',
+    'grappelli',
     'filebrowser',
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:

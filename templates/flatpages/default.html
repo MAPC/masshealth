@@ -17,7 +17,7 @@
 {% load flatpages %}
 {% get_flatpages '/about/' as flatpages %}
          {% for page in flatpages %}
-		<li class="summary">
+		<li class="summary{% ifequal page.id flatpage.id%} current{% endifequal%}">
 		    <a href="{{page.url}}"> {{page.title}} </a>
 		</li>
          {% endfor%}

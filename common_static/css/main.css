@@ -273,6 +273,7 @@ margin-top: 30px;
 .summary li.summary a { background-color: #fcded3; }
 .profile li.profile a { background-color: #fcded3; }
 .programs li.health_programs a { background-color: #fcded3; }
+.current { background-color: #fcded3; font-weight:bold; }
 
 li.town-list select { width: 180px; }
 .row { margin: 0; }
