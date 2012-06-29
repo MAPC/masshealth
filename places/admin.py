@@ -12,10 +12,7 @@ class Commonmedia:
         '/static/libs/tinymce/jscripts/tiny_mce/tiny_mce.js',
         '/static/js/textareas.js',
     )
-
-
-
-
+    
 admin.site.register(Place, _model_admin,
     Media = Commonmedia,
     )

@@ -186,7 +186,8 @@ a:focus { outline: none; }
 	padding: 31px 10px 39px;
 }
 
-.navbar .nav > li > a.home
+.about .navbar .nav > li > a.about,
+.home .navbar .nav > li > a.home
 {
 background-color: transparent;
 	color: #f35a20;
@@ -195,7 +196,23 @@ background-color: transparent;
 	border-top: 6px solid #f35a20;
 	padding: 31px 10px 39px;
 	
-	}
+}
+
+
+.summary .navbar .nav > li > a.cominfo,
+.profile .navbar .nav > li > a.cominfo,
+.datastories .navbar .nav > li > a.cominfo,
+.programs .navbar .nav > li > a.cominfo
+
+{
+background-color: transparent;
+	color: #f35a20;
+	text-decoration: none;
+	border-bottom: 2px solid #f35a20;
+	border-top: 6px solid #f35a20;
+ padding: 23px 10px 31px;	}
+
+
 
 .navbar .nav > li > a.maptool
 {

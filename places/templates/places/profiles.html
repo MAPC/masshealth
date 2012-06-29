@@ -115,9 +115,9 @@ jQuery(document).ready(function($) {
 {% block content %}  
 
 <div class="span9">
-<h2>Health Profile: {{place.name}}</h2>
+<h2>Health Profile</h2>
 <div class="profile_summary clearfix">
-	<div class="place_profile">{{place.profile|markdown}}</div>
+	<div class="place_profile">{{place.profile|safe}}</div>
 	<div id="place_map"></div>
 </div>
 

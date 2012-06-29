@@ -59,7 +59,7 @@ jQuery(document).ready(function($) {
 					<div class="page">
 
 					  {% if page.visualization %}
-					  <div class="page-text visualization-text">{{ page.text|markdown }}</div>
+					  <div class="page-text visualization-text">{{ page.text|safe }}</div>
 					    <div id="visualization">
 					      {% if page.visualization.thumbnail %}
 					        <img src="{{ MEDIA_URL }}{{ page.visualization.thumbnail }}" alt="">
@@ -71,13 +71,13 @@ jQuery(document).ready(function($) {
 						 </p>
 					    </div>
 					  {% else %}
-					  <div class="page-text">{{ page.text|markdown }}</div>
+					  <div class="page-text">{{ page.text|safe }}</div>
 					  	{% if page.image %}
 							<img src="{{ MEDIA_URL }}{{ page.image }}">
 					  	{% endif %}
 					  {% endif %}
 					</div>
-					<div class="story-abstract">{{ story.abstract }}</div>
+					<div class="story-abstract">{{ story.abstract|safe }}</div>
 				<div class="next-prev">
 					{% if page_prev %}
 					  <a href="?page_num={{ page_prev }}">&#9664;</a>&nbsp;
