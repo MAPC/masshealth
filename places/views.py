@@ -12,11 +12,24 @@ GDAL_AVAILABLE = getattr(settings, 'GDAL_AVAILABLE', True)
 def summary(request, place_slug):
     place = get_object_or_404(Place, slug=place_slug)
     page_type = "summary"
-    return render_to_response('places/summary.html',
-                              dict(place=place,
-                              page_type=page_type,
-                              ),
-                              context_instance=RequestContext(request))
+
+    u = request.user
+    can_update_thumbnails = u.is_active and (u.is_superuser or u.is_staff)
+    if can_update_thumbnails:
+        csrf_token_value = get_token(request) # Forces cookie generation.
+    else:
+        csrf_token_value = ''
+
+    return render_to_response(
+        'places/summary.html',
+        dict(place=place,
+             slots = Slot.objects.filter(shown_on='summary'
+                                         ).order_by('rank'),
+             can_update_thumbnails=can_update_thumbnails,
+             csrf_token_value=csrf_token_value,
+             page_type=page_type,
+             ),
+        context_instance=RequestContext(request))
 
 def profiles(request, place_slug):
     page_type = "profiles"
