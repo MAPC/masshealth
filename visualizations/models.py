@@ -105,12 +105,17 @@ class Slot(models.Model):
         'If turned off this slot is in the same row as the slot '
         'before it in the relative order.  If on, this slot begins '
         'a new row of slots.'))
-    title = models.CharField(_('Row title'), max_length=100,
+    title = models.CharField(_('Row (group) title'), max_length=100,
                              blank=True, default='',
                              help_text=_(
         'Ignored if "Starts new row" is off, or if it is blank.  '
         'Otherwise it is displayed as a heading for the row or '
         'section (group of rows begun by this one).'))
+    vistitle = models.CharField(_('Visualization title'), max_length=100,
+                             blank=True, default='',
+                             help_text=_(
+        'Optional title for the individual visualization (slots) '
+        'within a row.'))
     # The first two values below are width and height.
     # Use a string if you need a suffix.  Integers will be turned into
     # strings later.
