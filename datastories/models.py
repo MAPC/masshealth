@@ -64,6 +64,11 @@ class Story(models.Model):
     places = models.ManyToManyField('places.Place',
                                     related_name='datastories',
                                     blank=True)
+    image = models.ImageField(_('Image'),
+                              upload_to='stories/images/%y%U',
+                              max_length=255,
+                              blank=True,
+                              default='')
 
     def __unicode__(self):
         return self.title
