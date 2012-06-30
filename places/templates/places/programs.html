@@ -28,6 +28,7 @@
 
 {% for program in place.program_set.all %}
 <div class="program">
+{% if program.icon %}<img class="program-icon" src="{{ MEDIA_URL }}{{ program.icon.image }}" />{% endif %}
 <a name="{{ program.title|slugify }}"><h2>{{ program.title }}</h2></a>
 {% if program.image %}<img class="program-image" align="right" src="{{ program.image.url }}">{% endif %}
 <div class="program-description">{{ program.description|markdown }}</div>
