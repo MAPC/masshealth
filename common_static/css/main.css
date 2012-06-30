@@ -646,4 +646,11 @@ margin: 10px 0;
     font-size: 90%;
     text-align: right;
     text-decoration: underline;
-    width: 100%;}
+    width: 100%;
+}
+
+.slot-type-chart
+{
+    float: left;
+    margin-right: 10px;
+}
