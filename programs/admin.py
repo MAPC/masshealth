@@ -17,6 +17,15 @@ place_name.short_description = 'Town'
 
 class ProgramAdmin(_model_admin):
     list_display = ['title', place_name]
+    
+class Commonmedia:
+    js = (
+        '/static/libs/tinymce/jscripts/tiny_mce/tiny_mce.js',
+        '/static/js/textareas.js',
+    )
 
-admin.site.register(Program, ProgramAdmin)
+
+admin.site.register(Program, ProgramAdmin,
+    Media = Commonmedia,
+    )
 admin.site.register(Icon)
