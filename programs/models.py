@@ -14,6 +14,8 @@ class Program(models.Model):
                               help_text="Image will be shown at 120x80 in map info windwo.")
     place = models.ForeignKey('places.Place')
 
+    icon = models.ForeignKey('programs.Icon', blank=True, null=True)
+
     geometry = models.PointField(_('Location'), srid=26986, null=True, blank=True)
 
     objects = models.GeoManager()
@@ -31,3 +33,14 @@ class Program(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('places.views.programs', (self.place.slug,))
+
+class Icon(models.Model):
+    name = models.CharField(_('Name'), max_length=100)
+    image = models.ImageField(_('Image'),
+                              upload_to='programs/icons/%y%U',
+                              max_length=255,
+                              blank=True,
+                              default='')
+
+    def __unicode__(self):
+        return self.name
