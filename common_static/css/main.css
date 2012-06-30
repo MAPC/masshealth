@@ -344,11 +344,21 @@ margin-top: 30px;
 margin-left: 10px;
 }
 
-.datastories-summary, .health-programs-summary
+.health-profile-summary, .datastories-summary, .health-programs-summary
 {
-margin-top: 30px;
+border-bottom: 1px solid #dfdfdf;
+    margin-top: 20px;
+    padding-bottom: 10px;
 }
 
+.health-profile-summary
+{
+margin-top: 0;
+}
+
+.summary-visualizations .row-of-visualizations {
+    margin-top: 10px;
+}
 
 .place_program_desc
 {
@@ -598,4 +608,42 @@ border: 1px solid #dfdfdf;
 
 body.flash-is-present .if-no-flash { display: none; }
 .if-flash { display: none; }
-body.flash-is-present .if-flash { display: block; }
+body.flash-is-present .if-flash 
+{
+    display: block;
+    font-size: 80%;
+    padding-top: 4px;
+
+}
+
+.list-and-image ul
+{
+margin: 0 0 0 0px;
+    padding: 0;
+}
+
+.list-and-image ul li
+{
+margin-bottom: 12px;
+display: block;
+}
+
+.list-and-image a
+{
+text-decoration: underline;
+}
+
+.summary-box
+{
+background-color: #efefef;
+padding: 14px 8px 2px;
+margin: 10px 0;
+}
+
+.see-all 
+{
+    display: block;
+    font-size: 90%;
+    text-align: right;
+    text-decoration: underline;
+    width: 100%;}

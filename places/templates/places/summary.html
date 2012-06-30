@@ -120,7 +120,7 @@ jQuery(document).ready(function($) {
 {% comment %}    <div class="vis_placeholder">
     
     </div>{% endcomment %}
-  </div>
+ 
   
 
   <div class="summary-visualizations">
@@ -148,7 +148,9 @@ jQuery(document).ready(function($) {
   {% endwith %}
   </div>
   {% endfor %}
-  </div>
+        <a class="see-all" href="{{ profiles_url }}"
+       >View all health profile information &gt;</a>
+       </div>
   {% if can_update_thumbnails %}
   <hr />
   <div class="submit-new-thumbnails">
@@ -170,24 +172,27 @@ jQuery(document).ready(function($) {
 
   {% endif %}
   </div>
+  
+   </div>
 
   <div class="datastories-summary">{# Maybe the if goes outside this div? #}
     {% if place.datastories.count %}
     <h2>Data Stories</h2>
     <i>These data stories provide insight into health topics
        particularly of interest in your community.</i>
-    <img src="{{STATIC_URL}}river-jogger200x115.jpg">
-    <div class="list-and-image">
+ <div class="summary-box">
+ <div class="list-and-image">
       <ul>
         {% for story in place.datastories.all %}{# could use slice to limit to 3 #}
           <li><a href="{% url datastories.views.story place.slug story.slug %}"
                 >{{ story.title }}</a></li>
         {% endfor %}
       </ul>
-      <img src="{{ STATIC_URL }}img/datastories-summary.png">
-      <a href="{% url datastories.views.story place.slug %}"
+</div>
+        </div> 
+    <a class="see-all" href="{% url datastories.views.story place.slug %}"
        >View all data stories &gt;</a>
-    </div>
+ 
     {% endif %}
   </div>
   
@@ -199,6 +204,7 @@ jQuery(document).ready(function($) {
     {% if place.program_set.count %}
     <h2>Health Program Information</h2>
     <i>Learn more about health promotion programs in your community.</i>
+ <div class="summary-box">
     <div class="list-and-image">
       <ul>{% url places.views.programs place.slug as programs_url %}
         {% for program in place.program_set.all %}{# could use slice to limit to 3 #}
@@ -206,10 +212,11 @@ jQuery(document).ready(function($) {
                 >{{ program.title }}</a></li>
         {% endfor %}
       </ul>
-      <img src="{{ STATIC_URL }}img/programs-summary.png">
-      <a href="{{ programs_url }}"
+</div>
+</div>
+      <a class="see-all" href="{{ programs_url }}"
        >View all health program information &gt;</a>
-    </div>
+
     {% endif %}
   </div>
 
