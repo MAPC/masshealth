@@ -97,7 +97,7 @@
                 popupContent = "<h4>" + e.properties["title"] + "</h4>";
                 
                 if (e.properties["image_url"]) popupContent += "<p><img src=" + e.properties["image_url"] + " class=\"map-thumb\" alt=\"" + e.properties["title"] + "\"></p>";
-                if (e.properties["description"] !== "") popupContent += "<p>" + e.properties["description"] + "</p>";
+                if (e.properties["description"] !== "") popupContent += "<p>" + e.properties["description"] + "<a href=\"" + e.properties["absolute_url"] + "\"><br>read more</a></p>";
                 // TODO: add "read more" link to program page
                 e.layer.bindPopup(popupContent);
             }

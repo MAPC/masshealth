@@ -18,7 +18,7 @@ def all_geojson(request):
 
     for program in programs:
         # truncatewords
-        properties = dict(title=program.title, description=truncatewords(program.description,20))
+        properties = dict(title=program.title, description=truncatewords(program.description,20), absolute_url=program.get_absolute_url())
         if program.image:
             properties['image_url'] = program.image.url;
         geometry = simplejson.loads(program.geometry.geojson)
