@@ -35,3 +35,7 @@ class Place(models.Model):
     class Meta:
         ordering = ['name']
 
+    @models.permalink
+    def get_absolute_url(self):
+        return ('places.views.programs', (self.slug,))
+

@@ -1,5 +1,6 @@
 from django.utils.translation import ugettext as _
 from django.contrib.gis.db import models
+from django.template.defaultfilters import slugify
 
 class Program(models.Model):
     title = models.CharField(max_length=100)
@@ -30,9 +31,8 @@ class Program(models.Model):
 
         super(Program, self).save(*args, **kwargs)
 
-    @models.permalink
     def get_absolute_url(self):
-        return ('places.views.programs', (self.place.slug,))
+        return "%s#%s" % (self.place.get_absolute_url(), slugify(self.title))
 
 class Icon(models.Model):
     name = models.CharField(_('Name'), max_length=100)
