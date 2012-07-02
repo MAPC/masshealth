@@ -30,7 +30,7 @@ class Place(models.Model):
     @classmethod
     def place_choices(cls):
         return tuple([(o.slug, o.name)
-                      for o in cls.objects.order_by('name')])
+                      for o in cls.objects.exclude(unitid="353").order_by('name')])
 
     class Meta:
         ordering = ['name']
