@@ -13,3 +13,4 @@ local_settings.py
 /data/
 */migrations/
 *.swp
+_initial_data.json
