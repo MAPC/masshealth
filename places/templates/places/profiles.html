@@ -24,7 +24,7 @@ jQuery(document).ready(function($) {
 	  "10.0.0",
 	  "expressInstall.swf", 
 	  {
-		    file: "http://{{ CURRENT_SITE.domain }}{% url visualizations.views.visualization_xml vis.id place.id %}"
+		    file: "http://{{ CURRENT_SITE.domain }}{% if settings.DEBUG == True %}:8000{% endif %}{% url visualizations.views.visualization_xml vis.id place.id %}"
 	      }, 
 	  HEMA.swfobject.params,
 	  {
