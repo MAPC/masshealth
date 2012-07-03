@@ -149,7 +149,7 @@ jQuery(document).ready(function($) {
   {% endwith %}
   </div>
   {% endfor %}
-        <a class="see-all" href="{{ profiles_url }}"
+        <a class="see-all" href="{% url places.views.profiles place.slug %}"
        >View all health profile information &gt;</a>
        </div>
   {% if can_update_thumbnails %}
