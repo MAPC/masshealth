@@ -132,10 +132,11 @@ jQuery(document).ready(function($) {
   <div class="row-of-visualizations">
   {% endif %}
   {% if slot.new_row and slot.title %}<h2>{{ slot.title }}</h2>{% endif %}
-  <div id="profile-swf-div-{{ forloop.counter0 }}"
-     class="swfobject-container-div profile-slot-{{ slot.name|slugify }} slot-type-{{ slot.slot_type|slugify }}">
   {% with vis=slot.visualization %}
+  <div class="visualization-wrapper summary-slot-{{ slot.name|slugify }} slot-type-{{ slot.slot_type|slugify }}">
   {% if slot.vistitle %}<h3>{{ slot.vistitle }}</h3>{% endif %}
+  <div id="profile-swf-div-{{ forloop.counter0 }}"
+     class="swfobject-container-div summary-slot-{{ slot.name|slugify }} slot-type-{{ slot.slot_type|slugify }}">
   {% if vis.thumbnail %}
   <img src="{{ MEDIA_URL }}{{ vis.thumbnail }}" alt="">
   <p class="if-flash">Click image for interactive Weave Visualization</p>
@@ -146,8 +147,9 @@ jQuery(document).ready(function($) {
   <p class="if-no-flash">Please install the
   <a href="http://get.adobe.com/flashplayer/">Adobe Flash Player</a>
   to interact with this visualization.</p>
-  {% endwith %}
   </div>
+  </div>
+  {% endwith %}
   {% endfor %}
         <a class="see-all" href="{% url places.views.profiles place.slug %}"
        >View all health profile information &gt;</a>
