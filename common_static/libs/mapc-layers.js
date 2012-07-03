@@ -7,7 +7,7 @@ var SUBDOMAINS = [""],
         "basemap": {
             "url": "http://{S}tiles.mapc.org/basemap/{Z}/{X}/{Y}.png",
             "name": "Basemap",
-            "minZoom": 9,
+            "minZoom": 6,
             "maxZoom": 17
         },
         "trailmap": {
@@ -102,7 +102,8 @@ if (typeof OpenLayers === "object") {
             options = OpenLayers.Util.extend({
                 "numZoomLevels":    provider.maxZoom,
                 "buffer":           0,
-                "transitionEffect": "resize"
+                "transitionEffect": "resize",
+                "attribution": ATTRIBUTION
             }, options);
             return OpenLayers.Layer.OSM.prototype.initialize.call(this, name, hosts, options);
         }
