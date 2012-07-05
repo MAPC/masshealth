@@ -332,6 +332,7 @@ background-color: #EFEFEF;
 .program
 {
 margin-top: 50px;
+clear: both;
 }
 
 .place_program_desc
