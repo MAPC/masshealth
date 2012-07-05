@@ -4,7 +4,7 @@ from django.forms import SelectMultiple
 from django.conf import settings
 from django.contrib.flatpages.forms import FlatpageForm
 from django.contrib.admin import site
-from django.contrib.flatpages.models import FlatPage
+from django.contrib.flatpages.admin import FlatPage, FlatPageAdmin
 
 class PreSelectDefaultSiteOnCreateSelectMultiple(SelectMultiple):
     def render(self, name, value, attrs=None, choices=()):
@@ -29,16 +29,6 @@ def flatpages():
         fpafm.widgets = {}
     fpafm.widgets['sites'] = PreSelectDefaultSiteOnCreateSelectMultiple
 
-#    return
-    
-    fpa = site._registry[FlatPage]
-    try:
-        m = fpa.Media
-    except AttributeError:
-        fpa.Media = Flatpagemedia
-    else:
-        m.js = Flatpagemedia.js
-
-    fpa.media.js = fpa.Media.js
-    
-    
+    site.unregister(FlatPage)
+    FlatPageAdmin.Media = Flatpagemedia
+    site.register(FlatPage, FlatPageAdmin)

@@ -810,3 +810,11 @@ height: auto;
     cursor: default;
     background-position: -96px 0;
 }
+
+
+/*  tinyMce admin cleanup  */
+
+#id_profile, #id_program_desc, #id_abstract, #id_text, #id_content, #id_description
+{
+text-align: left;
+}
