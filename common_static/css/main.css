@@ -558,6 +558,24 @@ margin-left: 0;
 .row-of-visualizations
 {
 margin-top: 30px;
+display: block;
+clear: both;
+}
+
+.visualization-wrapper 
+{
+margin-right: 8px;
+}
+
+
+.visualization-wrapper + .visualization-wrapper
+{
+margin-right: 0px;
+}
+
+.row-of-visualizations h2
+{
+margin-bottom: 4px;
 }
 
 .row-of-visualizations object
@@ -652,7 +670,6 @@ margin: 10px 0;
 .slot-type-chart
 {
     float: left;
-    margin-right: 10px;
 }
 
 img.program-icon
@@ -735,13 +752,13 @@ height: auto;
     width: 32px;
     height: 100px;
     cursor: pointer;
-    background: transparent url(next-horizontal.png) no-repeat 0 0;
+    background: transparent url(/static/img/next-horizontal.png) no-repeat 0 0;
 }
 
 .jcarousel-skin-tango .jcarousel-direction-rtl .jcarousel-next-horizontal {
     left: 5px;
     right: auto;
-    background-image: url(prev-horizontal.png);
+    background-image: url(/static/img/prev-horizontal.png);
 }
 
 .jcarousel-skin-tango .jcarousel-next-horizontal:hover,
@@ -768,13 +785,13 @@ height: auto;
     width: 32px;
     height: 100px;
     cursor: pointer;
-    background: transparent url(prev-horizontal.png) no-repeat 0 0;
+    background: transparent url(/static/img/prev-horizontal.png) no-repeat 0 0;
 }
 
 .jcarousel-skin-tango .jcarousel-direction-rtl .jcarousel-prev-horizontal {
     left: auto;
     right: 5px;
-    background-image: url(next-horizontal.png);
+    background-image: url(/static/img/next-horizontal.png);
 }
 
 .jcarousel-skin-tango .jcarousel-prev-horizontal:hover, 
