@@ -3,6 +3,8 @@
 from django.forms import SelectMultiple
 from django.conf import settings
 from django.contrib.flatpages.forms import FlatpageForm
+from django.contrib.admin import site
+from django.contrib.flatpages.admin import FlatPage, FlatPageAdmin
 
 class PreSelectDefaultSiteOnCreateSelectMultiple(SelectMultiple):
     def render(self, name, value, attrs=None, choices=()):
@@ -13,6 +15,12 @@ class PreSelectDefaultSiteOnCreateSelectMultiple(SelectMultiple):
         return super(PreSelectDefaultSiteOnCreateSelectMultiple, self
                      ).render(name, value, attrs, choices)
 
+class Flatpagemedia:
+    js = (
+        '/static/libs/tinymce/jscripts/tiny_mce/tiny_mce.js',
+        '/static/js/textareas.js',
+    )
+    
 def flatpages():
     """Hack the sites field widget.
     """
@@ -20,3 +28,7 @@ def flatpages():
     if getattr(fpafm, 'widgets', None) is None:
         fpafm.widgets = {}
     fpafm.widgets['sites'] = PreSelectDefaultSiteOnCreateSelectMultiple
+
+    site.unregister(FlatPage)
+    FlatPageAdmin.Media = Flatpagemedia
+    site.register(FlatPage, FlatPageAdmin)
