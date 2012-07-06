@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% load places_extras %}<html>
+{% load places_extras %}{% non_place_url_parts as placeless %}<html>
     <head>
         <meta http-equiv="Content-type" content="text/html;charset=UTF-8" >
         <meta charset="utf-8">
@@ -78,7 +78,7 @@
 					
 					{% for town in towns %}<option 
 					 {% if place %}{% ifequal place.slug town.0 %} SELECTED=SELECTED{% endifequal %}{% endif %}
-					 value="{% url places.views.summary town.0 %}">{{town.1}}</option>
+					 value="{{ placeless.0 }}{{ town.0 }}{{ placeless.1 }}">{{town.1}}</option>
 					{% endfor %}
 				</select>
         </li>
@@ -120,12 +120,9 @@
 		    	{% if not place %} SELECTED=SELECTED{% endif %} value="">Select a Town</option>
 		    	{% places as towns %}
 		    	{% for town in towns %}<option 
-		    	    {% if place %}{% ifequal place.slug town.0 %} SELECTED=SELECTED{% endifequal %}{% endif %}
-                            {% comment %} Tie into the page and change the url depending on the page_type variable {% endcomment %}
-                            value=" {% ifequal page_type "summary" %}{% url places.views.summary town.0 %}{% endifequal %}
-                            {% ifequal page_type "profiles" %}{% url places.views.profiles town.0 %}{% endifequal %}
-                            {% ifequal page_type "story" %}{% url datastories.views.story town.0 %}{% endifequal %}
-                            {% ifequal page_type "programs" %}{% url places.views.programs town.0 %}{% endifequal %} ">{{town.1}}</option> 
+					 {% if place %}{% ifequal place.slug town.0 %} SELECTED=SELECTED{% endifequal %}{% endif %}
+					 value="{{ placeless.0 }}{{ town.0 }}{{ placeless.1 }}">{{town.1}}</option>
+
 		    	{% endfor %}
 		    </select>
                 </li>

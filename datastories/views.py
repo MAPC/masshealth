@@ -4,6 +4,7 @@ from django.template import RequestContext
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from models import Story
 from places.models import Place
+from places.views import InOtherPlace
 
 def story(request, place_slug, story_slug=None):
     page_type = "story"
@@ -51,16 +52,27 @@ def story(request, place_slug, story_slug=None):
         page_next = pgpg.next_page_number() if pgpg.has_next() else 0
         page_prev = pgpg.previous_page_number() if pgpg.has_previous() else 0
 
-    return render_to_response('datastories/story.html',
-                              dict(story=story,
-                                   page_type=page_type,
-                                   page=page,
-                                   page_num=page_num,
-                                   page_count=page_count,
-                                   page_prev=page_prev,
-                                   page_next=page_next,
-                                   paginator=paginator,
-                                   paginator_page=pgpg,
-                                   place=place,
-                                   datastories=place_stories),
-                              context_instance=RequestContext(request))
+    if story:
+        spp = InOtherPlace.get_split('story', 'XXX', 'XXX', story.slug)
+    else:
+        spp = InOtherPlace.get_split('story', 'XXX', 'XXX')
+
+    return render_to_response(
+        'datastories/story.html',
+        dict(story=story,
+             page_type=page_type,
+             page=page,
+             page_num=page_num,
+             page_count=page_count,
+             page_prev=page_prev,
+             page_next=page_next,
+             paginator=paginator,
+             paginator_page=pgpg,
+             place=place,
+             datastories=place_stories,
+             same_place_parts=spp,
+             ),
+        context_instance=RequestContext(request))
+
+InOtherPlace(story, 'XXX')
+InOtherPlace(story, 'XXX', 'YYY')
