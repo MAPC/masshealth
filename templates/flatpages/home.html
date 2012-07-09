@@ -42,21 +42,24 @@
 			<div class="home_slide_box_content">
 				<div class="home_slide_box_content_pad">
 					<div class="home_slide_box_nav_title">
-						{{ hero.title }}
-						<span class="home_slide_box_nav_subtitle">
+						
+						<div class="home_slide_box_nav_subtitle">
 							{{ hero.type }}
-						</span>
+						</div>
+						
+						{{ hero.title }}
 					</div>
-					<span class="home_slide_box_title">
-						{{ hero.title }} 
-					</span>
+
 					<div class="home_slide_box_subtitle">
 						{{ hero.type }} 
 					</div>
+					<h2 class="home_slide_box_title">
+						{{ hero.title }} 
+					</h2>
 					<div class="home_slide_box_text page_content">
-						<p>
+
 							{{ hero.description|safe }}
-						</p>
+
 					</div>
 				</div>
 			</div>

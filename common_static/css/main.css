@@ -576,20 +576,22 @@ margin-left: 0;
 
 .home_slide_box_title
 {
-	font-size: 22px line-height: 26px;
-	color: #000 !important;
+	font-size: 22px;
+	line-height: 26px;
+	color: #F35A20 !important;
 	text-decoration: none !important;
 	padding-bottom: 3px;
 	display: block;
 }
 
-.home_slide_box_subtitle
+.home_slide_box_subtitle,
+.home_slide_box_nav_subtitle
 {
 	color: #354f83;
 	font-size: 13px;
 	line-height: 18px;
 	font-weight: bold;
-	padding-bottom: 15px;
+	padding-bottom: 0px;
 	display: block;
 }
 
