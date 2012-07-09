@@ -547,6 +547,7 @@ margin-left: 0;
 -moz-box-shadow: inset -5px 5px 4px #888;
 -webkit-box-shadow: inset -5px 5px 4px #888;
 box-shadow: inset -5px 5px 4px #888;
+border-bottom: 1px solid #999;
 }
 
 .home_slide_box_nav_title { display: none; } 
