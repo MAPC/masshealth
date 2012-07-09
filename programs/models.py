@@ -19,7 +19,13 @@ class Program(models.Model):
 
     geometry = models.PointField(_('Location'), srid=26986, null=True, blank=True)
 
+    order = models.IntegerField(default=500, blank=True, null=True)
+
     objects = models.GeoManager()
+
+    class Meta:
+         ordering = ['order']
+
 
     def __unicode__(self):
         return 'Program %s @ %s' % (self.title, self.place.name)
@@ -34,10 +40,16 @@ class Program(models.Model):
     def get_absolute_url(self):
         return "%s#%s" % (self.place.get_absolute_url(), slugify(self.title))
 
+
 class Icon(models.Model):
     name = models.CharField(_('Name'), max_length=100)
     image = models.ImageField(_('Image'),
                               upload_to='programs/icons/%y%U',
+                              max_length=255,
+                              blank=True,
+                              default='')
+    map_icon = models.ImageField(_('Map Icon'),
+                              upload_to='programs/map_icons/%y%U',
                               max_length=255,
                               blank=True,
                               default='')
