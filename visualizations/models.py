@@ -122,7 +122,7 @@ class Slot(models.Model):
     # We can append more paramters to the value tuples as we think of
     # them.
     slot_params_by_type = {
-        'Table': (707, 100),
+        'Table': (707, 190),
         'Chart': (344, 288),
         'Map':   (344, 288)
         }

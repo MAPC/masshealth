@@ -394,7 +394,7 @@ margin-top: 0;
 
 .health-programs-summary .summary-box a
 {
-text-decoration: underline;
+text-decoration: none;
 
 }
 
@@ -408,11 +408,11 @@ text-decoration: underline;
 padding-left: 10px;
 }
 
-.programs-staff-info {
-	background-color: #EFEFEF;
-	padding: 10px;
-	margin-top: 10px;
-	display: none;
+.programs-staff-info
+{
+background-color: #EFEFEF;
+padding: 10px;
+margin-top: 10px;
 }
 .story_links { display: block; overflow: hidden; width: 700px; margin-top: 20px; }
 
@@ -612,6 +612,11 @@ display: block;
 clear: both;
 }
 
+.row-of-visualizations .slot-type-table object
+{
+height: 190px;
+}
+
 .visualization-wrapper 
 {
 margin-right: 8px;
@@ -630,7 +635,7 @@ margin-bottom: 4px;
 
 .row-of-visualizations object
 {
-border: 1px solid #dfdfdf;
+border: 1px none #dfdfdf;
 }
 
 .footer
