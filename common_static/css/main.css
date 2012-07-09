@@ -39,6 +39,13 @@ h1
 	font-weight: normal;
 }
 
+.home h1 {
+	font-style: italic;
+	font-size: 22px;
+	text-align: center;
+	margin-bottom: 20px;
+}
+
 h2
 {
 	font-size: 18px;

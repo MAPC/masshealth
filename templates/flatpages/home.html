@@ -22,9 +22,14 @@
 
 {% block content %} 
 
+<h1 class="home">Mapping data and local actions to create a healthier Massachusetts</h1>
 
 <!-- home_slider -->
 {% heroes "homepage" as my_heroes %}
+
+
+
+
 {% if my_heroes.count %}
 <div class="home_slider">
 	<div class="home_slide">
@@ -70,13 +75,11 @@
 <div class="span12">
 {{flatpage.content}}
 
-
-	<div id="mamc_map_container">
-		<div id="mamc_map">
 	
+	<div id="mamc_map_container">
+		<div id="mamc_map"></div>
 	</div>
-	</div>
-
+	<p>Mass in Motion Initiatives. Click on the map to explore health programs underway in Massachusetts.</p>
 
 </div>
 

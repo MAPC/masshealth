@@ -116,7 +116,7 @@ jQuery(document).ready(function($) {
 <div class="span9">
   <div class="health-profile-summary">
     <h2>Health Profile</h2>
-    <em>These indicators are selected according to an algorithm highlighting the most relevant indicators.</em>
+    <em>Find a variety of indicators that illustrate both health outcomes in each municipality, as well as contextual information about demographics, lifestyle, and environmental factors. The two indicators highlighted here were selected as particularly relevant for this municipality.</em>
 {% comment %}    <div class="vis_placeholder">
     
     </div>{% endcomment %}
@@ -181,8 +181,7 @@ jQuery(document).ready(function($) {
   <div class="datastories-summary">{# Maybe the if goes outside this div? #}
     {% if place.datastories.count %}
     <h2>Data Stories</h2>
-    <i>These data stories provide insight into health topics
-       particularly of interest in your community.</i>
+    <i>A data story uses data, text, and maps to investigate a specific policy question. Use them to learn what can be done to improve public health in your community, and how your community compares to others in the state.</i>
  <div class="summary-box">
  <div class="list-and-image">
       <ul>
@@ -206,7 +205,7 @@ jQuery(document).ready(function($) {
   <div class="health-programs-summary">
     {% if place.program_set.count %}
     <h2>Health Program Information</h2>
-    <i>Learn more about health promotion programs in your community.</i>
+    <i>Read about initiatives going on in your town, and learn how to get involved.</i>
  <div class="summary-box">
     <div class="list-and-image">
       <ul>{% url places.views.programs place.slug as programs_url %}
