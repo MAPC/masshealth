@@ -16,7 +16,17 @@ def place_name(obj):
 place_name.short_description = 'Town'
 
 class ProgramAdmin(_model_admin):
-    list_display = ['title', place_name]
+    fieldsets = (
+        (None, {
+            'fields': ('title', 'description', 'image', 'icon', 'order')
+        }),
+        ('Program Location', {
+            'fields': ('place', 'geometry')
+        }),
+    )
+    list_display = ['title', place_name, 'order']
+    list_editable = ['order']
+    ordering = ['place', 'order']
     
 class Commonmedia:
     js = (
