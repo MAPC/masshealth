@@ -10,7 +10,7 @@ def all_geojson(request):
     """
 
     try:
-      programs = Program.objects.transform(4326).all()
+      programs = Program.objects.transform(4326).all().select_related()
     except Place.DoesNotExist:
       raise Http404
 
@@ -18,9 +18,11 @@ def all_geojson(request):
 
     for program in programs:
         # truncatewords
-        properties = dict(title=program.title, description=truncatewords(program.description,20), absolute_url=program.get_absolute_url())
+        properties = dict(title=program.title, description=truncatewords(program.description,20), absolute_url=program.get_absolute_url(), map_icon='layer-0')
         if program.image:
-            properties['image_url'] = program.image.url;
+            properties['image_url'] = program.image.url
+        if program.icon:
+            properties['map_icon'] = 'layer-%s' % program.icon.id
         geometry = simplejson.loads(program.geometry.geojson)
         feature = dict(type='Feature', geometry=geometry, properties=properties)
         features.append(feature)
