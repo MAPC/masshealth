@@ -125,10 +125,10 @@ jQuery(document).ready(function($) {
 <div class="profile-visualizations">
 {% if slots.count %}
 
-<div class="row-of-visualizations">{# new_row or not #}
+<div class="row-of-visualizations clearfix">{# new_row or not #}
 {% for slot in slots %}
 {% if not forloop.first and slot.new_row %}</div>
-<div class="row-of-visualizations">
+<div class="row-of-visualizations clearfix">
 {% endif %}
 {% if slot.new_row and slot.title %}<h2>{{ slot.title }}</h2>{% endif %}
 {% with vis=slot.visualization %}

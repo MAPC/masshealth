@@ -144,6 +144,12 @@ a:focus { outline: none; }
 	font-weight: bold;
 }
 
+.beta {
+	float: left;
+	font-style: italic;
+	letter-spacing: 2px;
+}
+
 .navbar { color: #999999; }
 
 .navbar .nav
@@ -392,6 +398,13 @@ border-bottom: 1px solid #dfdfdf;
 margin-top: 0;
 }
 
+.health-programs-summary .summary-box a
+{
+text-decoration: none;
+
+}
+
+
 .summary-visualizations .row-of-visualizations {
     margin-top: 10px;
 }
@@ -401,11 +414,11 @@ margin-top: 0;
 padding-left: 10px;
 }
 
-.programs-staff-info {
-	background-color: #EFEFEF;
-	padding: 10px;
-	margin-top: 10px;
-	display: none;
+.programs-staff-info
+{
+background-color: #EFEFEF;
+padding: 10px;
+margin-top: 10px;
 }
 .story_links { display: block; overflow: hidden; width: 700px; margin-top: 20px; }
 
@@ -531,12 +544,13 @@ margin-left: 0;
 	padding-left: 16px;
 	background-color: #dfdfdf !important;
 	color: #000000 !important;
-	-webkit-box-shadow: inset -1px -1px 4px #000;
-	-moz-box-shadow: inset -1px -1px 4px #000;
-	box-shadow: inset -1px -1px 4px #000;
+-moz-box-shadow: inset -5px 5px 4px #888;
+-webkit-box-shadow: inset -5px 5px 4px #888;
+box-shadow: inset -5px 5px 4px #888;
+border-bottom: 1px solid #999;
 }
 
-.home_slide_box_nav_title { display: none; }
+.home_slide_box_nav_title { display: none; } 
 
 .home_slide_box_img
 {
@@ -563,20 +577,22 @@ margin-left: 0;
 
 .home_slide_box_title
 {
-	font-size: 22px line-height: 26px;
-	color: #000 !important;
+	font-size: 22px;
+	line-height: 24px;
+	color: #F35A20 !important;
 	text-decoration: none !important;
 	padding-bottom: 3px;
 	display: block;
 }
 
-.home_slide_box_subtitle
+.home_slide_box_subtitle,
+.home_slide_box_nav_subtitle
 {
 	color: #354f83;
 	font-size: 13px;
 	line-height: 18px;
 	font-weight: bold;
-	padding-bottom: 15px;
+	padding-bottom: 0px;
 	display: block;
 }
 
@@ -605,6 +621,13 @@ display: block;
 clear: both;
 }
 
+/*
+.row-of-visualizations .slot-type-table object
+{
+height: 190px;
+}
+*/
+
 .visualization-wrapper 
 {
 margin-right: 8px;
@@ -623,7 +646,7 @@ margin-bottom: 4px;
 
 .row-of-visualizations object
 {
-border: 1px solid #dfdfdf;
+border: 1px none #dfdfdf;
 }
 
 .footer
