@@ -64,8 +64,6 @@ MEDIA_ROOT = _rrel('htdocs', 'media', '')
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
 MEDIA_URL = '/media/'
 
-FILEBROWSER_DIRECTORY = MEDIA_ROOT
-
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 
@@ -161,6 +159,20 @@ FIXTURE_DIRS = ( # Extra fixure dirs, not stored under an ap
     )
 
 WEAVE_URL = 'http://metrobostondatacommon.org/weave/'
+
+# Setting FILEBROWSER_DIRECTORY to MEDIA_ROOT is incorrect, see
+# comment in .../site-packages/filebrowser/settings.py
+# It must be a path relative to MEDIA_ROOT.  It may NOT begin with a
+# slash, and, unless it is empty, as below, it must end with a slash.
+# Making it an absolute path, like MEDIA_ROOT, messes up the URLs
+# generated for the images (as though MEDIA_URL+FILEBROWSER_DIRECTORY
+# were used, though that's no the way it works.)
+# FILEBROWSER_DIRECTORY = MEDIA_ROOT  # bogus, see above
+FILEBROWSER_DIRECTORY = ''
+
+FILEBROWSER_URL_TINYMCE = STATIC_URL + 'libs/tinymce/jscripts/tiny_mce/'
+FILEBROWSER_PATH_TINYMCE = os.path.join(STATIC_ROOT,
+                                        'libs/tinymce/jscripts/tiny_mce/')
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
