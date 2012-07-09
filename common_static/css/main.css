@@ -392,6 +392,13 @@ border-bottom: 1px solid #dfdfdf;
 margin-top: 0;
 }
 
+.health-programs-summary .summary-box a
+{
+text-decoration: underline;
+
+}
+
+
 .summary-visualizations .row-of-visualizations {
     margin-top: 10px;
 }
