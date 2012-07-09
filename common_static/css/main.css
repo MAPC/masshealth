@@ -618,10 +618,12 @@ display: block;
 clear: both;
 }
 
+/*
 .row-of-visualizations .slot-type-table object
 {
 height: 190px;
 }
+*/
 
 .visualization-wrapper 
 {
