@@ -104,6 +104,9 @@ jQuery(document).ready(function($) {
     // Flash available
     if (swfobject.getFlashPlayerVersion()["major"] > 0) {
         $("body").addClass("flash-is-present");
+	// We expect just one weave.  Activate it rather than
+	// making the user click.
+	$("#profile-swf-div-0").click();
     }
 });
 
