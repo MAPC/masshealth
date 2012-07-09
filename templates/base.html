@@ -56,26 +56,21 @@
 <div class="navbar">
       <div class="navbar-inner">
         <div class="container-fluid">
+
            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>         
 
-<div class="logo"><a href="/">Our <span class="healthy">Healthy</span> Massachusetts</a></div>    
-<div class="nav-collapse">
+        <div class="logo"><a href="/">Our <span class="healthy">Healthy</span> Massachusetts</a></div>    
+        <div class="nav-collapse">
             <ul class="nav">
         <li class="town-list"><label>Choose a Town:</label>
                 <select id='town_selector'>
 					<option
 					{% if not place %} SELECTED=SELECTED{% endif %} value="">Select a Town</option>
 					{% places as towns %}
-					
-					
-					
-					
-					
-					
 					{% for town in towns %}<option 
 					 {% if place %}{% ifequal place.slug town.0 %} SELECTED=SELECTED{% endifequal %}{% endif %}
 					 value="{{ placeless.0 }}{{ town.0 }}{{ placeless.1 }}">{{town.1}}</option>
@@ -89,8 +84,11 @@
 
         </ul>
           </div><!--/.nav-collapse -->
+        <span class="beta">beta</span>
         </div>
+
       </div>
+     
     </div>
 {% endblock %}
  

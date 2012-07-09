@@ -144,6 +144,12 @@ a:focus { outline: none; }
 	font-weight: bold;
 }
 
+.beta {
+	float: left;
+	font-style: italic;
+	letter-spacing: 2px;
+}
+
 .navbar { color: #999999; }
 
 .navbar .nav
