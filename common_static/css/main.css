@@ -348,6 +348,10 @@ margin-top: 50px;
 clear: both;
 }
 
+.program > a {
+	text-decoration: none;
+}
+
 .place_program_desc
 {
 margin-top: 30px;
