@@ -50,9 +50,7 @@ class Icon(models.Model):
                               default='')
     map_icon = models.ImageField(_('Map Icon'),
                               upload_to='programs/map_icons/%y%U',
-                              max_length=255,
-                              blank=True,
-                              default='')
+                              max_length=255)
 
     def __unicode__(self):
         return self.name
