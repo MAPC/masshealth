@@ -97,7 +97,8 @@
 <div class="container middle">
   <div class="row-fluid">
   
-{% block sidenav %} 
+{% block sidenav %}
+	{% if place %}
     <div class="span3">
     <h1>{{place.name}}</h1>
     <ul class="sidenav">
@@ -128,6 +129,7 @@
                 </li>
 	</ul>
     </div>
+    {% endif %}
 {% endblock %}
 
 
