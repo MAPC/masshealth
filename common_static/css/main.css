@@ -312,6 +312,13 @@ background-color: #EFEFEF;
 
 .story-abstract { padding-top: 12px; }
 
+.storytitle { width: 580px; }
+
+.page
+{
+clear: both;
+}
+
 .next-prev
 {
 	font-weight: bold;
@@ -323,7 +330,18 @@ background-color: #EFEFEF;
     display: block;
     width: 700px;
     clear: both;
+    font-family: Arial, sans-serif;
 }
+
+
+.top-next-prev
+{
+float: right;
+margin-bottom: 6px;
+width: 100px;
+
+}
+
 
 .next-prev a:link,
 .next-prev a:visited { color: #f35a20; }

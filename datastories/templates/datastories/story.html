@@ -67,9 +67,26 @@ jQuery(document).ready(function() {
     	<p><em>These data stories provide insight into health topics particularly of interest in your community</em></p>
     
 		{% if story %}
-		<h4>{{ story.title }}</h4>
+
+			{% if page %}
+				<div class="next-prev top-next-prev">
+					{% if page_prev %}
+					  <a href="?page_num={{ page_prev }}">&#9668;</a>&nbsp;
+					{% endif %}
+					
+					{{ page_num }} of {{ page_count }}
+		
+					{% if page_next %}
+					&nbsp;
+					  <a href="?page_num={{ page_next }}">&#9658;</a>
+					{% endif %}
+				</div>
+           {% endif %}
+   
+		<h4 class="storytitle">{{ story.title }}</h4>
 		
 			{% if page %}
+				
 					<div class="page">
 
 					  {% if page.visualization %}
@@ -94,7 +111,7 @@ jQuery(document).ready(function() {
 					<div class="story-abstract">{{ story.abstract|safe }}</div>
 				<div class="next-prev">
 					{% if page_prev %}
-					  <a href="?page_num={{ page_prev }}">&#9664;</a>&nbsp;
+					  <a href="?page_num={{ page_prev }}">&#9668;</a>&nbsp;
 					{% endif %}
 					
 					{{ page_num }} of {{ page_count }}
