@@ -147,6 +147,7 @@ INSTALLED_APPS = (
     'django.contrib.gis',
     'django.contrib.flatpages',
     'django.contrib.markup',
+    'registration',
     'datastories',
     'places',
     'visualizations',
@@ -173,6 +174,20 @@ FILEBROWSER_DIRECTORY = ''
 FILEBROWSER_URL_TINYMCE = STATIC_URL + 'libs/tinymce/jscripts/tiny_mce/'
 FILEBROWSER_PATH_TINYMCE = os.path.join(STATIC_ROOT,
                                         'libs/tinymce/jscripts/tiny_mce/')
+
+# Django registration requires this.  It is the number of
+# days after a new user has registered by which he must
+# activate his account.  There is no default.
+ACCOUNT_ACTIVATION_DAYS = 5
+# DEFAULT_FROM_EMAIL must also be set, and such other EMAIL
+# configuration as to enable successful operation of
+#   django.contrib.auth.models.User().email_user
+# Using the default smtp email backend, this requires
+# EMAIL_HOST, the default is 'localhost', which may or may
+# not cut it.  The default EMAIL_PORT is probably correct.
+# EMAIL_HOST_USER adn EMAIL_HOST_PASSWORD each default to
+# an empty string, which may be ok with the default
+# EMAIL_HOST.  EMAIL_USE_TLS defaults to false.
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
