@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+<title>{% block title %}{{flatpage.title}}{% endblock %}</title>
+
+{% block head_javascript %}
+{{ block.super }}
+</script>
+{% endblock %} 
+
+{% block bodyclass %}
+<body class="pages about">
+{% endblock %} 
+
+{% block sidenav %} 
+    <div class="span3">
+    <ul class="sidenav">
+{% load flatpages %}
+{% get_flatpages '/about/' as flatpages %}
+         {% for page in flatpages %}
+		<li class="summary{% ifequal page.id flatpage.id%} current{% endifequal%}">
+		    <a href="{{page.url}}"> {{page.title}} </a>
+		</li>
+         {% endfor%}
+		
+		<li class="town-list"><label>Choose a Town:</label>
+		<select id='town_selector_side'>
+			<option SELECTED=SELECTED value="">Select a Town</option>
+			{% for place in places%}<option 
+			     value="{% url places.views.summary place.0 %}">{{place.1}}</option>
+			{% endfor %}
+		</select>
+</li>
+	</ul>
+    
+    </div>
+{% endblock %}
+
+
+{% block content %}  
+
+    <div class="span9">
+
+{{flatpage.content}}
+
+</div>
+{% endblock %}

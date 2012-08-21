@@ -1,0 +1,7 @@
+Django==1.4
+Markdown==2.1.1
+PIL==1.1.7
+django-filebrowser==3.4.3
+django-grappelli==2.3.8
+psycopg2==2.4.5
+wsgiref==0.1.2

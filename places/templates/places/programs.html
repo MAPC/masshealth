@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load markup %}
+
+<title>{% block title %}{{ place.name }} Health Propmotion Programs{% endblock %}</title>
+
+{% block head_javascript %}
+{{ block.super }}
+{% endblock %} 
+
+{% block bodyclass %}
+<body class="programs">
+{% endblock %} 
+
+{% block content %}  
+
+<div class="span9">
+<h2>Health Promotion Programs</h2>
+<div class="place_program_desc">{{place.program_desc|safe}}</div>
+<div class="programs-staff-info"><h3>Staff Information</h3>
+{# Need stuff dependent on login? is this whole section conditional or just "you are logged in as..." #}
+<ul>
+{# and maybe some for loop #}
+<li><a href="#">Some private document...</a></li>
+<li><a href="#">Some other private document...</a></li>
+</ul>
+</div>
+
+
+{% for program in place.program_set.all %}
+<div class="program">
+{% if program.icon %}<img class="program-icon" src="{{ MEDIA_URL }}{{ program.icon.image }}" align="left" />{% endif %}
+<a name="{{ program.title|slugify }}"><h2>{{ program.title }}</h2></a>
+{% if program.image %}<img class="program-image" align="right" src="{{ program.image.url }}">{% endif %}
+<div class="program-description">{{ program.description|markdown }}</div>
+</div>
+{% endfor %}
+</div>
+{% endblock %} 

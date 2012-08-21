@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+{% load places_extras %}{% non_place_url_parts as placeless %}<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html;charset=UTF-8" >
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            {% block title %}Healthy Massachusetts{% endblock %} 
+        </title>
+
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+
+        <link rel="stylesheet" href="{{ STATIC_URL }}libs/bootstrap/css/bootstrap.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/main.css">
+        <link rel="stylesheet" media="print" href="{{ STATIC_URL }}css/print.css">
+
+{% block head_javascript %}
+<script type="text/javascript" src="{{ STATIC_URL }}libs/jquery-1.7.2.min.js"></script>
+
+<script type="text/javascript" src="{{ STATIC_URL }}libs/bootstrap/js/bootstrap.js"></script> 
+
+<script type="text/javascript" src="{{ STATIC_URL }}js/hema-min.js"></script>
+
+<script type="text/javascript">
+    /*
+    * Global HEMA object
+    */
+    var HEMA = {
+        weave_url: "{{ WEAVE_URL }}",
+        sessionstate: {},
+        swfobject: {
+            vis: {}
+        }
+    }
+
+    // A spot for Google Analytics code.
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-5547782-17']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+</script>
+{% endblock %}
+    </head>
+
+{% block bodyclass %}
+<body>
+{% endblock %}  
+<div class="topbar">&nbsp;</div>
+
+{% block topnav %}
+<div class="navbar">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+
+           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>         
+
+        <div class="logo"><a href="/">Our <span class="healthy">Healthy</span> Massachusetts</a></div>    
+        <div class="nav-collapse">
+            <ul class="nav">
+        <li class="town-list"><label>Choose a Town:</label>
+                <select id='town_selector'>
+					<option
+					{% if not place %} SELECTED=SELECTED{% endif %} value="">Select a Town</option>
+					{% places as towns %}
+					{% for town in towns %}<option 
+					 {% if place %}{% ifequal place.slug town.0 %} SELECTED=SELECTED{% endifequal %}{% endif %}
+					 value="{{ placeless.0 }}{{ town.0 }}{{ placeless.1 }}">{{town.1}}</option>
+					{% endfor %}
+				</select>
+        </li>
+        <li><a class="home" href="/">HOME</a></li>
+        <li><a class="cominfo" href="/place/summary/massachusetts/">COMMUNITY<br>INFORMATION</a></li>
+        <li><a class="maptool" href="#">MAP&nbsp;TOOL</a></li>
+        <li><a class="about" href="/about/about-the-website/">ABOUT</a></li>
+
+        </ul>
+          </div><!--/.nav-collapse -->
+        <span class="beta">beta</span>
+        </div>
+
+      </div>
+     
+    </div>
+{% endblock %}
+ 
+<div class="container middle">
+  <div class="row-fluid">
+  
+{% block sidenav %}
+	{% if place %}
+    <div class="span3">
+    <h1>{{place.name}}</h1>
+    <ul class="sidenav">
+		<li class="summary">
+		    <a href="{% url places.views.summary place.slug %}"> Summary </a>
+		</li>
+		<li class="health_profile profile">
+		    <a href="{% url places.views.profiles place.slug %}"> Health Profile </a>
+		</li>
+		<li class="data_stories">
+			<a href="{% url datastories.views.story place.slug %}"> Data Stories </a>
+		</li>
+		<li class="health_programs">
+		    <a href="{% url places.views.programs place.slug %}"> Health Programs </a>
+		</li>
+		
+		<li class="town-list"><label>Choose a Town:</label>
+		    <select id='town_selector_side'>
+		    	<option
+		    	{% if not place %} SELECTED=SELECTED{% endif %} value="">Select a Town</option>
+		    	{% places as towns %}
+		    	{% for town in towns %}<option 
+					 {% if place %}{% ifequal place.slug town.0 %} SELECTED=SELECTED{% endifequal %}{% endif %}
+					 value="{{ placeless.0 }}{{ town.0 }}{{ placeless.1 }}">{{town.1}}</option>
+
+		    	{% endfor %}
+		    </select>
+                </li>
+	</ul>
+    </div>
+    {% endif %}
+{% endblock %}
+
+
+{% block content %}  
+{% endblock %}
+</div>
+</div>
+  <div class="footer">
+  <div class="footer-inner">
+<div class="container-fluid">
+<div class="footer-text">
+<h5>60 Temple Place Boston, MA 02111 Main Tel: 617-451-2770&nbsp;|&nbsp;FAX: 627-451-2770</h5>
+<a href="/about/about-the-website/">About Healthy Massachusetts</a>&nbsp;|&nbsp;<a href="/about/contact-us/">Contact Us</a>&nbsp;|&nbsp;<a href="/about/legal/#disclaimer">Data Disclaimer</a>&nbsp;|&nbsp;<a href="/about/legal/#terms">Terms of Service</a>&nbsp;|&nbsp;<a href="/about/legal/#privacy">Privacy Policy</a> 
+<div class="footer_socials">
+							<a href="https://twitter.com/#!/MAPCMetroBoston" class="twitter">
+							<img src="{{ STATIC_URL }}img/twitterx20.jpg" alt="Twitter" /></a>
+							<a href="http://www.facebook.com/pages/Metropolitan-Area-Planning-Council-MAPC/127159693987749" class="facebook">
+							<img src="{{ STATIC_URL }}img/facebookx21.jpg" alt="Facebook" /></a>
+							<a href="http://www.linkedin.com/company/64441" class="linkedin">
+							<img src="{{ STATIC_URL }}img/linkinx21.jpg" alt="Linkedin" /></a>
+						</div>
+</div>
+<div class="footer-images">
+<img src="{{ STATIC_URL }}img/mapc108x62.png" alt="MAPC" />
+<img src="{{ STATIC_URL }}img/mim38x62.png" alt="Mass In Motion" />
+</div>
+
+</div>
+</div>
+</div>
+
+
+{% block javascript %}
+{% endblock %}
+<script>
+var $ = jQuery;
+    $(function(){
+      // bind change event to select
+      $('#town_selector').bind('change', function () {
+          var url = $(this).val(); // get selected value
+          if (url) { // require a URL
+              window.location = url; // redirect
+          }
+          return false;
+      });
+      $('#town_selector_side').bind('change', function () {
+          var url = $(this).val(); // get selected value
+          if (url) { // require a URL
+              window.location = url; // redirect
+          }
+          return false;
+      });
+      
+    $("a[href$='.pdf']").addClass("pdf");
+ 
+});
+    
+</script>
+
+
+
+</body>
+</html>
+

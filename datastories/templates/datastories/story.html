@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% load markup %}
+
+<title>{% block title %}{{ story.title }}{% endblock %}</title>
+
+{% block head_javascript %}
+
+{{ block.super }}
+
+{% include "visualizations/_swfobject.html" %}
+
+<script src="/static/libs/jquery.jcarousel.min.js" type="text/javascript">
+</script>
+
+<script type="text/javascript">
+
+{% if page.visualization %}
+
+jQuery(document).ready(function($) {
+    swfobject.embedSWF(
+      "{{ WEAVE_URL }}weave.swf", 
+      "visualization", 
+      "470", "325", 
+      "10.0.0",
+      "expressInstall.swf", 
+      {
+		file: "http://{{ CURRENT_SITE.domain }}{% url visualizations.views.visualization_xml page.visualization.id place.id %}"
+	  }, 
+      HEMA.swfobject.params,
+      {
+        id: "visualization",
+        name: "visualization"
+      }
+    );
+
+    // Flash available
+    if (swfobject.getFlashPlayerVersion()["major"] > 0) {
+        $("#visualization p:first").remove();
+    }
+
+
+});
+
+
+{% endif %}
+
+</script>
+
+<script type="text/javascript">
+
+jQuery(document).ready(function() {
+    jQuery('#featured_stories').jcarousel();
+});
+
+</script>
+
+{% endblock %} 
+
+{% block bodyclass %}
+<body class="datastories">
+{% endblock %} 
+
+{% block content %}  
+
+    <div class="span9">
+    	<h2>Data Stories: {{ place.name }}</h2>
+    	<p><em>These data stories provide insight into health topics particularly of interest in your community</em></p>
+    
+		{% if story %}
+
+			{% if page %}
+				<div class="next-prev top-next-prev">
+					{% if page_prev %}
+					  <a href="?page_num={{ page_prev }}">&#9668;</a>&nbsp;
+					{% endif %}
+					
+					{{ page_num }} of {{ page_count }}
+		
+					{% if page_next %}
+					&nbsp;
+					  <a href="?page_num={{ page_next }}">&#9658;</a>
+					{% endif %}
+				</div>
+           {% endif %}
+   
+		<h4 class="storytitle">{{ story.title }}</h4>
+		
+			{% if page %}
+				
+					<div class="page">
+
+					  {% if page.visualization %}
+					  <div class="page-text visualization-text">{{ page.text|safe }}</div>
+					    <div id="visualization">
+					      {% if page.visualization.thumbnail %}
+					        <img src="{{ MEDIA_URL }}{{ page.visualization.thumbnail }}" alt="">
+					      {% endif %}
+					         <p>Please install the
+						   <a href="http://get.adobe.com/flashplayer/">Adobe
+						     Flash Player
+						   </a> to interact with this visualization.
+						 </p>
+					    </div>
+					  {% else %}
+					  <div class="page-text">{{ page.text|safe }}</div>
+					  	{% if page.image %}
+							<img src="{{ MEDIA_URL }}{{ page.image }}">
+					  	{% endif %}
+					  {% endif %}
+					</div>
+					<div class="story-abstract">{{ story.abstract|safe }}</div>
+				<div class="next-prev">
+					{% if page_prev %}
+					  <a href="?page_num={{ page_prev }}">&#9668;</a>&nbsp;
+					{% endif %}
+					
+					{{ page_num }} of {{ page_count }}
+		
+					{% if page_next %}
+					&nbsp;
+					  <a href="?page_num={{ page_next }}">&#9658;</a>
+					{% endif %}
+				</div>
+			{% else %}
+					<div class="no-pages">
+					  This story has no pages.
+					</div>
+			{% endif %}
+		{% else %}
+			<div class="no-story">
+				{{ place.name }} has no Data Stories.
+			</div>
+		{% endif %}
+
+<ul id="featured_stories" class="story_links jcarousel-skin-tango">			
+	{% for story in datastories %}
+	<li class="story_sum">
+					  {% if story.image %}
+						<img class="thumbnail" src="{{ MEDIA_URL }}{{ story.image }}" align="right">
+					  {% endif %}	
+					  <a class="link_title" href="{% url datastories.views.story place.slug story.slug %}">
+                      {{ story.title }}
+                      </a>
+
+	
+	</li>
+	{% endfor %}
+</ul>
+	 
+	 </div>
+
+
+
+  
+  {% endblock %}

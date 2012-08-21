@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{# N.B.; a RequestContext is used, so you can have, e.g.; MEDIA_URL #}
+
+
+{% block title %}Not found{% endblock %} 
+
+
+
+{% block content %}  
+<h1>Not found</h1>
+<div>We're sorry but the page:
+<h3>{{ request_path }}</h3>
+isn't available here.</div>
+{% endblock %}

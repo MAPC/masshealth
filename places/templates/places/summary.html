@@ -1,0 +1,230 @@
+{% extends 'base.html' %}
+{% load markup %}
+
+<title>{% block title %}{{ place.name }} Summary{% endblock %}</title>
+
+{% block head_javascript %}
+{{ block.super }}
+{% endblock %} 
+
+{% block bodyclass %}
+<body class="summary">
+
+{% include "visualizations/_swfobject.html" %}
+
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+
+{% if slots.count %}
+
+{% for slot in slots %}
+    {% with vis=slot.visualization %}
+    $("#profile-swf-div-{{ forloop.counter0 }}").click(function() {
+	swfobject.embedSWF(
+	  "{{ WEAVE_URL }}weave.swf", 
+	  "profile-swf-div-{{ forloop.counter0 }}", 
+	  {{ slot.width }}, {{ slot.height }}, 
+	  "10.0.0",
+	  "expressInstall.swf", 
+	  {
+		    file: "http://{{ CURRENT_SITE.domain }}{% url visualizations.views.visualization_xml vis.id place.id %}"
+	      }, 
+	  HEMA.swfobject.params,
+	  {
+	    id: "profile-swf-div-{{ forloop.counter0 }}",
+	    name: "profile-swf-div-{{ forloop.counter0 }}"
+	  }
+	);
+    });
+    {% endwith %}
+{% endfor %}
+
+{% if can_update_thumbnails %}
+    {% url visualizations.views.ajax_thumbnails_post as ajax_url %}
+    $('form#submit-new-thumbnails').submit(function(e) {
+
+        var holders = [{% for slot in slots %}
+	  {
+	    vid: {{ slot.visualization.id }},
+            has_thumbnail: {% if slot.visualization.has_thumbnail %}true{% else %}false{% endif %}
+	  }{% if not forloop.last %},{% endif %}{% endfor %}
+        ];
+	var do_all = ! ! $(
+	  'form#submit-new-thumbnails input[name=update-which-thumbnails]'
+	  ).attr('checked');
+
+	var sendables = [];
+
+	for (var i = 0; i < holders.length; i++) {
+	  var h = holders[i];
+	  if (h.has_thumbnail && ! do_all) continue;
+	  var weave = swfobject.getObjectById('profile-swf-div-' + i);
+	  if ( ! weave ) continue;
+	  //if ( weave.getTaskCount() ) continue; // If Andy Dufilie is right
+	  try {
+	    var new_image = weave.evaluateExpression(
+	      null,
+	      'getBase64Image(Application.application.visDesktop)',
+	      null,
+	      ['weave.utils.BitmapUtils', 'mx.core.Application']);
+	  } catch(error) {
+	    alert(error);
+	    continue;
+	  }
+	  sendables.push({vid: h.vid, img: new_image});
+	};
+
+	if (sendables.length > 0) {
+	  $(document).ajaxSend(function(event, xhr, settings) {
+	    /* We presume that we're the only ajax here, and don't
+	       check same origin or method.  If it comes down to
+	       it we could compare against the template ajax_url
+	       variable, as well as method.
+	    */
+	    xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token_value }}");
+	  });
+
+	  $.post("{{ ajax_url }}",
+	         { visualization_thumbnails: JSON.stringify(sendables) },
+		 function(data) {
+		   if (data) alert(data);
+		 },
+		 "json");
+	} else {
+	  alert("Found nothing to send");
+	};
+
+        return false;  // Don't actually let the form submit
+    });
+{% endif %}
+
+
+{% endif %}
+
+    // Flash available
+    if (swfobject.getFlashPlayerVersion()["major"] > 0) {
+        $("body").addClass("flash-is-present");
+	// We expect just one weave.  Activate it rather than
+	// making the user click.
+	$("#profile-swf-div-0").click();
+    }
+});
+
+</script>
+
+{% endblock %} 
+
+{% block content %}  
+
+<div class="span9">
+  <div class="health-profile-summary">
+    <h2>Health Profile</h2>
+    <em>Find a variety of indicators that illustrate both health outcomes in each municipality, as well as contextual information about demographics, lifestyle, and environmental factors. The two indicators highlighted here were selected as particularly relevant for this municipality.</em>
+{% comment %}    <div class="vis_placeholder">
+    
+    </div>{% endcomment %}
+ 
+  
+
+  <div class="summary-visualizations">
+  {% if slots.count %}
+
+  <div class="row-of-visualizations">{# new_row or not #}
+  {% for slot in slots %}
+  {% if not forloop.first and slot.new_row %}</div>
+  <div class="row-of-visualizations">
+  {% endif %}
+  {% if slot.new_row and slot.title %}<h2>{{ slot.title }}</h2>{% endif %}
+  {% with vis=slot.visualization %}
+  <div class="visualization-wrapper summary-slot-{{ slot.name|slugify }} slot-type-{{ slot.slot_type|slugify }}">
+  {% if slot.vistitle %}<h3>{{ slot.vistitle }}</h3>{% endif %}
+  <div id="profile-swf-div-{{ forloop.counter0 }}"
+     class="swfobject-container-div summary-slot-{{ slot.name|slugify }} slot-type-{{ slot.slot_type|slugify }}">
+  {% if vis.thumbnail %}
+  <img src="{{ MEDIA_URL }}{{ vis.thumbnail }}" alt="">
+  <p class="if-flash">Click image for interactive Weave Visualization</p>
+  {% else %}
+  <p class="if-flash">Click here for interactive
+    {{ slot.get_slot_type_display }} Weave Visualization</p>
+  {% endif %}
+  <p class="if-no-flash">Please install the
+  <a href="http://get.adobe.com/flashplayer/">Adobe Flash Player</a>
+  to interact with this visualization.</p>
+  </div>
+  </div>
+  {% endwith %}
+  {% endfor %}
+        <a class="see-all" href="{% url places.views.profiles place.slug %}"
+       >View all health profile information &gt;</a>
+       </div>
+  {% if can_update_thumbnails %}
+  <hr />
+  <div class="submit-new-thumbnails">
+    <form method="POST" action="#" id="submit-new-thumbnails">
+      <div>
+	<input type="checkbox" name="update-which-thumbnails" value="all" />
+	  Update thumbnails for all rendered visualizations<br />
+	  (versus just those that don't already have a thumbnail).<br />
+	  Wait for visualization rendering to be complete before submitting.
+	<input type="submit" />
+      </div>
+    </form>
+  </div>
+  {% endif %}
+
+  {% else %}
+
+  <div>There are no visualization slots available for this page.</div>
+
+  {% endif %}
+  </div>
+  
+   </div>
+
+  <div class="datastories-summary">{# Maybe the if goes outside this div? #}
+    {% if place.datastories.count %}
+    <h2>Data Stories</h2>
+    <i>A data story uses data, text, and maps to investigate a specific policy question. Use them to learn what can be done to improve public health in your community, and how your community compares to others in the state.</i>
+ <div class="summary-box">
+ <div class="list-and-image">
+      <ul>
+        {% for story in place.datastories.all %}{# could use slice to limit to 3 #}
+          <li><a href="{% url datastories.views.story place.slug story.slug %}"
+                >{{ story.title }}</a></li>
+        {% endfor %}
+      </ul>
+</div>
+        </div> 
+    <a class="see-all" href="{% url datastories.views.story place.slug %}"
+       >View all data stories &gt;</a>
+ 
+    {% endif %}
+  </div>
+  
+  
+  
+  
+  
+  <div class="health-programs-summary">
+    {% if place.program_set.count %}
+    <h2>Health Program Information</h2>
+    <i>Read about initiatives going on in your town, and learn how to get involved.</i>
+ <div class="summary-box">
+    <div class="list-and-image">
+      <ul>{% url places.views.programs place.slug as programs_url %}
+        {% for program in place.program_set.all %}{# could use slice to limit to 3 #}
+          <li><a href="{{ programs_url }}#{{ program.title|slugify }}"
+                >{{ program.title }}</a></li>
+        {% endfor %}
+      </ul>
+</div>
+</div>
+      <a class="see-all" href="{{ programs_url }}"
+       >View all health program information &gt;</a>
+
+    {% endif %}
+  </div>
+
+
+</div>
+{% endblock %} 

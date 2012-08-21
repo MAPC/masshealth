@@ -1,0 +1,44 @@
+This directory is the project root.
+
+The subdirectory "masshealth" is the project package directory.
+
+"masshealth" is the project name.
+
+Things you want to reference with the project name as a prefix (to
+avoid collisions in python's global namespace) go in the project
+package directory (e.g.; settings.py as masshealth.settings, the
+top level urls.py as masshealth.urls).  This works because the
+project root is on sys.path (and, by deaault, remains there, a
+change from Django older than 1.4).
+
+Things you want to reference globally, but that you want under
+revision control, and thus not in your site-packages directory,
+go in the project root.  An example might be an app that you
+customized (thus the revision control), but which may be referred
+to by other standard apps (like filebrowser referred to by pages)
+which you don't want to customize (and thus they can't be expected
+to prefix their references with your project name).  Pre 1.4, such
+things went in the project package directory, and we arranged to
+have it on sys.path.  But it is no longer on the path.
+
+templates is for templates that aren't part of an app or which
+have been customized as compared to the version in their (not
+otherwise customized) app.
+
+common_static is a source directory for the new staticfiles stuff
+like "manage.py collectstatic" to find any static files that you
+need to supply, but which aren't properly part of some app (or
+which have been customized as compared to the versions in their
+not otherwise customized app).
+
+htdocs/static is where static files get collected to.  htdocs/media
+is the designated place for uploaded files to be put, among other
+things.  Things like favicon.ico and robots.txt can also go in
+htdocs.  All this allows a shortcut in deployment behind Apache,
+since they all can share a single "<Directory>" directive (though
+they still all need separate Alias directives).  You can, of
+course, deploy differently - remember to change STATIC_ROOT and/or
+MEDIA_ROOT in settings.py (collectstatic isn't necessary for
+running the development server, but anything that uploads to /media/
+needs the directory to exist, and htdocs being local is unlikely
+to run into permissions problems).
