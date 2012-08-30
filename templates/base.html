@@ -103,14 +103,14 @@
 		<li class="summary">
 		    <a href="{% url places.views.summary place.slug %}"> Summary </a>
 		</li>
+		<li class="health_programs">
+		    <a href="{% url places.views.programs place.slug %}"> Health Programs </a>
+		</li>
 		<li class="health_profile profile">
 		    <a href="{% url places.views.profiles place.slug %}"> Health Profile </a>
 		</li>
 		<li class="data_stories">
 			<a href="{% url datastories.views.story place.slug %}"> Data Stories </a>
-		</li>
-		<li class="health_programs">
-		    <a href="{% url places.views.programs place.slug %}"> Health Programs </a>
 		</li>
 		
 		<li class="town-list"><label>Choose a Town:</label>

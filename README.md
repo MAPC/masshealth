@@ -1,6 +1,6 @@
-# MassHealth
+# Our Healthy Mass
 
-A public health data portal for Municipalities in the Boston Metro Area.
+A public health data and information portal for Massachusetts.
 
 MAPC Project team: Mariana Arcaya, Peter James, Kate Ito, Holly St. Clair, Rob Goodspeed, Susan Brunton, Christian Spanring  
 Consultants: [Appropriate Solutions, Inc.](http://www.appropriatesolutions.com/)

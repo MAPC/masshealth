@@ -117,6 +117,29 @@ jQuery(document).ready(function($) {
 {% block content %}  
 
 <div class="span9">
+  
+  <div class="health-programs-summary">
+    {% if place.program_set.count %}
+    <h2>Health Program Information</h2>
+    <i>Read about initiatives going on in your town, and learn how to get involved.</i>
+ <div class="summary-box">
+    <div class="list-and-image">
+      <ul>{% url places.views.programs place.slug as programs_url %}
+        {% for program in place.program_set.all %}{# could use slice to limit to 3 #}
+          <li><a href="{{ programs_url }}#{{ program.title|slugify }}"
+                >{{ program.title }}</a></li>
+        {% endfor %}
+      </ul>
+</div>
+</div>
+      <a class="see-all" href="{{ programs_url }}"
+       >View all health program information &gt;</a>
+
+    {% endif %}
+  </div>
+
+
+
   <div class="health-profile-summary">
     <h2>Health Profile</h2>
     <em>Find a variety of indicators that illustrate both health outcomes in each municipality, as well as contextual information about demographics, lifestyle, and environmental factors. The two indicators highlighted here were selected as particularly relevant for this municipality.</em>
@@ -204,26 +227,6 @@ jQuery(document).ready(function($) {
   
   
   
-  
-  <div class="health-programs-summary">
-    {% if place.program_set.count %}
-    <h2>Health Program Information</h2>
-    <i>Read about initiatives going on in your town, and learn how to get involved.</i>
- <div class="summary-box">
-    <div class="list-and-image">
-      <ul>{% url places.views.programs place.slug as programs_url %}
-        {% for program in place.program_set.all %}{# could use slice to limit to 3 #}
-          <li><a href="{{ programs_url }}#{{ program.title|slugify }}"
-                >{{ program.title }}</a></li>
-        {% endfor %}
-      </ul>
-</div>
-</div>
-      <a class="see-all" href="{{ programs_url }}"
-       >View all health program information &gt;</a>
-
-    {% endif %}
-  </div>
 
 
 </div>

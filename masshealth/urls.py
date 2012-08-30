@@ -56,6 +56,7 @@ urlpatterns = patterns(
     url(r'^admin/filebrowser/', include(site.urls)),
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^accounts/', include('registration.backends.default.urls')),
 )
 
 if settings.DEBUG:
