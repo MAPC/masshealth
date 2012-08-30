@@ -879,3 +879,5 @@ height: auto;
 {
 text-align: left;
 }
+
+.olMap img { max-width:none; }
