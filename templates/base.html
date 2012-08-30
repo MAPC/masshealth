@@ -20,6 +20,7 @@
 <script type="text/javascript" src="{{ STATIC_URL }}libs/bootstrap/js/bootstrap.js"></script> 
 
 <script type="text/javascript" src="{{ STATIC_URL }}js/hema-min.js"></script>
+ 
 
 <script type="text/javascript">
     /*
@@ -45,8 +46,7 @@
     })();
 </script>
 {% endblock %}
-{% block head %}
-{% endblock %}
+{% block head %} {% endblock head %}
     </head>
 
 {% block bodyclass %}
@@ -135,6 +135,7 @@
 
 {% block content %}  
  {% block main %}{% endblock %}
+
 {% endblock %}
 </div>
 </div>
@@ -189,7 +190,11 @@ var $ = jQuery;
 });
     
 </script>
-
+<script src="{{ STATIC_URL }}geonode/js/hogan.js"></script>
+<script src="{{ STATIC_URL }}geonode/js/jquery.timeago.js"></script>
+<script src="{{ STATIC_URL }}geonode/js/json2.js"></script>
+<script src="{{ STATIC_URL }}geonode/js/utils.js"></script>
+{% block  extra_script  %}{% endblock extra_script %}
 
 
 </body>
