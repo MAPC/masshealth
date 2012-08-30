@@ -35,7 +35,7 @@ import places.models
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
-
+import geonode.proxy.urls
 from monkey_patches import admin as mpa
 mpa.flatpages()
 
@@ -58,6 +58,8 @@ urlpatterns = patterns(
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/', include('registration.backends.default.urls')),
 )
+
+urlpatterns += geonode.proxy.urls.urlpatterns
 
 if settings.DEBUG:
     urlpatterns += patterns(
