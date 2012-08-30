@@ -233,11 +233,6 @@ background-color: transparent;
 
 
 
-.navbar .nav > li > a.maptool
-{
-color: #CCCCCC;
-}
-
 
 .navbar .nav > li > a.cominfo { padding: 29px 10px 32px; }
 .navbar .nav > li > a.cominfo:hover { padding: 23px 10px 31px; }
