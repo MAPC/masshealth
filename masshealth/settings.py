@@ -128,8 +128,99 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    _rrel('templates'),
+    #_rrel('templates'),
+    '/home/mapc/masshealth/templates/',
+    '/home/mapc/geonode/geonode/templates',
 )
+
+#
+# GeoNode specific settings
+#
+
+SITENAME = "GeoNode"
+SITEURL = "http://mapc.dev.geonode.org/"
+
+# The FULLY QUALIFIED url to the GeoServer instance for this GeoNode.
+GEOSERVER_BASE_URL = "http://mapc.dev.geonode.org/geoserver/"
+
+# The username and password for a user that can add and
+# edit layer details on GeoServer
+GEOSERVER_CREDENTIALS = "geoserver_admin", SECRET_KEY
+
+# GeoNode javascript client configuration
+
+# Google Api Key needed for 3D maps / Google Earth plugin
+GOOGLE_API_KEY = "ABQIAAAAkofooZxTfcCv9Wi3zzGTVxTnme5EwnLVtEDGnh-lFVzRJhbdQhQgAhB1eT_2muZtc0dl-ZSWrtzmrw"
+
+# Where should newly created maps be focused?
+DEFAULT_MAP_CENTER = (0, 0)
+
+# How tightly zoomed should newly created maps be?
+# 0 = entire world;
+# maximum zoom is between 12 and 15 (for Google Maps, coverage varies by area)
+DEFAULT_MAP_ZOOM = 0
+
+MAP_BASELAYERS = [{
+    "source": {
+        "ptype": "gxp_wmscsource",
+        "url": GEOSERVER_BASE_URL + "wms",
+        "restUrl": "/gs/rest"
+     }
+  },{
+    "source": {"ptype": "gx_olsource"},
+    "type":"OpenLayers.Layer",
+    "args":["No background"],
+    "visibility": False,
+    "fixed": True,
+    "group":"background"
+  }, {
+    "source": {"ptype": "gx_olsource"},
+    "type":"OpenLayers.Layer.OSM",
+    "args":["OpenStreetMap"],
+    "visibility": False,
+    "fixed": True,
+    "group":"background"
+  }, {
+    "source": {"ptype": "gxp_mapquestsource"},
+    "name":"osm",
+    "group":"background",
+    "visibility": True
+  }, {
+    "source": {"ptype": "gxp_mapquestsource"},
+    "name":"naip",
+    "group":"background",
+    "visibility": False
+  }, {
+    "source": {"ptype": "gxp_bingsource"},
+    "name": "AerialWithLabels",
+    "fixed": True,
+    "visibility": False,
+    "group":"background"
+  },{
+    "source": {"ptype": "gxp_mapboxsource"},
+  }, {
+    "source": {"ptype": "gx_olsource"},
+    "type":"OpenLayers.Layer.WMS",
+    "group":"background",
+    "visibility": False,
+    "fixed": True,
+    "args":[
+      "bluemarble",
+      "http://maps.opengeo.org/geowebcache/service/wms",
+      {
+        "layers":["bluemarble"],
+        "format":"image/png",
+        "tiled": True,
+        "tilesOrigin": [-20037508.34, -20037508.34]
+      },
+      {"buffer": 0}
+    ]
+
+}]
+
+GEONODE_CLIENT_LOCATION = "/static/geonode/"
+
+
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -138,15 +229,31 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Uncomment the next line to enable the admin:
-    'grappelli',
-    'filebrowser',
     'django.contrib.admin',
-    # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
     'django.contrib.gis',
     'django.contrib.flatpages',
     'django.contrib.markup',
+
+    # Third party apps
+    'django_forms_bootstrap',
+    'registration',
+    'profiles',
+    'avatar',
+    'dialogos',
+    'agon_ratings',
+    'taggit',
+    'grappelli',
+    'filebrowser',
+    'south',
+
+    # GeoNode internal apps
+    'geonode.maps',
+    'geonode.layers',
+    'geonode.people',
+    'geonode.proxy',
+    'geonode.security',
+
+    # MassHealth Apps 
     'datastories',
     'places',
     'visualizations',
