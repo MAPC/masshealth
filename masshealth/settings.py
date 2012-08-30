@@ -1,8 +1,10 @@
 # Django settings for masshealth project.
 from django.conf import global_settings as DEFAULT_SETTINGS
 import os
+import geonode
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT, PROJECT_NAME = os.path.split(PROJECT_DIR)
+GEONODE_ROOT = os.path.dirname(geonode.__file__)
 def _prel(*args): return os.path.join(PROJECT_DIR, *args)
 def _rrel(*args): return os.path.join(PROJECT_ROOT, *args)
 def _pmod(*args): return '.'.join((PROJECT_NAME,) + args)
@@ -84,6 +86,7 @@ STATICFILES_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     _rrel('common_static'),
+    os.path.join(GEONODE_ROOT, "static"),
 )
 
 # List of finder classes that know how to find static files in
@@ -106,6 +109,7 @@ TEMPLATE_LOADERS = (
 
 TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS + (
     'visualizations.context_processors.visualizations',
+    'geonode.context_processors.resource_urls',
     )
 
 MIDDLEWARE_CLASSES = (
@@ -146,6 +150,12 @@ GEOSERVER_BASE_URL = "http://mapc.dev.geonode.org/geoserver/"
 # The username and password for a user that can add and
 # edit layer details on GeoServer
 GEOSERVER_CREDENTIALS = "geoserver_admin", SECRET_KEY
+
+# For django-profiles
+AUTH_PROFILE_MODULE = 'people.Contact'
+
+#Import uploaded shapefiles into a database such as PostGIS?
+DB_DATASTORE = False
 
 # GeoNode javascript client configuration
 
@@ -219,8 +229,6 @@ MAP_BASELAYERS = [{
 }]
 
 GEONODE_CLIENT_LOCATION = "/static/geonode/"
-
-
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -308,14 +316,46 @@ LOGGING = {
             '()': 'django.utils.log.RequireDebugFalse'
         }
     },
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        'simple': {
+            'format': '%(message)s',        },
+    },
     'handlers': {
+        'null': {
+            'level':'DEBUG',
+            'class':'django.utils.log.NullHandler',
+        },
+        'console':{
+            'level':'DEBUG',
+            'class':'logging.StreamHandler',
+            'formatter': 'simple'
+        },
         'mail_admins': {
             'level': 'ERROR',
-            'filters': ['require_debug_false'],
-            'class': 'django.utils.log.AdminEmailHandler'
+            'class': 'django.utils.log.AdminEmailHandler',
         }
     },
     'loggers': {
+        'django': {
+            'handlers':['null'],
+            'propagate': True,
+            'level':'INFO',
+        },
+        "geonode": {
+            "handlers": ["console"],
+            "level": "DEBUG",
+        },
+        "gsconfig.catalog": {
+            "handlers": ["console"],
+            "level": "INFO",
+        },
+        "owslib": {
+            "handlers": ["console"],
+            "level": "INFO",
+        },
         'django.request': {
             'handlers': ['mail_admins'],
             'level': 'ERROR',
