@@ -157,6 +157,27 @@ AUTH_PROFILE_MODULE = 'people.Contact'
 #Import uploaded shapefiles into a database such as PostGIS?
 DB_DATASTORE = False
 
+# CSW settings
+CATALOGUE = {
+    'default': {
+        # The underlying CSW implementation
+        'ENGINE': 'geonode.catalogue.backends.geonetwork',
+
+        # enabled formats
+        #'formats': ['DIF', 'Dublin Core', 'FGDC', 'TC211'],
+        'FORMATS': ['TC211'],
+
+        # The FULLY QUALIFIED base url to the CSW instance for this GeoNode
+        #'url': 'http://localhost/pycsw/trunk/csw.py',
+        'URL': 'http://localhost:8080/geonetwork/srv/en/csw',
+        #'url': 'http://localhost:8080/deegree-csw-demo-3.0.4/services',
+
+        # login credentials (for GeoNetwork)
+        'USER': 'admin',
+        'PASSWORD': 'admin'
+    }
+}
+
 # GeoNode javascript client configuration
 
 # Google Api Key needed for 3D maps / Google Earth plugin
@@ -363,6 +384,8 @@ LOGGING = {
         },
     }
 }
+
+REGISTRATION_OPEN=False
 
 try:
     from local_settings import *
