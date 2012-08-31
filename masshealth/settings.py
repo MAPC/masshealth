@@ -153,13 +153,21 @@ INSTALLED_APPS = (
     'visualizations',
     'programs',
     'heroes',
+    'accounts',
+    'profiles',
 )
+
+AUTH_PROFILE_MODULE = 'accounts.UserProfile'
+
+LOGIN_REDIRECT_URL = '/my_profile'
 
 FIXTURE_DIRS = ( # Extra fixure dirs, not stored under an ap
     _rrel('fixtures', 'flatpages'),  # flatpages is off under django.contrib
     )
 
 WEAVE_URL = 'http://metrobostondatacommon.org/weave/'
+
+GRAPPELLI_ADMIN_TITLE = 'Healthy Massachusetts'
 
 # Setting FILEBROWSER_DIRECTORY to MEDIA_ROOT is incorrect, see
 # comment in .../site-packages/filebrowser/settings.py
