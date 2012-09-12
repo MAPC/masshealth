@@ -49,6 +49,7 @@ urlpatterns = patterns(
     url(r'^place/', include('places.urls')),
     url(r'^crossdomain.xml$', 'visualizations.views.crossdomain'),
     url(r'^program/', include('programs.urls')),
+    url(r'^data/acls/?$', 'geonode.layers.views.layer_acls', name='layer_acls'),
     url(r'^geonode/', include('geonode.urls')),
     (r'^grappelli/', include('grappelli.urls')),
     # Uncomment the admin/doc line below to enable admin documentation:
