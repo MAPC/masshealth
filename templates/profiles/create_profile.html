@@ -1,7 +1,12 @@
 {% extends "base.html" %}
+
+{% block bodyclass %}
+<body class="account userprofile">
+{% endblock %} 
+
 {% block content %}
 <h4>User {{ user.username }}</h4>
-<div>Enter your profile information as desired.</div>
+<h2>Enter your profile information as desired.</h2>
 <form method="POST" action="">{% csrf_token %}
     <ul>
         {{ form.as_ul }}

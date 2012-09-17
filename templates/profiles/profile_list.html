@@ -1,4 +1,10 @@
 {% extends "base.html" %}
+
+
+{% block bodyclass %}
+<body class="account userprofile">
+{% endblock %} 
+
 {% block content %}
 {% if object_list.count %}
 {% if is_paginated %}

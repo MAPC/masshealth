@@ -1,6 +1,15 @@
 {% extends "base.html" %}
+
+{% block title %}Healthy Massachusetts{% endblock %} 
+
+
+{% block bodyclass %}
+<body class="account">
+{% endblock %}  
+
+
 {% block content %}
-<div> Please fill out and submit the form below to register with MASSHealth.</div>
+<h2> Please fill out and submit the form below to register with MASSHealth.</h2>
 <form method="POST" action="">{% csrf_token %}
     <ul>
         {{ form.as_ul }}

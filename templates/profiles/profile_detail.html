@@ -1,6 +1,12 @@
 {% extends "base.html" %}
+
+
+{% block bodyclass %}
+<body class="account userprofile">
+{% endblock %} 
+
 {% block content %}
-<div>Profile of user "{{ profile.display_name }}"</div>
+<h2>Profile of user "{{ profile.display_name }}"</h2>
 {% if profile.towns_of_interest.count %}<div>Interested
 in:{% for town in profile.towns_of_interest.all %}
 {% if not forloop.first %}{% if forloop.last %}
