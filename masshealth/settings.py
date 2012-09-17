@@ -388,6 +388,11 @@ LOGGING = {
 REGISTRATION_OPEN=False
 LOGIN_REDIRECT_URL = '/admin/'
 
+# temporary hack for https://github.com/MAPC/masshealth/issues/108
+ABSOLUTE_URL_OVERRIDES = {
+    'auth.user': lambda u: "/admin/",
+}
+
 try:
     from local_settings import *
 except ImportError:
