@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<div>Profile of user "{{ profile.display_name }}"</div>
+{% if profile.towns_of_interest.count %}<div>Interested
+in:{% for town in profile.towns_of_interest.all %}
+{% if not forloop.first %}{% if forloop.last %}
+and{% else %},{% endif %}{% endif %}
+<a href="{{ town.get_absolute_url }}">{{ town.name }}</a>
+{% endfor %}</div>{% endif %}
+{% endblock %}
