@@ -133,10 +133,17 @@
 {% endblock %}
 
 
-{% block content %}  
+{% block content %}
+<div class="row">
+<div class="span8">
  {% block main %}{% endblock %}
-
+</div>
+<div class="span4">
+ {% block sidebar %}{% endblock %}
+</div>
+</div>
 {% endblock %}
+
 </div>
 </div>
   <div class="footer">
