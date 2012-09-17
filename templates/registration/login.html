@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
-<form method="POST" action="">{% csrf_token %}
-    <ul>
+<form class="accounts" method="POST" action="">{% csrf_token %}
+    <ul class="unstyled">
         {{ form.as_ul }}
     </ul>
-    <input type="submit" value="Login" />
-<form>
+    <button type="submit" class="btn" value="Login">Log in</button>
+</form>
+<p>Don't have an account? <a href="{% url registration_register %}">Register here</a>!</p>
 {% endblock %}

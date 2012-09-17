@@ -386,6 +386,7 @@ LOGGING = {
 }
 
 REGISTRATION_OPEN=False
+LOGIN_REDIRECT_URL = '/admin/'
 
 try:
     from local_settings import *

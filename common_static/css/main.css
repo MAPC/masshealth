@@ -881,3 +881,18 @@ text-align: left;
 }
 
 .olMap img { max-width:none; }
+
+
+/* registration */
+
+form.accounts {
+	text-align: left;
+}
+
+.accounts .errorlist {
+	list-style-type: none;
+	margin-top: 12px
+	margin-bottom: 6px;
+    margin-left: 0px;
+    color: #F35A20;
+}
