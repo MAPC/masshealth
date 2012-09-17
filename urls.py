@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, include, url
 from filebrowser.sites import site
 from django.conf import settings
+from django.http import HttpResponseRedirect
 
 # There appears to be an import order bug (probably
 # a Django bug) that results in an exception in
@@ -52,6 +53,8 @@ urlpatterns = patterns(
     url(r'^data/acls/?$', 'geonode.layers.views.layer_acls', name='layer_acls'),
     url(r'^geonode/', include('geonode.urls')),
     (r'^grappelli/', include('grappelli.urls')),
+
+    url(r'^geoserver/', lambda x:HttpResponseRedirect('http://localhost:8080/geoserver'))),
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/filebrowser/', include(site.urls)),
