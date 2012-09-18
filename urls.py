@@ -54,7 +54,7 @@ urlpatterns = patterns(
     url(r'^geonode/', include('geonode.urls')),
     (r'^grappelli/', include('grappelli.urls')),
 
-    url(r'^geoserver/', lambda x:HttpResponseRedirect('http://localhost:8080/geoserver')),
+    #url(r'^geoserver/', lambda x:HttpResponseRedirect('http://localhost:8080/geoserver')),
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/filebrowser/', include(site.urls)),

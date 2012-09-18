@@ -21,7 +21,7 @@ PROJECT_ROOT = os.path.dirname(os.path.realpath(sfile))
 SITE_ID = 1
 SITENAME = "HealthyMass"
 # Change to actual URL
-SITEURL = 'http://localhost:8000/'
+SITEURL = 'http://mapc.dev.geonode.org/geonode/'
 ROOT_URLCONF = 'masshealth.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
