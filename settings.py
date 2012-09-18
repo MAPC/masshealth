@@ -22,10 +22,10 @@ SITE_ID = 1
 SITENAME = "HealthyMass"
 # Change to actual URL
 SITEURL = 'http://mapc.dev.geonode.org/geonode/'
-ROOT_URLCONF = 'masshealth.urls'
+ROOT_URLCONF = 'urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = os.path.join('masshealth.wsgi.application')
+WSGI_APPLICATION = os.path.join('wsgi.application')
 
 # Add additional apps here (appended to INSTALLED_APPS)
 SITE_APPS = ()
@@ -198,11 +198,11 @@ INSTALLED_APPS = (
     'django.contrib.markup',
     'grappelli',
     'filebrowser',
-    'masshealth.datastories',
-    'masshealth.heroes',
-    'masshealth.places',
-    'masshealth.programs',
-    'masshealth.visualizations',
+    'datastories',
+    'heroes',
+    'places',
+    'programs',
+    'visualizations',
 )
 
 # Agon Ratings
