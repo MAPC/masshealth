@@ -15,5 +15,4 @@ local_settings.py
 */migrations/
 *.swp
 _initial_data.json
-
-/tmp/*
+/tmp
