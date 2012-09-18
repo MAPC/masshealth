@@ -11,7 +11,7 @@ if sfile.endswith('.pyc'): sfile = sfile[:-1]
 PROJECT_ROOT = os.path.dirname(os.path.realpath(sfile))
 
 # temporarily add path
-sys.path.append(PROJECT_ROOT)
+#sys.path.append(PROJECT_ROOT)
 
 ###########################################################
 # SITE SPECIFIC SETTINGS
@@ -301,53 +301,26 @@ GEOSERVER_CREDENTIALS = "geoserver_admin", SECRET_KEY
 
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': True,
-    'formatters': {
-        'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
-        },
-        'simple': {
-            'format': '%(message)s',        },
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
     },
     'handlers': {
-        'null': {
-            'level':'DEBUG',
-            'class':'django.utils.log.NullHandler',
-        },
-        'console':{
-            'level':'DEBUG',
-            'class':'logging.StreamHandler',
-            'formatter': 'simple'
-        },
         'mail_admins': {
             'level': 'ERROR',
-            'class': 'django.utils.log.AdminEmailHandler',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
         }
     },
     'loggers': {
-        'django': {
-            'handlers':['null'],
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
             'propagate': True,
-            'level':'INFO',
         },
-        "geonode": {
-            "handlers": ["console"],
-            "level": "DEBUG",
-        },
-        "gsconfig.catalog": {
-            "handlers": ["console"],
-            "level": "INFO",
-        },
-        "owslib": {
-            "handlers": ["console"],
-            "level": "INFO",
-        },
-        "django.request": {
-            "handlers": ["mail_admins"],
-            "level": "ERROR",
-            "propagate": True,
-        },
-    },
+    }
 }
 
 # temporary hack for https://github.com/MAPC/masshealth/issues/108
