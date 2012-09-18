@@ -361,8 +361,8 @@ GEONODE_CLIENT_LOCATION = os.path.join(STATIC_URL,'geonode/')
 GEONODE_UPLOAD_PATH = MEDIA_ROOT #os.path.join(STATIC_URL, 'uploaded/')
 
 # The FULLY QUALIFIED url to the GeoServer instance for this GeoNode.
-#GEOSERVER_BASE_URL = SITEURL + 'geoserver/'
-GEOSERVER_BASE_URL = 'http://localhost:8080/geoserver/'
+GEOSERVER_BASE_URL = SITEURL + 'geoserver/'
+#GEOSERVER_BASE_URL = 'http://localhost:8080/geoserver/'
 
 CATALOGUE = {
     'default': {
