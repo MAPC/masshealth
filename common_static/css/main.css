@@ -180,7 +180,7 @@ a:focus { outline: none; }
 {
 	display: block;
 	float: left;
-	padding: 0 0 0 11px;
+	padding: 0 0 0 10px;
 }
 
 .navbar .nav > li.town-list { padding: 0; }
@@ -190,8 +190,8 @@ a:focus { outline: none; }
 	color: #3A3A3A;
 	font-weight: bold;
 	line-height: 16px;
-    padding:37px 6px 40px;
-    font-size: 12px;
+	padding:37px 6px 40px;
+	font-size: 12px;
 	text-decoration: none;
 	text-shadow: none;
 }
@@ -203,7 +203,7 @@ a:focus { outline: none; }
 	text-decoration: none;
 	border-bottom: 2px solid #f35a20;
 	border-top: 6px solid #f35a20;
-	padding: 31px 6px 38px;
+	padding: 31px 6px 39px;
 }
 
 .about .navbar .nav > li > a.about,
@@ -214,7 +214,7 @@ background-color: transparent;
 	text-decoration: none;
 	border-bottom: 2px solid #f35a20;
 	border-top: 6px solid #f35a20;
-	padding: 31px 10px 39px;
+        padding: 31px 6px 39px;
 	
 }
 
@@ -230,10 +230,11 @@ background-color: transparent;
 	text-decoration: none;
 	border-bottom: 2px solid #f35a20;
 	border-top: 6px solid #f35a20;
- padding: 23px 10px 31px;	}
+ padding: 23px 6px 31px;	}
+
 
 .navbar .nav > li > a.cominfo { padding: 29px 6px 32px; }
-.navbar .nav > li > a.cominfo:hover { padding: 23px 6px 30px; }
+.navbar .nav > li > a.cominfo:hover { padding: 23px 6px 31px; }
 
 .navbar .nav li label
 {
@@ -287,7 +288,10 @@ margin-top: 30px;
 .programs li.health_programs a { background-color: #fcded3; }
 .current { background-color: #fcded3; font-weight:bold; }
 
-li.town-list select { width: 180px; }
+li.town-list select
+ {
+   width: 165px;
+ }
 .row { margin: 0; }
 
 .row-fluid .span9
@@ -910,3 +914,19 @@ color: #0066B1;
 }
 
 
+.userprofile form
+{
+width: 800px;
+}
+
+.account .helptext
+{
+    font-style: italic;
+    padding-left: 10px;
+}
+
+.userprofile .container div
+{
+margin-top:10px;
+text-align: left;
+}
