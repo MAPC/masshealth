@@ -190,9 +190,8 @@ a:focus { outline: none; }
 	color: #3A3A3A;
 	font-weight: bold;
 	line-height: 16px;
-	padding: 37px 10px 40px;
-padding:37px 6px 40px;
-font-size: 12px;
+        padding:37px 6px 40px;
+        font-size: 12px;
 	text-decoration: none;
 	text-shadow: none;
 }
@@ -204,7 +203,7 @@ font-size: 12px;
 	text-decoration: none;
 	border-bottom: 2px solid #f35a20;
 	border-top: 6px solid #f35a20;
-	padding: 31px 6px 39px;
+	padding: 31px 6px 38px;
 }
 
 .about .navbar .nav > li > a.about,
@@ -242,7 +241,7 @@ color: #CCCCCC;
 
 
 .navbar .nav > li > a.cominfo { padding: 29px 6px 32px; }
-.navbar .nav > li > a.cominfo:hover { padding: 23px 6px 31px; }
+.navbar .nav > li > a.cominfo:hover { padding: 23px 6px 30px; }
 
 .navbar .nav li label
 {
