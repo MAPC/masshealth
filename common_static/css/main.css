@@ -234,13 +234,6 @@ background-color: transparent;
  padding: 23px 6px 31px;	}
 
 
-
-.navbar .nav > li > a.maptool
-{
-color: #CCCCCC;
-}
-
-
 .navbar .nav > li > a.cominfo { padding: 29px 6px 32px; }
 .navbar .nav > li > a.cominfo:hover { padding: 23px 6px 31px; }
 
@@ -890,43 +883,37 @@ height: auto;
 text-align: left;
 }
 
+.olMap img { max-width:none; }
 
 /*  Account-related styles */
+
+.account form {
+	text-align: left;
+}
+
+.account .errorlist {
+	list-style-type: none;
+	margin-top: 12px
+	margin-bottom: 6px;
+    margin-left: 0px;
+    color: #F35A20;
+}
+
 .account .navbar
 {
 margin-bottom: 20px;
 }
 
-.account ul
-{
-list-style: none outside none;
-}
-
-.account_options
-{
-margin: 20px 0;
-}
-
-.account_options a
-{
-padding-right: 20px;
+.account ul {
+	list-style-type: none;
+	margin-left: 0px;
 }
 
 .account h1
 {
 color: #0066B1;
 }
-.account p
-{
-width: 400px;
-margin: 10px auto 0;
-}
 
-.account form
-{
-width: 400px;
-margin: 20px auto 18px;
-}
 
 .userprofile form
 {
@@ -943,24 +930,4 @@ width: 800px;
 {
 margin-top:10px;
 text-align: left;
-}
-
-ul.errorlist
-{
-color: red;
-margin: 0;
-}
-
-/* registration */
-
-form.accounts {
-	text-align: left;
-}
-
-.accounts .errorlist {
-	list-style-type: none;
-	margin-top: 12px
-	margin-bottom: 6px;
-    margin-left: 0px;
-    color: #F35A20;
 }
