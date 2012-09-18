@@ -1,0 +1,446 @@
+{% extends "base.html" %}
+
+
+
+{% block title %}New Weave Visualization{% endblock %}
+
+{% block bodyclass %}
+<body class="visualization">
+{% endblock %} 
+
+
+{% block content %}
+
+<h1>New Weave Visualization</h1>
+
+
+
+
+		<!-- data_vis -->
+		<div class="data_vis">
+			<div class="data_vis_pad">
+				<div id="spinner"></div>
+				<div class="data_vis_header editor">
+
+					
+
+					
+
+					<div class="info">  </div>
+					<a href="" id="properties-button" class="expand_link">Edit Properties [+]</a>
+				</div>
+				
+				<div class="vis_properties_form">	
+					<form>
+							<div class="vis_properties_form_label"><label for="title">Title</label></div>
+							<input type="text" name="title" id="title" value="New Weave Visualization" class="" />
+							<br />
+							<div class="vis_properties_form_label"><label for="year">Year(s)</label></div>
+							<input type="text" name="year" id="year" value="" class="" />
+							<br />
+							<div class="vis_properties_form_label"><label for="abstract"></label>Short description</div>
+							<textarea id="abstract" name="abstract"></textarea>
+							<br>
+							<div class="vis_properties_form_label"><label for="topic"></label>Related topic(s)</div>
+							<select id="topics" multiple="multiple">
+							
+							<option value="1" >Demographics</option>
+							
+							<option value="2" >Arts &amp; Culture</option>
+							
+							<option value="3" >Civic Vitality &amp; Governance</option>
+							
+							<option value="4" >Economy</option>
+							
+							<option value="5" >Education</option>
+							
+							<option value="6" >Environment &amp; Energy</option>
+							
+							<option value="7" >Housing</option>
+							
+							<option value="8" >Land Use &amp; Zoning</option>
+							
+							<option value="9" >Public Health</option>
+							
+							<option value="10" >Public Safety</option>
+							
+							<option value="11" >Technology</option>
+							
+							<option value="12" >Transportation</option>
+							
+							<option value="13" >Geographic Boundaries</option>
+							
+							</select>
+							<br>
+							<div class="vis_properties_form_label"><label for="datasources"></label>Datasource(s)</div>
+							<select id="datasources" multiple="multiple">
+							
+							<option value="1" >American Community Survey</option>
+							
+							<option value="4" >Census</option>
+							
+							<option value="18" >Central MA Planning Commission</option>
+							
+							<option value="53" >CNT</option>
+							
+							<option value="10" >Community Preservation Coalition</option>
+							
+							<option value="9" >DESE</option>
+							
+							<option value="3" >DHCD</option>
+							
+							<option value="42" >Executive Office of Energy and Environmental Affairs</option>
+							
+							<option value="31" >Federal Bureau of Labor Statistics</option>
+							
+							<option value="19" >Federal Emergency Management Agency</option>
+							
+							<option value="35" >Home Mortgage Disclosure Act</option>
+							
+							<option value="14" >Hubway</option>
+							
+							<option value="12" >InfoGroup</option>
+							
+							<option value="50" >MacConnell</option>
+							
+							<option value="25" >MA Clean Energy Center</option>
+							
+							<option value="28" >MA Department of Conservation and Recreation</option>
+							
+							<option value="30" >MA Department of Correction</option>
+							
+							<option value="52" >MA Department of Education</option>
+							
+							<option value="40" >MA Department of Environmental Protection</option>
+							
+							<option value="38" >MA Department of Fish and Game</option>
+							
+							<option value="24" >MA Department of Housing and Economic Development</option>
+							
+							<option value="51" >MA Department of Labor and Workforce Development</option>
+							
+							<option value="32" >MA Department of Revenue</option>
+							
+							<option value="47" >MA Department of Transportation</option>
+							
+							<option value="34" >MA DPH</option>
+							
+							<option value="7" >MA Elections Division</option>
+							
+							<option value="2" >MA EOLWD ES-202</option>
+							
+							<option value="21" >MA Muncipal Association</option>
+							
+							<option value="33" >MA Office of Coastal Zone Management</option>
+							
+							<option value="8" >MAPC</option>
+							
+							<option value="22" >MA Secretary of the State</option>
+							
+							<option value="11" >MassCHIP</option>
+							
+							<option value="6" >MassGIS</option>
+							
+							<option value="44" >MA Technology Collaborative</option>
+							
+							<option value="27" >MA Water Resources Authority</option>
+							
+							<option value="13" >MBTA</option>
+							
+							<option value="46" >MIT Center for Real Estate</option>
+							
+							<option value="49" >Northeastern</option>
+							
+							<option value="45" >State Land Conservation Plan</option>
+							
+							<option value="16" >The Federal Reserve of Boston</option>
+							
+							<option value="23" >The Urban Institute</option>
+							
+							<option value="15" >The Warren Group</option>
+							
+							<option value="39" >Tighe &amp; Bond Water Rate Survey</option>
+							
+							<option value="26" >U.S. Energy Information Administration</option>
+							
+							<option value="29" >U.S. Environmental Protection Agency</option>
+							
+							<option value="20" >WalkBoston</option>
+							
+							<option value="48" >Weston Observatory at Boston College</option>
+							
+							</select>
+
+							<div><a class="properties_button" href="/accounts/login?next=/visualizations/new">Login to Save Visualization</a></div>
+					</form>
+				</div>
+
+				<div class="data_vis_nav">
+					
+					<a href="/accounts/login?next=/visualizations/new">Login to Save Visualization</a>
+					
+					<span id="embed-spacer" class="spacer">|</span> <a id="embed-button" href="embed" title="Embed this Visualization in another website">Embed</a>
+				</div>
+
+				<div id="embed-code">Copy&amp;paste the embed-code below into your website:<input type="text" /></div>
+
+				<div class="data_vis_tabs">
+					<div id="tabs-1" class="weave_container">
+						<div id="vis-new">
+							
+							<p>Please install the <a href="http://get.adobe.com/flashplayer/">Adobe Flash Player</a> to be able to interact with this visualization.</p>
+						</div>
+					</div>
+				</div>
+				<div class="data_vis_content page_content">
+					<p id="vis-abstract"></p>
+				</div>
+				<div class="data_vis_attr">
+					<img src="/media/mbdc/img/logo-oic.png" alt="OIC" width="65" height="30" />
+					powered by: <a href="http://oicweave.org/" title="Weave - Web-based Analysis and Visualization Environment">Weave</a>
+				</div>
+				<div class="data_vis_relations">
+					<ul class="data_vis_relations_topics">
+
+						
+
+					</ul>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<!-- /data_vis -->	
+
+
+{% endblock %}
+
+
+{% block javascript %}
+
+<script type="text/javascript">
+    /*
+    * Global MBDC object
+    */
+    var MBDC = {
+        weave_url: "http://metrobostondatacommon.org/weave/",
+        sessionstate: {},
+        swfobject: {
+            vis: {}
+        }
+    }
+
+   
+</script>
+
+
+
+<script type="text/javascript" src="/static/swfobject/swfobject.js"></script>
+
+
+
+<script type="text/javascript">
+
+
+
+	// general Flash parameters
+
+	MBDC.swfobject.params = {
+
+		quality: "high",
+
+		bgcolor: "#ffffff",
+
+		allowscriptaccess: "always",
+
+		base: "http://metrobostondatacommon.org/weave/",
+
+		wmode: "transparent"
+
+	};
+
+
+
+</script>
+
+
+
+<script type="text/javascript">
+	
+	// Weave API availability flag
+	MBDC.weaveAPI = false;
+
+	// called when Weave JavaScript API is ready
+	var weaveReady = function(weave) { 
+
+		MBDC.weaveAPI = true;
+
+		
+
+		// visual cosmetics
+		weave.setSessionState(["WeaveProperties"], { 
+			backgroundColor: "16777215", // white 
+			showCopyright: false
+		});
+	}
+
+	jQuery(document).ready(function($) {
+
+		// FlashVars and attributes
+		MBDC.swfobject.vis["vis-new"] = {
+			flashvars: {},
+			attributes: {
+				id: "vis-new",
+				name: "vis-new"
+			}
+		};
+
+		
+		$("#duplicate-button, #duplicate-spacer, #embed-button, #embed-spacer, #delete-button, #delete-spacer, #perm-button, #perm-spacer").hide();
+		
+
+		// post url
+
+		MBDC.visembedurl = MBDC.visurl = "/visualizations/new";
+
+		// FIXME: security by obscurity
+		// MBDC.visurl = "/visualizations/new";
+		// $("#properties-button, #save-button, #duplicate-spacer, #delete-button, #delete-spacer, #perm-button, #perm-spacer").hide();
+		
+
+		// no Flash
+		if (swfobject.getFlashPlayerVersion()["major"] === 0) $("#properties-button, #save-button, #duplicate-spacer, #duplicate-button, #delete-button, #embed-spacer, #delete-spacer, #perm-button, #perm-spacer").hide();
+
+		// init embed-code
+		$("#embed-code input").val("<iframe width='500' height='350' frameborder='0' scrolling='no' marginheight='0' marginwidth='0' src='http://metrobostondatacommon.orgembed'></iframe><br /><small><a href='http://metrobostondatacommon.org'>View Larger Visualization</a></small>");
+
+		// add Weave Flash object
+		swfobject.embedSWF(
+			"http://metrobostondatacommon.org/weave/weave.swf", 
+			"vis-new", 
+			"100%", "620", 
+			"10.0.0",
+			"expressInstall.swf", 
+			MBDC.swfobject.vis["vis-new"].flashvars, 
+			MBDC.swfobject.params, 
+			MBDC.swfobject.vis["vis-new"].attributes
+		);
+
+		// Save Visualization
+		$("#save-button, #save-properties-button").bind("click", function() {
+			saveSessionState();
+			return false;
+		});
+
+		// Duplicate Visualization
+		$("#duplicate-button").bind("click", function() {
+			MBDC.visurl = "/visualizations/new";
+			// pass the current visualization as original if duplicate action
+			saveSessionState({"original": MBDC.visid});
+			return false;
+		});
+
+		// Set public or private Visualization [get perm, set perm]
+		var perm = ["Private", "Public"]
+		$("#perm-button").bind("click", function() {
+
+			// visual AJAX feedback
+			$("#spinner").spin("small");
+
+			$.post(MBDC.visurl + "permissions", 
+				{
+					"set_perm": perm[1]
+				},
+				function () {
+					perm.reverse();
+					$("#perm-button")
+						.html("Make " + perm[1])
+						.attr("title", "Set this Visualization " + perm[1])
+						.attr("href", "permissions/" + perm[1]);
+					$("#spinner").spin(false);
+				}, 
+				"json"
+			);
+
+			return false;
+		});
+
+		// Show Embed-code
+		$("#embed-button").toggle(function() {
+			$("#embed-code").show();
+			return false;
+			}, function () {
+			$("#embed-code").hide();
+			return false;
+		});
+
+		var saveSessionState = function (add_params) {
+
+			// visual AJAX feedback
+			$("#spinner").spin("small");
+
+			// get Weave object
+			var weave = swfobject.getObjectById("vis-new");
+
+			if (MBDC.weaveAPI) {
+
+				var params = { 
+					"title": $("#.vis_properties_form form #title").val(),
+					"year": $("#.vis_properties_form form #year").val(),
+					"abstract": $("#.vis_properties_form form #abstract").val(), 
+					"topics": JSON.stringify($(".vis_properties_form form #topics").val()),
+					"datasources": JSON.stringify($(".vis_properties_form form #datasources").val()),
+					"sessionstate": JSON.stringify(weave.getSessionState([])),
+					"thumbnail": weave.evaluateExpression(null, 'getBase64Image(Application.application.visDesktop)', null, ['weave.utils.BitmapUtils', 'mx.core.Application']) 
+				}
+
+				// additional parameters
+				if (add_params) $.extend(params, add_params);
+
+				$.post(MBDC.visurl, 
+					params,
+					function(data){
+						
+						// set new URLs
+						if (data) {
+							MBDC.visembedurl = MBDC.visurl = data["visurl"];
+							MBDC.visid = data["visid"];
+							$("#vis-title").attr("href", data["visurl"]);
+							$("#embed-code input").val("<iframe width='500' height='350' frameborder='0' scrolling='no' marginheight='0' marginwidth='0' src='http://metrobostondatacommon.org" + MBDC.visembedurl + "embed'></iframe><br /><small><a href='http://metrobostondatacommon.org" + MBDC.visembedurl + "'>View Larger Visualization</a></small>");
+						}
+
+						// more options once the visualization is saved
+						$("#properties-button, #save-button, #duplicate-button, #duplicate-spacer, #embed-button, #embed-spacer, #delete-button, #delete-spacer, #perm-button, #perm-spacer").show();
+						// except for delete, only visual effect of link target
+						$("#save-button").attr("href", MBDC.visurl + "save");
+						$("#duplicate-button").attr("href", MBDC.visurl + "duplicate");
+						$("#embed-button").attr("href", MBDC.visurl + "embed");
+						$("#delete-button").attr("href", MBDC.visurl + "delete");
+						$("#perm-button").attr("href", MBDC.visurl + "permissions/" + perm[1]);
+
+						$("#spinner").spin(false);
+
+					}, 
+					"json"
+				);
+			} else {
+				$("#spinner").spin(false);
+			}
+		}
+
+		// Edit visualization properties and update text on page
+		$(".vis_properties_form form #title, .vis_properties_form form #abstract, .vis_properties_form form #year").bind("keyup", function () {
+			$("#vis-" + $(this).attr("id")).html($(this).val());
+		});
+
+	});
+
+a("div.vis_properties_form").length&&a(".data_vis_header .expand_link").toggle(function(){a(this).html("Edit Properties [-]");a(".vis_properties_form:first").show()},function(){a(this).html("Edit Properties [+]");a(".vis_properties_form").hide()});a("div.related_vis").length&&a(".related_vis_header .expand_link").toggle(function(){a(this).html("Collapse [-]").parents(".related_vis:first").find(".related_vis_content:first").show()},function(){a(this).html("Expand [+]").parents(".related_vis:first").find(".related_vis_content:first").hide()});
+
+</script>
+
+
+
+
+
+
+{% endblock %}

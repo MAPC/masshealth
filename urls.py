@@ -2,6 +2,7 @@ from django.conf.urls import patterns, include, url
 from filebrowser.sites import site
 from django.conf import settings
 from django.http import HttpResponseRedirect
+from django.views.generic.simple import direct_to_template
 
 # There appears to be an import order bug (probably
 # a Django bug) that results in an exception in
@@ -45,6 +46,7 @@ urlpatterns = patterns(
     # Examples:
     # url(r'^$', 'masshealth.views.home', name='home'),
     # url(r'^masshealth/', include('masshealth.foo.urls')),
+    ('^new-weave/$', direct_to_template, {'template': 'new_weave.html'}),
     url(r'^story/', include('datastories.urls')),
     url(r'^visualizations/', include('visualizations.urls')),
     url(r'^place/', include('places.urls')),
