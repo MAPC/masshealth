@@ -22,10 +22,10 @@ SITE_ID = 1
 SITENAME = "HealthyMass"
 # Change to actual URL
 SITEURL = 'http://localhost:8000/'
-ROOT_URLCONF = 'masshealth.urls'
+ROOT_URLCONF = 'urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = os.path.join('masshealth.wsgi.application')
+WSGI_APPLICATION = os.path.join('wsgi.application')
 
 # Add additional apps here (appended to INSTALLED_APPS)
 SITE_APPS = ()
@@ -169,6 +169,8 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
+    'grappelli',
+    'filebrowser',
     'django.contrib.admin',
     'django.contrib.sitemaps',
     'django.contrib.staticfiles',
@@ -196,13 +198,11 @@ INSTALLED_APPS = (
     'django.contrib.flatpages',
     'django.contrib.gis',
     'django.contrib.markup',
-    'grappelli',
-    'filebrowser',
-    'masshealth.datastories',
-    'masshealth.heroes',
-    'masshealth.places',
-    'masshealth.programs',
-    'masshealth.visualizations',
+    'datastories',
+    'heroes',
+    'places',
+    'programs',
+    'visualizations',
 )
 
 # Agon Ratings
@@ -424,25 +424,6 @@ FILEBROWSER_PATH_TINYMCE = os.path.join(STATIC_ROOT,
                                         'libs/tinymce/jscripts/tiny_mce/')
 if SITE_APPS:
     INSTALLED_APPS += SITE_APPS
-
-if DEBUG_TOOLBAR:
-    INTERNAL_IPS = ('127.0.0.1','10.0.0.160')
-    MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
-    DEBUG_TOOLBAR_PANELS = (
-        'debug_toolbar.panels.version.VersionDebugPanel',
-        'debug_toolbar.panels.timer.TimerDebugPanel',
-        'debug_toolbar.panels.settings_vars.SettingsVarsDebugPanel',
-        'debug_toolbar.panels.headers.HeaderDebugPanel',
-        'debug_toolbar.panels.request_vars.RequestVarsDebugPanel',
-        'debug_toolbar.panels.template.TemplateDebugPanel',
-        'debug_toolbar.panels.sql.SQLDebugPanel',
-        'debug_toolbar.panels.signals.SignalDebugPanel',
-        'debug_toolbar.panels.logger.LoggingPanel',
-    )
-    INSTALLED_APPS += ('debug_toolbar',)
-    DEBUG_TOOLBAR_CONFIG = {
-        'INTERCEPT_REDIRECTS': False,
-    }
 
 try:
     from local_settings import *
