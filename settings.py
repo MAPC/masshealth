@@ -293,6 +293,10 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 )
 
+# Replacement of default authentication backend in order to support
+# permissions per object.
+AUTHENTICATION_BACKENDS = ('geonode.security.auth.GranularBackend',)
+
 #AUTHENTICATION_BACKENDS = ('geonode.security.auth.GranularBackend',)
 AUTH_PROFILE_MODULE = 'people.Contact'
 
