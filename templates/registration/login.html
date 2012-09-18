@@ -1,4 +1,9 @@
-{% extends "base.html" %}
+{% extends "base.html" %} 
+
+{% block bodyclass %}
+<body class="account">
+{% endblock %} 
+
 {% block content %}
 <form class="accounts" method="POST" action="">{% csrf_token %}
     <ul class="unstyled">
@@ -6,5 +11,8 @@
     </ul>
     <button type="submit" class="btn" value="Login">Log in</button>
 </form>
-<p>Don't have an account? <a href="{% url registration_register %}">Register here</a>!</p>
+
+<!-- <p><a href="/accounts/password/reset/">Forgot Your Password?</a></p> -->
+<p><a href="{% url registration_register %}">Create A New Account</a></p>
+
 {% endblock %}

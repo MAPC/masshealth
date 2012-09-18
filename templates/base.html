@@ -70,19 +70,26 @@
             <ul class="nav">
         <li class="town-list"><label>Choose a Town:</label>
                 <select id='town_selector'>
-					<option
-					{% if not place %} SELECTED=SELECTED{% endif %} value="">Select a Town</option>
-					{% places as towns %}
-					{% for town in towns %}<option 
-					 {% if place %}{% ifequal place.slug town.0 %} SELECTED=SELECTED{% endifequal %}{% endif %}
-					 value="{{ placeless.0 }}{{ town.0 }}{{ placeless.1 }}">{{town.1}}</option>
-					{% endfor %}
-				</select>
+          <option
+          {% if not place %} SELECTED=SELECTED{% endif %} value="">Select a Town</option>
+          {% places as towns %}
+          {% for town in towns %}<option 
+           {% if place %}{% ifequal place.slug town.0 %} SELECTED=SELECTED{% endifequal %}{% endif %}
+           value="{{ placeless.0 }}{{ town.0 }}{{ placeless.1 }}">{{town.1}}</option>
+          {% endfor %}
+        </select>
         </li>
         <li><a class="home" href="/">HOME</a></li>
         <li><a class="cominfo" href="/place/summary/massachusetts/">COMMUNITY<br>INFORMATION</a></li>
         <li><a class="maptool" href="/geonode/">MAP&nbsp;TOOL</a></li>
         <li><a class="about" href="/about/about-the-website/">ABOUT</a></li>
+        <li>
+          {% if user.is_authenticated %}
+          <a class="login" href="/accounts/logout/">LOGOUT</a>
+          {% else %}
+          <a class="login" href="/accounts/login/">LOGIN</a>
+          {% endif %}
+        </li>
 
         </ul>
           </div><!--/.nav-collapse -->
@@ -98,36 +105,36 @@
   <div class="row-fluid">
   
 {% block sidenav %}
-	{% if place %}
+  {% if place %}
     <div class="span3">
     <h1>{{place.name}}</h1>
     <ul class="sidenav">
-		<li class="summary">
-		    <a href="{% url places.views.summary place.slug %}"> Summary </a>
-		</li>
-		<li class="health_programs">
-		    <a href="{% url places.views.programs place.slug %}"> Health Programs </a>
-		</li>
-		<li class="health_profile profile">
-		    <a href="{% url places.views.profiles place.slug %}"> Health Profile </a>
-		</li>
-		<li class="data_stories">
-			<a href="{% url datastories.views.story place.slug %}"> Data Stories </a>
-		</li>
-		
-		<li class="town-list"><label>Choose a Town:</label>
-		    <select id='town_selector_side'>
-		    	<option
-		    	{% if not place %} SELECTED=SELECTED{% endif %} value="">Select a Town</option>
-		    	{% places as towns %}
-		    	{% for town in towns %}<option 
-					 {% if place %}{% ifequal place.slug town.0 %} SELECTED=SELECTED{% endifequal %}{% endif %}
-					 value="{{ placeless.0 }}{{ town.0 }}{{ placeless.1 }}">{{town.1}}</option>
+    <li class="summary">
+        <a href="{% url places.views.summary place.slug %}"> Summary </a>
+    </li>
+    <li class="health_programs">
+        <a href="{% url places.views.programs place.slug %}"> Health Programs </a>
+    </li>
+    <li class="health_profile profile">
+        <a href="{% url places.views.profiles place.slug %}"> Health Profile </a>
+    </li>
+    <li class="data_stories">
+      <a href="{% url datastories.views.story place.slug %}"> Data Stories </a>
+    </li>
+    
+    <li class="town-list"><label>Choose a Town:</label>
+        <select id='town_selector_side'>
+          <option
+          {% if not place %} SELECTED=SELECTED{% endif %} value="">Select a Town</option>
+          {% places as towns %}
+          {% for town in towns %}<option 
+           {% if place %}{% ifequal place.slug town.0 %} SELECTED=SELECTED{% endifequal %}{% endif %}
+           value="{{ placeless.0 }}{{ town.0 }}{{ placeless.1 }}">{{town.1}}</option>
 
-		    	{% endfor %}
-		    </select>
+          {% endfor %}
+        </select>
                 </li>
-	</ul>
+  </ul>
     </div>
     {% endif %}
 {% endblock %}
@@ -154,15 +161,14 @@
 <div class="footer-text">
 <h5>60 Temple Place Boston, MA 02111 Main Tel: 617-451-2770&nbsp;|&nbsp;FAX: 627-451-2770</h5>
 <a href="/about/about-the-website/">About Healthy Massachusetts</a>&nbsp;|&nbsp;<a href="/about/contact-us/">Contact Us</a>&nbsp;|&nbsp;<a href="/about/legal/#disclaimer">Data Disclaimer</a>&nbsp;|&nbsp;<a href="/about/legal/#terms">Terms of Service</a>&nbsp;|&nbsp;<a href="/about/legal/#privacy">Privacy Policy</a> 
-<br><a class="signup" href="/accounts/login/">Log-in for Program-Managers</a>
 <div class="footer_socials">
-							<a href="https://twitter.com/#!/MAPCMetroBoston" class="twitter">
-							<img src="{{ STATIC_URL }}img/twitterx20.jpg" alt="Twitter" /></a>
-							<a href="http://www.facebook.com/pages/Metropolitan-Area-Planning-Council-MAPC/127159693987749" class="facebook">
-							<img src="{{ STATIC_URL }}img/facebookx21.jpg" alt="Facebook" /></a>
-							<a href="http://www.linkedin.com/company/64441" class="linkedin">
-							<img src="{{ STATIC_URL }}img/linkinx21.jpg" alt="Linkedin" /></a>
-						</div>
+              <a href="https://twitter.com/#!/MAPCMetroBoston" class="twitter">
+              <img src="{{ STATIC_URL }}img/twitterx20.jpg" alt="Twitter" /></a>
+              <a href="http://www.facebook.com/pages/Metropolitan-Area-Planning-Council-MAPC/127159693987749" class="facebook">
+              <img src="{{ STATIC_URL }}img/facebookx21.jpg" alt="Facebook" /></a>
+              <a href="http://www.linkedin.com/company/64441" class="linkedin">
+              <img src="{{ STATIC_URL }}img/linkinx21.jpg" alt="Linkedin" /></a>
+            </div>
 </div>
 <div class="footer-images">
 <img src="{{ STATIC_URL }}img/mapc108x62.png" alt="MAPC" />

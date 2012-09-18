@@ -21,7 +21,7 @@ PROJECT_ROOT = os.path.dirname(os.path.realpath(sfile))
 SITE_ID = 1
 SITENAME = "HealthyMass"
 # Change to actual URL
-SITEURL = 'http://mapc.dev.geonode.org/geonode/'
+SITEURL = 'http://localhost:8000/'
 ROOT_URLCONF = 'urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
@@ -169,6 +169,8 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
+    'grappelli',
+    'filebrowser',
     'django.contrib.admin',
     'django.contrib.sitemaps',
     'django.contrib.staticfiles',
@@ -196,8 +198,6 @@ INSTALLED_APPS = (
     'django.contrib.flatpages',
     'django.contrib.gis',
     'django.contrib.markup',
-    'grappelli',
-    'filebrowser',
     'datastories',
     'heroes',
     'places',
@@ -421,3 +421,4 @@ try:
     from local_settings import *
 except ImportError:
     pass
+
