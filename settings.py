@@ -293,7 +293,10 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 )
 
-#AUTHENTICATION_BACKENDS = ('geonode.security.auth.GranularBackend',)
+# Replacement of default authentication backend in order to support
+# permissions per object.
+AUTHENTICATION_BACKENDS = ('geonode.security.auth.GranularBackend',)
+
 AUTH_PROFILE_MODULE = 'people.Contact'
 
 # The username and password for a user that can add and edit layer details on GeoServer

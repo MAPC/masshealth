@@ -41,6 +41,18 @@ import geonode.proxy.urls
 from monkey_patches import admin as mpa
 mpa.flatpages()
 
+from geonode.sitemap import LayerSitemap, MapSitemap
+
+js_info_dict = {
+    'domain': 'djangojs',
+    'packages': ('geonode',)
+}
+
+sitemaps = {
+    "layer": LayerSitemap,
+    "map": MapSitemap
+}
+
 urlpatterns = patterns(
     '', # Putting it here makes emacs indentation helpful.
     # Examples:
@@ -52,9 +64,17 @@ urlpatterns = patterns(
     url(r'^place/', include('places.urls')),
     url(r'^crossdomain.xml$', 'visualizations.views.crossdomain'),
     url(r'^program/', include('programs.urls')),
-    url(r'^data/acls/?$', 'geonode.layers.views.layer_acls', name='layer_acls'),
-    url(r'^geonode/', include('geonode.urls')),
     (r'^grappelli/', include('grappelli.urls')),
+
+    # GeoNode urls
+    url(r'^geonode/', 'django.views.generic.simple.direct_to_template', {'template':'index.html'},name='home'),
+    (r'^data/', include('geonode.layers.urls')),
+    (r'^maps/', include('geonode.maps.urls')),
+    (r'^comments/', include('dialogos.urls')),
+    (r'^ratings/', include('agon_ratings.urls')),
+    (r'^profiles/', include('idios.urls')),
+    (r'^people/', include('geonode.people.urls')),
+    (r'^avatar/', include('avatar.urls')),
 
     #url(r'^geoserver/', lambda x:HttpResponseRedirect('http://localhost:8080/geoserver')),
     # Uncomment the admin/doc line below to enable admin documentation:
@@ -64,6 +84,16 @@ urlpatterns = patterns(
     url(r'^admin/', include(admin.site.urls)),
     # url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^accounts/', include('registration.backends.simple.urls')),
+
+    # Meta
+    url(r'^lang\.js$', 'django.views.generic.simple.direct_to_template',
+         {'template': 'lang.js', 'mimetype': 'text/javascript'}, name='lang'),
+    url(r'^jsi18n/$', 'django.views.i18n.javascript_catalog',
+                                  js_info_dict, name='jscat'),
+    url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap',
+                                  {'sitemaps': sitemaps}, name='sitemap'),
+    (r'^i18n/', include('django.conf.urls.i18n')),
+
 )
 
 urlpatterns += geonode.proxy.urls.urlpatterns
