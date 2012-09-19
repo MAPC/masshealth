@@ -404,7 +404,13 @@ padding-left: 10px;
 background-color: #EFEFEF;
 padding: 10px;
 margin-top: 10px;
+
+/* *** TEMPORARY HIDE STAFF INFO ***** */
+
+display: none;
 }
+
+
 .story_links { display: block; overflow: hidden; width: 700px; margin-top: 20px; }
 
 .story_sum
