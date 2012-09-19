@@ -173,6 +173,7 @@ a:focus { outline: none; }
 
 .navbar .nav > li.town-list { padding: 0; }
 
+
 .navbar .nav > li > a
 {
 	color: #3A3A3A;
@@ -195,7 +196,9 @@ a:focus { outline: none; }
 }
 
 .about .navbar .nav > li > a.about,
-.home .navbar .nav > li > a.home
+.home .navbar .nav > li > a.home,
+.maptool .navbar .nav > li > a.maptool,
+.account .navbar .nav > li > a.login
 {
 background-color: transparent;
 	color: #f35a20;
@@ -232,6 +235,42 @@ background-color: transparent;
 	margin-top: 14px;
 	text-align: left;
 }
+
+ul.nav li.dropdown
+{
+width: 60px;position: relative;
+}
+
+ul.nav .dropdown-menu {
+    background-clip: padding-box;
+    background-color: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    display: none;
+    float: left;
+    left: -50px;
+    list-style: none outside none;
+    margin: 30px 0 0;
+    min-width: 100px;
+    padding: 4px 0;
+    position: absolute;
+    top: 100%;
+    z-index: 1000;
+}
+
+
+
+ul.nav .open > .dropdown-menu {
+    display: block;
+}
+
+
+.navbar-inner ul.nav
+{
+height: 94px !important;
+}
+
 
 ul.sidenav
 {
@@ -882,6 +921,42 @@ text-align: left;
 
 .account form {
 	text-align: left;
+}
+
+a#tabnav:link,
+a#tabnav:visited
+{
+    background-color: #CDCDCD;
+    border-bottom: 1px solid #999999;
+    border-radius: 0 0 5px 5px;
+    border-right: 1px solid #999999;
+    box-shadow: 3px 3px 6px -2px #999999;
+    color: #666666;
+    margin-top: -1px;
+    min-width: 100px;
+    padding: 3px 12px;
+    position: absolute;
+    right: 0;
+    text-align: right;
+    top: 0;
+}
+
+a#tabnav:hover,
+a#tabnav:active
+{
+border-style: none;
+
+}
+
+
+a.btn
+{
+margin-top: 10px;
+}
+
+.account .middle
+{
+text-align: left;
 }
 
 .account .errorlist {
