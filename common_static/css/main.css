@@ -257,6 +257,11 @@ ul.nav .dropdown-menu
 	z-index: 1000;
 }
 
+.dropdown-menu a
+{
+font-size: 11px;
+}
+
 ul.nav .open > .dropdown-menu { display: block; }
 .navbar-inner ul.nav { height: 94px !important; }
 
