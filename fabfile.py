@@ -88,6 +88,8 @@ def setup_pgsql():
     sudo("createuser -SDR %s" % PROJECT, user="postgres")
     sudo("createdb -O %s %s" %(PROJECT,PROJECT), user="postgres")
     sudo("psql -c \"alter user %s with encrypted password '%s'\" " % (PROJECT,PROJECT), user="postgres")
+    with prefix(ACT):
+        sudo('django-admin.py syncdb --settings=%s.settings' % PROJECT)
     # Need to restore database and GeoServer data
     
 def install():
