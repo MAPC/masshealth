@@ -68,12 +68,12 @@ DEBUG_TOOLBAR = False
 # Default sqlite3 database (flatfile)
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(PROJECT_ROOT,'development.db'),
-        'USER': '',     # Not used with sqlite
-        'PASSWORD': '', # Not used with sqlite
-        'HOST': '',     # Not used with sqlite
-        'PORT': ''      # Not used with sqlite
+        'ENGINE': 'django.db.backends.postgis',
+        'NAME': 'masshealth',
+        'USER': 'masshealth',     # Not used with sqlite
+        'PASSWORD': 'p@$$w0rd', # Not used with sqlite
+        'HOST': 'localhost',     # Not used with sqlite
+        'PORT': '5432'      # Not used with sqlite
     }
 }
 # Datastore settings to make geonode upload vector layers directly to postgis
