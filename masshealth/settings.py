@@ -21,11 +21,12 @@ PROJECT_ROOT = os.path.dirname(os.path.realpath(sfile))
 SITE_ID = 1
 SITENAME = "HealthyMass"
 # Change to actual URL
-SITEURL = 'http://mapc.dev.geonode.org/geonode/'
-ROOT_URLCONF = 'urls'
+#SITEURL = 'http://mapc.dev.geonode.org/geonode/'
+SITEURL = 'http://localhost:8000/'
+ROOT_URLCONF = 'masshealth.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = os.path.join('wsgi.application')
+WSGI_APPLICATION = os.path.join('masshealth.wsgi.application')
 
 # Add additional apps here (appended to INSTALLED_APPS)
 SITE_APPS = ()
@@ -183,7 +184,9 @@ INSTALLED_APPS = (
     'avatar',
     'dialogos',
     'agon_ratings',
+    'pagination',
     'taggit',
+    'taggit_templatetags',
     'south',
 
     # GeoNode apps
@@ -192,7 +195,7 @@ INSTALLED_APPS = (
     'geonode.people',
     'geonode.proxy',
     'geonode.security',
-    #'geonode.catalogue',
+    'geonode.catalogue',
 
     # MAPC added apps
     'django.contrib.flatpages',
@@ -285,10 +288,11 @@ FIXTURE_DIRS = (os.path.join(PROJECT_ROOT, 'fixtures'),
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+    'pagination.middleware.PaginationMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    #'django.middleware.locale.LocaleMiddleware',
     # MAPC added
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 )
